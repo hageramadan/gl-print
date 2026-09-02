@@ -1,26 +1,589 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================
+   الألوان الأساسية والثانوية
+   ============================================ */
+
+@theme {
+  /* الألوان الرئيسية */
+  --color-primary: #1F3161;
+  --color-primary-light: #2A4280;
+  --color-primary-dark: #15234A;
+  
+  --color-secondary: #C62127;
+  --color-secondary-light: #E02A31;
+  --color-secondary-dark: #A81B20;
+  
+  /* الألوان الأساسية */
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  
+  /* الخطوط */
+  --font-montserrat: 'Montserrat', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================
+   إعدادات الخطوط والأساسيات
+   ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    font-family: var(--font-montserrat);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-montserrat);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* تحسين عرض النصوص العربية */
+  * {
+    font-family: var(--font-montserrat);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   دعم RTL (الاتجاه من اليمين لليسار)
+   ============================================ */
+/* ===== التأكد من ثبات الـ Header ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* ===== الـ Navbar ثابتة تحت الـ SubNavbar ===== */
+nav.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+/* ===== الـ SubNavbar فوق الـ Navbar ===== */
+.subnavbar {
+  position: relative;
+  z-index: 30;
+}
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+html[dir="rtl"] .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+html[dir="rtl"] .ml-4 {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+html[dir="rtl"] .mr-4 {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+html[dir="rtl"] .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+html[dir="rtl"] .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
+}
+
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left;
+}
+.swiper-pagination {
+  display: none !important;
+}
+
+/* ============================================
+   كلاسات الألوان المخصصة
+   ============================================ */
+
+@layer components {
+  /* === الألوان الأساسية === */
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .bg-primary-light {
+    background-color: var(--color-primary-light);
+  }
+  
+  .bg-primary-dark {
+    background-color: var(--color-primary-dark);
+  }
+  
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  
+  .bg-secondary-light {
+    background-color: var(--color-secondary-light);
+  }
+  
+  .bg-secondary-dark {
+    background-color: var(--color-secondary-dark);
+  }
+  
+  /* === الألوان النصية === */
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .text-primary-light {
+    color: var(--color-primary-light);
+  }
+  
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  
+  .text-secondary-light {
+    color: var(--color-secondary-light);
+  }
+  
+  /* === الحدود === */
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+  
+  /* === أزرار === */
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-dark transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+  }
+  
+  .btn-white {
+    @apply bg-white text-primary hover:bg-gray-100 transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+  }
+  
+  /* === البطاقات === */
+  .card {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  .card-primary {
+    @apply bg-primary text-white border border-primary-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+  
+  .card-secondary {
+    @apply bg-secondary text-white border border-secondary-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+  
+  /* === الحاويات === */
+  .section-primary {
+    @apply bg-primary text-white py-16 md:py-20;
+  }
+  
+  .section-secondary {
+    @apply bg-secondary text-white py-16 md:py-20;
+  }
+  
+  .section-light {
+    @apply bg-white text-primary py-16 md:py-20;
+  }
+  
+  .section-gray {
+    @apply bg-gray-50 text-primary py-16 md:py-20;
+  }
+  
+  /* === عناوين الأقسام === */
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-primary mb-4;
+  }
+  
+  .section-title-white {
+    @apply text-3xl md:text-4xl font-bold text-white mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-gray-600 max-w-2xl mx-auto;
+  }
+  
+  .section-subtitle-white {
+    @apply text-lg text-gray-300 max-w-2xl mx-auto;
+  }
+}
+
+/* ============================================
+   الهيدر
+   ============================================ */
+
+@layer components {
+  .header {
+    @apply bg-primary text-white shadow-lg sticky top-0 z-50;
+  }
+  
+  .header-logo {
+    @apply text-2xl font-bold text-white;
+  }
+  
+  .header-link {
+    @apply text-gray-300 hover:text-white transition-colors duration-300 font-medium;
+  }
+  
+  .header-link-active {
+    @apply text-white font-semibold border-b-2 border-secondary;
+  }
+  
+  .lang-switcher {
+    @apply bg-secondary text-white hover:bg-secondary-dark px-4 py-2 rounded-md transition-colors duration-300 font-medium text-sm;
+  }
+}
+
+/* ============================================
+   الفوتر
+   ============================================ */
+
+@layer components {
+  .footer {
+    @apply bg-primary text-white pt-16 pb-8;
+  }
+  
+  .footer-title {
+    @apply text-white font-bold text-lg mb-4;
+  }
+  
+  .footer-link {
+    @apply text-gray-400 hover:text-secondary transition-colors duration-300;
+  }
+  
+  .footer-text {
+    @apply text-gray-400;
+  }
+  
+  .footer-copyright {
+    @apply border-t border-primary-light pt-8 mt-8 text-center text-gray-400 text-sm;
+  }
+}
+
+/* ============================================
+   الهيرو (القسم الرئيسي)
+   ============================================ */
+
+@layer components {
+  .hero {
+    @apply bg-primary text-white min-h-[600px] flex items-center;
+  }
+  
+  .hero-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4;
+  }
+  
+  .hero-subtitle {
+    @apply text-xl md:text-2xl text-gray-300 mb-8;
+  }
+  
+  .hero-cta {
+    @apply bg-secondary text-white hover:bg-secondary-dark transition-colors duration-300 px-8 py-4 rounded-md font-medium text-lg;
+  }
+}
+
+/* ============================================
+   التنسيقات العامة
+   ============================================ */
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .divider-primary {
+    @apply w-16 h-1 bg-primary mx-auto my-4;
+  }
+  
+  .divider-secondary {
+    @apply w-16 h-1 bg-secondary mx-auto my-4;
+  }
+  
+  .divider-white {
+    @apply w-16 h-1 bg-white mx-auto my-4;
+  }
+  
+  /* تأثيرات التحويم */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .hover-shadow {
+    @apply transition-shadow duration-300 hover:shadow-xl;
+  }
+}
+
+/* ============================================
+   تأثيرات الحركة (Animations)
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s ease-out;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.3s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* تأخيرات الحركة */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* ============================================
+   التمرير السلس
+   ============================================ */
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   شريط التمرير المخصص
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-light;
+}
+
+/* ============================================
+   تحديد النص
+   ============================================ */
+
+::selection {
+  @apply bg-secondary text-white;
+}
+
+/* ============================================
+   تحسينات للطباعة
+   ============================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+}
+
+/* ============================================
+   تحسينات للشاشات الصغيرة
+   ============================================ */
+
+@media (max-width: 640px) {
+  .section-title,
+  .section-title-white {
+    @apply text-2xl;
+  }
+  
+  .hero-title {
+    @apply text-3xl;
+  }
+  
+  .hero-subtitle {
+    @apply text-lg;
+  }
+}
+
+/* ===== تأثيرات الـ Hero ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ===== تأثيرات السلايدر ===== */
+.slide-enter {
+  animation: slideIn 0.7s ease-out forwards;
+}
+
+.slide-exit {
+  animation: slideOut 0.7s ease-in forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* ===== تأثير hover للبطاقات ===== */
+.hover\:shadow-3xl:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }

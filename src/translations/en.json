@@ -1,0 +1,207 @@
+{
+ "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "products": "Products",
+    "industries": "Industries",
+    "blogs": "Blogs",
+    "contact": "Contact Us",
+    "quote": "Get a Quote"
+  },
+  "subNav": {
+    "faqs": "FAQs",
+    "careers": "Careers"
+  },
+  
+  "hero": {
+    "title": "Printing Excellence",
+    "subtitle": "We bring your ideas to life",
+    "cta": "Get a Quote"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "We are a leading printing company dedicated to delivering high-quality printing solutions for businesses of all sizes.",
+    "mission": "Our mission is to provide innovative and sustainable printing services that exceed our clients' expectations.",
+    "vision": "To be the most trusted printing partner in the region, known for quality, reliability, and innovation.",
+    "stats": {
+      "years": "Years of Experience",
+      "projects": "Projects Completed",
+      "clients": "Happy Clients",
+      "awards": "Awards Won"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive printing solutions tailored to your needs",
+    "learnMore": "Learn More",
+    "items": [
+      {
+        "title": "Digital Printing",
+        "description": "High-quality digital printing for small to medium runs with fast turnaround times."
+      },
+      {
+        "title": "Offset Printing",
+        "description": "Cost-effective offset printing for large volumes with exceptional color accuracy."
+      },
+      {
+        "title": "Large Format Printing",
+        "description": "Eye-catching large format prints for banners, posters, and outdoor advertising."
+      },
+      {
+        "title": "Packaging Printing",
+        "description": "Custom packaging solutions that make your products stand out on the shelf."
+      },
+      {
+        "title": "Book Printing",
+        "description": "Professional book printing services for authors, publishers, and businesses."
+      },
+      {
+        "title": "Promotional Printing",
+        "description": "Branded promotional materials to help you market your business effectively."
+      }
+    ]
+  },
+   "services2": {
+    "tag": "Our Services",
+    "title": "Everything Your Brand",
+    "subtitle": "Needs In One Place.",
+    "viewAll": "View All Services"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Premium printing products for every need",
+    "viewDetails": "View Details",
+    "items": [
+      {
+        "name": "Business Cards",
+        "description": "Professional business cards that make a lasting impression."
+      },
+      {
+        "name": "Brochures",
+        "description": "Informative brochures to showcase your products and services."
+      },
+      {
+        "name": "Flyers",
+        "description": "Eye-catching flyers for promotions and events."
+      },
+      {
+        "name": "Posters",
+        "description": "High-impact posters for indoor and outdoor advertising."
+      },
+      {
+        "name": "Catalogs",
+        "description": "Comprehensive catalogs to display your product range."
+      },
+      {
+        "name": "Stickers",
+        "description": "Custom stickers and labels for branding and packaging."
+      }
+    ]
+  },
+  "industries": {
+    "title": "Industries We Serve",
+    "subtitle": "Trusted by businesses across various sectors",
+    "items": [
+      "Retail & E-commerce",
+      "Real Estate",
+      "Hospitality",
+      "Healthcare",
+      "Education",
+      "Manufacturing",
+      "Construction",
+      "Financial Services",
+      "Food & Beverage",
+      "Technology"
+    ]
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "subtitle": "What sets us apart from the competition",
+    "items": [
+      {
+        "title": "Quality Assurance",
+        "description": "We use state-of-the-art equipment and premium materials to ensure the highest quality."
+      },
+      {
+        "title": "Fast Turnaround",
+        "description": "We understand deadlines and deliver your projects on time, every time."
+      },
+      {
+        "title": "Competitive Pricing",
+        "description": "Get the best value for your money with our competitive pricing structure."
+      },
+      {
+        "title": "Expert Team",
+        "description": "Our experienced team is passionate about printing and dedicated to excellence."
+      }
+    ]
+  },
+  "blog": {
+    "title": "Latest Blogs",
+    "subtitle": "Insights and tips from our printing experts",
+    "readMore": "Read More",
+    "items": [
+      {
+        "title": "5 Tips for Choosing the Right Paper",
+        "description": "Learn how to select the perfect paper for your printing project.",
+        "date": "March 15, 2026"
+      },
+      {
+        "title": "Digital vs Offset Printing: What's Best?",
+        "description": "A comprehensive comparison to help you choose the right printing method.",
+        "date": "March 10, 2026"
+      },
+      {
+        "title": "Sustainable Printing Practices",
+        "description": "How we're reducing our environmental impact with eco-friendly printing.",
+        "date": "March 5, 2026"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us for all your printing needs",
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "workingHours": "Working Hours"
+    },
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "subject": "Subject",
+      "message": "Your Message",
+      "submit": "Send Message"
+    }
+  },
+  "quote": {
+    "title": "Get a Quote",
+    "subtitle": "Tell us about your printing needs and we'll get back to you with a competitive quote",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company Name",
+      "service": "Service Required",
+      "message": "Project Details",
+      "submit": "Request Quote"
+    }
+  },
+  "footer": {
+    "description": "Your trusted partner for high-quality printing solutions. We bring your ideas to life with precision and care.",
+    "quickLinks": "Quick Links",
+    "services": "Our Services",
+    "contactInfo": "Contact Information",
+    "copyright": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "noResults": "No results found",
+    "backToHome": "Back to Home",
+    "404": "Page Not Found"
+  }
+}
