@@ -112,8 +112,8 @@ export const SubNavbar = () => {
                 </div>
               )}
             </div>
-             <div className="h-6 w-px bg-gray-600 mx-2"></div>
-            <div className="flex items-center gap-3 my-4 lg:my-6">
+             <div className="hidden lg:block h-6 w-px bg-gray-600 mx-2"></div>
+            <div className="hidden lg:flex items-center gap-3 my-4 lg:my-6">
               <Link
                 href="https://tiktok.com"
                 target="_blank"
