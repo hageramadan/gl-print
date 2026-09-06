@@ -132,7 +132,7 @@ export const Services = () => {
 
                       {/* ===== Learn More مع حدود (يظهر عند hover) ===== */}
                       <div className="inline-flex items-center gap-2 text-white w-fit font-medium border-2  border-white/80 px-2 py-2 rounded-2xl group-hover:rounded-full transition-all duration-500 group-hover:px-4 group-hover:border-white">
-                        <span className="text-sm transition-all duration-500 hidden group-hover:block">
+                        <span className="text-sm transition-all duration-500 lg:hidden group-hover:block">
                           Learn More
                         </span>
                         <FaArrowRightLong className="text-xl transition-transform duration-300 group-hover:translate-x-1 mx-2" />

@@ -207,19 +207,19 @@ export const Navbar = () => {
 
   return (
     <nav
-      className="bg-white text-[#3E3F42] shadow-lg sticky top-0 z-40"
+      className="bg-white text-[#3E3F42] shadow-lg sticky top-0 z-[999]"
       dir={dir}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/" >
             <Image
-              src="/logo.png"
+              src="/logo1.png"
               alt="Logo"
               width={100}
               height={50}
-              className="object-contain w-14 h-12"
+              className="object-contain  w-20 h-16 lg:w-18 lg:h-16"
             />
           </Link>
 
@@ -317,7 +317,7 @@ export const Navbar = () => {
           {/* Actions: Search + Apps + Quote + Mobile Menu */}
           <div className="flex items-center gap-3">
             {/* Search Icon */}
-            <div className="relative" ref={searchRef}>
+            {/* <div className="relative" ref={searchRef}>
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer shadow-lg"
@@ -326,7 +326,7 @@ export const Navbar = () => {
                 <FiSearch className="text-xl" />
               </button>
 
-              {/* Search Input */}
+              
               {isSearchOpen && (
                 <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-2xl p-4 w-72 z-[9999] border border-gray-200">
                   <input
@@ -337,7 +337,7 @@ export const Navbar = () => {
                   />
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* Apps Icon (Social Media) */}
             <div className="relative" ref={appsRef}>

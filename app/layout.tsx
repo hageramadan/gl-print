@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/src/components/layout/Header";
 import { LanguageProvider } from "@/src/context/LanguageProvider";
+import { Footer } from "@/src/components/layout/Footer";
 
 // ============================================
 // تحميل خط Montserrat
@@ -50,7 +51,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="grow">{children}</main>
-           
+           <Footer/>
           </div>
         </LanguageProvider>
       </body>

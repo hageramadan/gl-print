@@ -68,10 +68,25 @@
     "subtitle": "Needs In One Place.",
     "viewAll": "View All Services"
   },
+  "testimonials": {
+    "tag": "What Our Clients Say",
+    "title": "Real Success Stories"
+  },
+  "partners": {
+    "tag": "Our Success Partners",
+    "subtitle": "Companies and projects that have trusted us."
+  },
+  "search": {
+    "placeholder": "Search for products, services...",
+    "button": "Search"
+  },
   "products": {
     "title": "Our Products",
     "subtitle": "Premium printing products for every need",
     "viewDetails": "View Details",
+     "tag": "Featured Products",
+    "title2": "Latest Products",
+    "viewAll": "View All",
     "items": [
       {
         "name": "Business Cards",
@@ -190,11 +205,20 @@
       "submit": "Request Quote"
     }
   },
-  "footer": {
-    "description": "Your trusted partner for high-quality printing solutions. We bring your ideas to life with precision and care.",
-    "quickLinks": "Quick Links",
-    "services": "Our Services",
-    "contactInfo": "Contact Information",
+    "footer": {
+       "company": "Company",
+    "support": "Support",
+    "follow": "Follow Us",
+    "about": "About GL Print",
+    "services": "Services",
+    "products": "Products",
+    "industries": "Industries",
+    "quote": "Request a Quote",
+    "faq": "FAQ",
+    "whatsapp": "WhatsApp",
+    "contact": "Contact",
+    "newsletter": "Follow Us",
+    "emailPlaceholder": "Email",
     "copyright": "All rights reserved."
   },
   "common": {
