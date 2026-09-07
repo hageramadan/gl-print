@@ -13,7 +13,8 @@ export const useLanguage = () => {
   const translations = context.language === 'en' ? en : ar;
   
   return {
-    ...context, // language, toggleLanguage, dir
-    t: translations, // الترجمة
+    ...context,
+    t: translations,
+    lang: context.language,
   };
 };

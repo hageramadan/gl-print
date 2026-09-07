@@ -5,13 +5,25 @@ import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/src/hooks/useLanguage";
 import { usePathname } from "next/navigation";
 import { 
-  FiMenu, FiX, FiSearch, FiGrid, 
+  FiMenu, FiX, FiGrid, 
   FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiYoutube, 
   FiChevronDown, FiChevronRight 
 } from "react-icons/fi";
 import Image from "next/image";
 
-export const Navbar = () => {
+interface SocialLinks {
+  whatsapp: string;
+  facebook: string;
+  linkedin: string;
+  instagram: string;
+  tik_tok: string;
+}
+
+interface NavbarProps {
+  socialLinks?: SocialLinks | null;
+}
+
+export const Navbar = ({ socialLinks }: NavbarProps) => {
   const { t, dir } = useLanguage();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +36,24 @@ export const Navbar = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const appsRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const defaultLinks = {
+    whatsapp: "https://wa.me/201234567890",
+    facebook: "https://facebook.com",
+    linkedin: "https://linkedin.com",
+    instagram: "https://instagram.com",
+    tik_tok: "https://tiktok.com",
+  };
+
+  const links = socialLinks || defaultLinks;
+
+  const socialLinksFromAPI = [
+    { icon: FiFacebook, href: links.facebook, label: "Facebook" },
+    { icon: FiTwitter, href: "#", label: "Twitter" },
+    { icon: FiInstagram, href: links.instagram, label: "Instagram" },
+    { icon: FiLinkedin, href: links.linkedin, label: "LinkedIn" },
+    { icon: FiYoutube, href: "#", label: "YouTube" },
+  ];
 
   // إغلاق العناصر عند الضغط خارجها
   useEffect(() => {
@@ -56,15 +86,6 @@ export const Navbar = () => {
     { key: "industries", href: "/industries" },
     { key: "blogs", href: "/blogs" },
     { key: "contact", href: "/contact" },
-  ];
-
-  // روابط السوشيال ميديا
-  const socialLinks = [
-    { icon: FiFacebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: FiTwitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: FiInstagram, href: "https://instagram.com", label: "Instagram" },
-    { icon: FiLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: FiYoutube, href: "https://youtube.com", label: "YouTube" },
   ];
 
   // القوائم الرئيسية مع القوائم الفرعية الجانبية
@@ -211,15 +232,15 @@ export const Navbar = () => {
       dir={dir}
     >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" >
             <Image
-              src="/logo1.png"
+              src="/logo2.png"
               alt="Logo"
               width={100}
               height={50}
-              className="object-contain  w-20 h-16 lg:w-18 lg:h-16"
+              className="object-contain w-20 h-12 lg:w-18 lg:h-14 "
             />
           </Link>
 
@@ -255,7 +276,7 @@ export const Navbar = () => {
                   {/* Dropdown SubMenu مع Sub-Dropdown جانبي */}
                   {hasSub && isDropdownOpen && menuData && (
                     <div 
-                      className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-2xl min-w-[220px] overflow-visible z-[9999] border border-gray-100 py-1"
+                      className="absolute top-full start-0 mt-1 bg-white rounded-lg shadow-2xl min-w-[220px] overflow-visible z-[9999] border border-gray-100 py-1"
                       onMouseEnter={handleDropdownMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
@@ -316,29 +337,6 @@ export const Navbar = () => {
 
           {/* Actions: Search + Apps + Quote + Mobile Menu */}
           <div className="flex items-center gap-3">
-            {/* Search Icon */}
-            {/* <div className="relative" ref={searchRef}>
-              <button
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer shadow-lg"
-                aria-label="Search"
-              >
-                <FiSearch className="text-xl" />
-              </button>
-
-              
-              {isSearchOpen && (
-                <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-2xl p-4 w-72 z-[9999] border border-gray-200">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary"
-                    autoFocus
-                  />
-                </div>
-              )}
-            </div> */}
-
             {/* Apps Icon (Social Media) */}
             <div className="relative" ref={appsRef}>
               <button
@@ -351,10 +349,10 @@ export const Navbar = () => {
 
               {/* Social Media Dropdown */}
               {isAppsOpen && (
-                <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-2xl p-4 w-56 z-[9999] border border-gray-200">
+                <div className="absolute top-full end-0 mt-2 bg-white rounded-lg shadow-2xl p-4 w-56 z-[9999] border border-gray-200">
                   <h3 className="text-sm font-semibold text-gray-600 mb-3">Follow Us</h3>
                   <div className="flex flex-col gap-2">
-                    {socialLinks.map((social) => (
+                    {socialLinksFromAPI.map((social) => (
                       <a
                         key={social.label}
                         href={social.href}
@@ -371,7 +369,7 @@ export const Navbar = () => {
               )}
             </div>
 
-            {/* Get a Quote Button - مع تأثير الرفع */}
+            {/* Get a Quote Button */}
             <Link
               href="/quote"
               className="hidden lg:block bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-6 py-2 text-white rounded-xl transition-all duration-300 font-medium hover:-translate-y-1 hover:shadow-xl"
@@ -435,7 +433,7 @@ export const Navbar = () => {
                     
                     {/* Mobile Sub-Menu */}
                     {hasSub && isSubOpen && menuData && (
-                      <div className="ml-4 mt-1 border-l-2 border-gray-200 pl-4">
+                      <div className="ms-4 mt-1 border-l-2 border-gray-200 ps-4">
                         {menuData.items.map((subItem) => (
                           <div key={subItem.key}>
                             <Link
@@ -447,7 +445,7 @@ export const Navbar = () => {
                             </Link>
                             {/* عرض Sub-Sub في الموبايل */}
                             {subItem.subItems && subItem.subItems.length > 0 && (
-                              <div className="ml-4 mt-1 border-l-2 border-gray-200 pl-4">
+                              <div className="ms-4 mt-1 border-l-2 border-gray-200 ps-4">
                                 {subItem.subItems.map((subSubItem) => (
                                   <Link
                                     key={subSubItem.key}

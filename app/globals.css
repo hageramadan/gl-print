@@ -3,7 +3,21 @@
 /* ============================================
    الألوان الأساسية والثانوية
    ============================================ */
+html.lang-ar body,
+html.lang-ar * {
+  font-family: var(--font-almarai), var(--font-montserrat), sans-serif !important;
+}
 
+/* ===== الخط للغة الإنجليزية ===== */
+html.lang-en body,
+html.lang-en * {
+  font-family: var(--font-montserrat), var(--font-almarai), sans-serif !important;
+}
+
+body {
+  font-family: var(--font-montserrat), sans-serif;
+  transition: font-family 0.3s ease;
+}
 @theme {
   /* الألوان الرئيسية */
   --color-primary: #1F3161;

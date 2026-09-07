@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import Image from "next/image";
@@ -11,47 +11,51 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const servicesData = [
-  {
-    id: 1,
-    title: "Printing Services",
-    description:
-      "High-quality printing solutions tailored to your business needs.",
-    image: "/images/services/service1.jpg",
-    link: "/services/printing",
-  },
-  {
-    id: 2,
-    title: "Graphic Design Services",
-    description:
-      "Creative designs tailored to your brand and communication needs.",
-    image: "/images/services/service2.png",
-    link: "/services/design",
-  },
-  {
-    id: 3,
-    title: "Packaging Solutions",
-    description:
-      "Custom boxes, bags, and product packaging engineered for your brand.",
-    image: "/images/services/service3.jpg",
-    link: "/services/packaging",
-  },
-  {
-    id: 4,
-    title: "Digital Printing",
-    description: "Fast and high-quality digital printing for all your needs.",
-    image: "/images/services/service1.jpg",
-    link: "/services/digital",
-  },
-];
+interface ServicesProps {
+  data: Array<{
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+    image?: string; // إضافة خاصية image كخيار
+  }>;
+}
 
-export const Services = () => {
+export const Services = ({ data }: ServicesProps) => {
   const { t } = useLanguage();
 
+  // استخدام البيانات من API أو بيانات افتراضية إذا لم تكن موجودة
+  const servicesData = data && data.length > 0 ? data : [
+    {
+      id: 1,
+      title: "Printing Services",
+      description: "High-quality printing solutions tailored to your business needs.",
+      icon: "/images/services/service1.jpg",
+    },
+    {
+      id: 2,
+      title: "Graphic Design Services",
+      description: "Creative designs tailored to your brand and communication needs.",
+      icon: "/images/services/service2.png",
+    },
+    {
+      id: 3,
+      title: "Packaging Solutions",
+      description: "Custom boxes, bags, and product packaging engineered for your brand.",
+      icon: "/images/services/service3.jpg",
+    },
+    {
+      id: 4,
+      title: "Digital Printing",
+      description: "Fast and high-quality digital printing for all your needs.",
+      icon: "/images/services/service1.jpg",
+    },
+  ];
+
   return (
-    <section className="py-16 md:py-20 lg:py-24  overflow-hidden">
-      <div className="= mx-auto ">
-        <div className=" container mx-auto mb-12 md:mb-16 px-3">
+    <section className="py-16 md:py-20 lg:py-24 overflow-hidden">
+      <div className="mx-auto">
+        <div className="container mx-auto mb-5 md:mb-16 px-3">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-0.5 bg-secondary"></div>
             <span className="text-xs md:text-sm lg:text-base text-secondary uppercase tracking-wider font-bold">
@@ -70,7 +74,7 @@ export const Services = () => {
         {/* ===== سلايدر الخدمات ===== */}
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={24}
+          spaceBetween={0}
           slidesPerView={1}
           breakpoints={{
             640: {
@@ -102,22 +106,22 @@ export const Services = () => {
         >
           {servicesData.map((service) => (
             <SwiperSlide key={service.id}>
-              <Link href={service.link} className="block group">
-                <div className="relative  overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+              <Link href={`/services/${service.id}`} className="block group">
+                <div className="relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                   {/* ===== الصورة ===== */}
                   <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]">
                     <Image
-                      src={service.image}
+                      src={service.image || service.icon}
                       alt={service.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
 
                     {/* ===== الكفر الأحمر الشفاف ===== */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/40 to-secondary/20 group-hover:from-secondary/90 group-hover:via-secondary/50 group-hover:to-secondary/30 transition-all duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-secondary/90  to-[#C621278C]/70 group-hover:from-secondary/90 group-hover:via-secondary/50 group-hover:to-secondary/30 transition-all duration-500"></div>
 
-                    {/* ===== الكفر الأحمر مع تأثير من الشمال (إضافة جديدة) ===== */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/0 to-secondary/0 group-hover:from-secondary/70 group-hover:via-secondary/40 group-hover:to-secondary/10 transition-all duration-700 ease-out"></div>
+                    {/* ===== الكفر الأحمر مع تأثير من الشمال ===== */}
+                    {/* <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/0 to-secondary/0 group-hover:from-secondary/70 group-hover:via-secondary/40 group-hover:to-secondary/10 transition-all duration-700 ease-out"></div> */}
 
                     {/* ===== المحتوى ===== */}
                     <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8">
@@ -131,7 +135,7 @@ export const Services = () => {
                       </p>
 
                       {/* ===== Learn More مع حدود (يظهر عند hover) ===== */}
-                      <div className="inline-flex items-center gap-2 text-white w-fit font-medium border-2  border-white/80 px-2 py-2 rounded-2xl group-hover:rounded-full transition-all duration-500 group-hover:px-4 group-hover:border-white">
+                      <div className="inline-flex items-center gap-2 text-white w-fit font-medium border-2 border-white/80 px-2 py-2 rounded-2xl group-hover:rounded-full transition-all duration-500 group-hover:px-4 group-hover:border-white">
                         <span className="text-sm transition-all duration-500 lg:hidden group-hover:block">
                           Learn More
                         </span>

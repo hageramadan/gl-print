@@ -16,12 +16,44 @@ import { SiTiktok } from "react-icons/si";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
-export const Footer = () => {
+
+interface FooterData {
+  phone: string;
+  email: string;
+  address: string;
+  working_hours: string;
+  social_links: {
+    whatsapp: string;
+    facebook: string;
+    linkedin: string;
+    instagram: string;
+    tik_tok: string;
+  };
+}
+
+interface FooterProps {
+  data?: FooterData | null;
+}
+
+export const Footer = ({ data }: FooterProps) => {
   const { t, dir } = useLanguage();
+
+  const footerData = data || {
+    phone: "+20 123 456 7890",
+    email: "quotes@glprint.com",
+    address: "123 Printing Ave, Cairo, Egypt",
+    working_hours: "Sun - Thu: 9 AM - 6 PM",
+    social_links: {
+      whatsapp: "https://wa.me/201234567890",
+      facebook: "https://facebook.com/glprint",
+      linkedin: "https://linkedin.com/company/glprint",
+      instagram: "https://instagram.com/glprint",
+      tik_tok: "https://tiktok.com/@glprint",
+    },
+  };
 
   return (
     <footer className="relative w-full overflow-hidden" dir={dir}>
-      {/* ===== خلفية الصورة ===== */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/footer/footer-bg.png"
@@ -29,8 +61,7 @@ export const Footer = () => {
           fill
           className="object-cover"
         />
-
-        <div className="absolute inset-0 bg-[#152141]/92 "></div>
+        <div className="absolute inset-0 bg-[#152141]/92"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-4 md:py-8 lg:py-10">
@@ -50,7 +81,7 @@ export const Footer = () => {
             <p className="text-base lg:text-[20px] text-white leading-relaxed font-semibold mb-3">
               Experience Comfort &amp; Creative at GL Print
             </p>
-            <p className="text-[15px] lg:text-lg font-bold text-[#B3B3B3] leading-relaxed ">
+            <p className="text-[15px] lg:text-lg font-bold text-[#B3B3B3] leading-relaxed">
               GL Print is your trusted partner for professional printing,
               advertising, branding, and promotional solutions.
             </p>
@@ -96,7 +127,6 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* ===== العمود الثالث: Support ===== */}
           <div className="col-span-1">
             <h3 className="text-lg lg:text-2xl font-semibold text-white mb-4">
               {t.footer?.support || "Support"}
@@ -120,7 +150,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="https://wa.me/201234567890"
+                  href={footerData.social_links.whatsapp}
                   target="_blank"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -138,9 +168,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* ===== العمود الرابع: Newsletter + Social + Contact ===== */}
           <div className="col-span-2">
-            {/* ===== Newsletter ===== */}
             <h3 className="text-lg font-bold text-white mb-4">
               {t.footer?.newsletter || "Follow Us"}
             </h3>
@@ -148,55 +176,54 @@ export const Footer = () => {
               <input
                 type="email"
                 placeholder={t.footer?.emailPlaceholder || "Email"}
-                className="w-full  px-4 py-2.5 pr-14 rounded-full bg-white text-[#B3B3B3] placeholder:text-[#B3B3B3] focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm"
+                className="w-full px-4 py-2.5 pe-14 rounded-full bg-white text-[#B3B3B3] placeholder:text-[#B3B3B3] focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm"
               />
               <button
                 type="submit"
-                className="absolute right-1 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-dark text-white p-2 rounded-full transition-all duration-300 hover:scale-105"
+                className="absolute end-1 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-dark text-white p-2 rounded-full transition-all duration-300 hover:scale-105"
               >
                 <BiSend className="text-lg" />
               </button>
             </form>
 
-            {/* ===== أيقونات السوشيال ميديا ===== */}
-            <div className="flex items-center gap-3 my-4 lg:my-6">
+            <div className="flex items-center gap-3 py-4 lg:py-6">
               <Link
-                href="https://tiktok.com"
+                href={footerData.social_links.tik_tok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <SiTiktok className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://wa.me/201234567890"
+                href={footerData.social_links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <IoLogoWhatsapp className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://instagram.com"
+                href={footerData.social_links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <FiInstagram className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://linkedin.com"
+                href={footerData.social_links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <FaLinkedinIn className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://facebook.com"
+                href={footerData.social_links.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <FaFacebook className="text-white w-4 h-4" />
               </Link>
@@ -204,7 +231,7 @@ export const Footer = () => {
 
             <div className="flex items-center gap-3">
               <Link
-                href="tel:+201234567890"
+                href={`tel:${footerData.phone}`}
                 className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
               >
                 <Image
@@ -216,7 +243,7 @@ export const Footer = () => {
                 />
               </Link>
               <Link
-                href="mailto:glprint@gmail.com"
+                href={`mailto:${footerData.email}`}
                 className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
               >
                 <Image
@@ -227,7 +254,7 @@ export const Footer = () => {
                   className="w-10 h-10"
                 />
               </Link>
-              <div className="flex items-center gap-3 text-[#B3B3B3] font-boldtext-sm">
+              <div className="flex items-center gap-3 text-[#B3B3B3] font-bold text-sm">
                 <Image
                   src="/images/footer/Location.png"
                   alt="Location"
@@ -235,12 +262,12 @@ export const Footer = () => {
                   height={200}
                   className="w-10 h-10"
                 />
+                <span className="hidden lg:block">{footerData.address}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* ===== Copyright ===== */}
         <div className="mt-10 pt-6 border-t border-white/50 text-center">
           <p className="text-sm lg:text-base text-[#F2F2F2] font-bold">
             © {new Date().getFullYear()} GL Print.{" "}

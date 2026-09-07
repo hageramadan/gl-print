@@ -15,10 +15,32 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 
-export const SubNavbar = () => {
+interface SocialLinks {
+  whatsapp: string;
+  facebook: string;
+  linkedin: string;
+  instagram: string;
+  tik_tok: string;
+}
+
+interface SubNavbarProps {
+  socialLinks?: SocialLinks | null;
+}
+
+export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
   const { t, language, toggleLanguage, dir } = useLanguage();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const defaultLinks = {
+    whatsapp: "https://wa.me/201234567890",
+    facebook: "https://facebook.com",
+    linkedin: "https://linkedin.com",
+    instagram: "https://instagram.com",
+    tik_tok: "https://tiktok.com",
+  };
+
+  const links = socialLinks || defaultLinks;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -47,7 +69,6 @@ export const SubNavbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center">
-       
           <div className="flex items-center gap-4 lg:gap-6 flex-wrap">
             <a
               href="mailto:glprint@gmail.com"
@@ -65,7 +86,6 @@ export const SubNavbar = () => {
             </a>
           </div>
 
-          
           <div className="flex items-center gap-1 lg:gap-1 flex-wrap">
             <Link
               href="/faqs"
@@ -74,7 +94,7 @@ export const SubNavbar = () => {
               <span>{t.subNav.faqs}</span>
             </Link>
             <div className="h-6 w-px bg-gray-600 mx-2"></div>
-            {/* Language Switcher with Dropdown */}
+
             <div className="relative cursor-pointer" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -85,7 +105,7 @@ export const SubNavbar = () => {
                   className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
                 />
               </button>
-             
+
               {isDropdownOpen && (
                 <div className="absolute top-full end-0 mt-2 bg-white text-gray-800 rounded-lg shadow-2xl min-w-40 overflow-hidden z-50 border border-gray-200">
                   <button
@@ -96,7 +116,7 @@ export const SubNavbar = () => {
                     `}
                   >
                     <span>English</span>
-                    {language === "en" && <FiCheck className="text-white" />}
+                    {language === "en" && <FiCheck className="text-secondary" />}
                   </button>
                   <div className="border-t border-gray-100"></div>
                   <button
@@ -107,55 +127,56 @@ export const SubNavbar = () => {
                     `}
                   >
                     <span>العربية</span>
-                    {language === "ar" && <FiCheck className="text-white" />}
+                    {language === "ar" && <FiCheck className="text-secondary" />}
                   </button>
                 </div>
               )}
             </div>
-             <div className="hidden lg:block h-6 w-px bg-gray-600 mx-2"></div>
+
+            <div className="hidden lg:block h-6 w-px bg-gray-600 mx-2"></div>
+
             <div className="hidden lg:flex items-center gap-3 my-4 lg:my-6">
               <Link
-                href="https://tiktok.com"
+                href={links.tik_tok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <SiTiktok className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://wa.me/201234567890"
+                href={links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <IoLogoWhatsapp className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://instagram.com"
+                href={links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <FiInstagram className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://linkedin.com"
+                href={links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <FaLinkedinIn className="text-white w-4 h-4" />
               </Link>
               <Link
-                href="https://facebook.com"
+                href={links.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" transition-all duration-300 hover:scale-110"
+                className="transition-all duration-300 hover:scale-110"
               >
                 <FaFacebook className="text-white w-4 h-4" />
               </Link>
             </div>
-
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ const services = [
 
 export const HeroServices = () => {
   return (
-    <div className="absolute bottom-0 sm:-bottom-1 lg:bottom-1 left-0 right-0 z-20">
+    <div className="absolute bottom-0 sm:-bottom-1 lg:bottom-1 start-0 end-0 z-20">
       <div className="container mx-auto px-1 lg:px-4">
         {/* ===== Desktop & Tablet: عرض شبكي ===== */}
         <div className="hidden lg:grid md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
@@ -66,8 +66,8 @@ export const HeroServices = () => {
                     className="
                     w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 
                     rounded-full 
-                    bg-primary/10 flex items-center justify-center
-                    group-hover:bg-primary/20 transition-all duration-300
+                    bg-[#ECF6FF] flex items-center justify-center
+                    group-hover:bg-[#ECF6FF]/90 transition-all duration-300
                     overflow-hidden
                   "
                   >
@@ -145,7 +145,8 @@ export const HeroServices = () => {
               <SwiperSlide key={service.id}>
                 <div
                   className="
-                    group
+                    group 
+                    my-4
                     bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg 
                     p-5 
                     transition-all duration-500 hover:shadow-2xl
@@ -160,8 +161,8 @@ export const HeroServices = () => {
                         className="
                         w-14 h-14 
                         rounded-full 
-                        bg-primary/10 flex items-center justify-center
-                        group-hover:bg-primary/20 transition-all duration-300
+                        bg-[#ECF6FF] flex items-center justify-center
+                        group-hover:bg-[#ECF6FF]/90 transition-all duration-300
                         overflow-hidden
                       "
                       >
@@ -200,7 +201,7 @@ export const HeroServices = () => {
                         href={service.link}
                         className="
                           inline-flex items-center gap-1 
-                          text-primary font-medium text-xs
+                          text-primary font-semibold text-xs
                           hover:text-primary-dark transition-colors
                           group-hover:gap-2 transition-all duration-300
                         "
