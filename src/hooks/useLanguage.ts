@@ -18,3 +18,12 @@ export const useLanguage = () => {
     lang: context.language,
   };
 };
+
+// ✅ إضافة دالة getLanguage
+export const getLanguage = (): string => {
+  if (typeof window !== 'undefined') {
+    const lang = localStorage.getItem('language');
+    return lang || 'en';
+  }
+  return 'en';
+};

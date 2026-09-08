@@ -64,7 +64,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
 
   return (
     <div
-      className="bg-linear-to-l from-[#090E1B] to-primary text-white text-sm lg:text-base font-medium py-2 border-b border-primary-light relative z-50"
+      className="bg-linear-to-l from-[#090E1B] to-primary text-white text-sm lg:text-base font-medium py-0.5 border-b border-primary-light relative z-50"
       dir={dir}
     >
       <div className="container mx-auto px-4">
@@ -135,7 +135,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
 
             <div className="hidden lg:block h-6 w-px bg-gray-600 mx-2"></div>
 
-            <div className="hidden lg:flex items-center gap-3 my-4 lg:my-6">
+            <div className="hidden lg:flex items-center gap-3 my-2 lg:my-3">
               <Link
                 href={links.tik_tok}
                 target="_blank"

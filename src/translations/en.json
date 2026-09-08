@@ -29,7 +29,15 @@
       "projects": "Projects Completed",
       "clients": "Happy Clients",
       "awards": "Awards Won"
-    }
+    },
+   
+    "pageTitle": "About Us",
+    "howWeWork": "How do we work?",
+    "implementationStages": "Implementation Stages From concept to final product",
+    "fromConcept": "From concept to final product",
+    "partners": "Our Partners",
+    "trustedBy": "Trusted by leading companies"
+  
   },
   "services": {
     "title": "Our Services",
@@ -221,6 +229,16 @@
     "emailPlaceholder": "Email",
     "copyright": "All rights reserved."
   },
+   "banner": {
+    "home": "Home"
+  },
+   "servicesPage": {
+    "title": "Services",
+    "tag": "Our Services",
+    "subtitle": "Everything Your Brand",
+    "subtitle2": "Needs In One Place."
+  },
+  
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",

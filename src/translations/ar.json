@@ -34,7 +34,13 @@
       "projects": "مشروع مكتمل",
       "clients": "عميل سعيد",
       "awards": "جائزة حصلنا عليها"
-    }
+    },
+      "pageTitle": "من نحن",
+    "howWeWork": "كيف نعمل؟",
+    "implementationStages": "مراحل التنفيذ من الفكرة الي المنتج النهائي",
+    "fromConcept": "من الفكرة إلى المنتج النهائي",
+    "partners": "شركاؤنا",
+    "trustedBy": "موثوق من قبل الشركات الرائدة"
   },
   "services": {
     "title": "خدماتنا",
@@ -219,6 +225,15 @@
     "newsletter": "تابعنا",
     "emailPlaceholder": "البريد الإلكتروني",
     "copyright": "جميع الحقوق محفوظة."
+  },
+   "banner": {
+    "home": "الرئيسية"
+  },
+   "servicesPage": {
+    "title": "خدماتنا",
+    "tag": "خدماتنا",
+    "subtitle": "كل ما تحتاجه علامتك التجارية",
+    "subtitle2": "في مكان واحد."
   },
   "common": {
     "loading": "جاري التحميل...",
