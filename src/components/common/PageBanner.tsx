@@ -34,7 +34,6 @@ export const PageBanner = ({
 
   return (
     <div className={`relative w-full ${height} overflow-hidden`} dir={dir}>
-      {/* ===== خلفية الصورة ===== */}
       <div className="absolute inset-0 z-0">
         <Image
           src={backgroundImage}
@@ -43,10 +42,12 @@ export const PageBanner = ({
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div> */}
       </div>
 
-      {/* ===== المحتوى ===== */}
       <div className="relative z-10 container mx-auto px-4 h-full flex flex-col">
         {/* ===== Breadcrumb في الأعلى ===== */}
         <div className="flex items-center gap-1 text-sm text-white/90 pt-6">
@@ -64,9 +65,7 @@ export const PageBanner = ({
                   />
                 )}
                 {isLast ? (
-                  <span className="text-white font-medium">
-                    {crumb.label}
-                  </span>
+                  <span className="text-white font-medium">{crumb.label}</span>
                 ) : (
                   <Link
                     href={crumb.href}

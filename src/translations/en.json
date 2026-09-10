@@ -88,13 +88,34 @@
     "placeholder": "Search for products, services...",
     "button": "Search"
   },
+   "productDetails": {
+    "requestQuote": "Request a Quote",
+    "relatedTag": "Related Products",
+    "relatedTitle": "You May Also Like",
+    "ctaTitle": "Need a Custom Quote?",
+    "ctaDescription": "Contact us today and get a personalized quote for your project.",
+    "ctaButton": "Get a Quote",
+     "specs": {
+      "size": "Size",
+      "paper": "Paper",
+      "printing": "Printing",
+      "quantity": "Quantity"
+    }
+  },
   "products": {
     "title": "Our Products",
     "subtitle": "Premium printing products for every need",
     "viewDetails": "View Details",
      "tag": "Featured Products",
+     "tag2":"All Products",
     "title2": "Latest Products",
     "viewAll": "View All",
+  "more": "More" ,
+    "all": "All",
+    "showing": "Showing",
+    "of": "of",
+    "products": "products",
+    "noProducts": "No products found.",
     "items": [
       {
         "name": "Business Cards",

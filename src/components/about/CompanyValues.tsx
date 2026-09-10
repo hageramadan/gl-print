@@ -17,19 +17,19 @@ export const CompanyValues = ({ data }: CompanyValuesProps) => {
   return (
     <section className="py-2 md:py-16 lg:py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
           {data.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl p-6 md:p-8 border border-[#E6E8ED] transition-all duration-300 hover:-translate-y-1 text-center group"
+              className="bg-white rounded-lg lg:rounded-2xl p-2 md:p-8 border border-[#E6E8ED] transition-all duration-300 hover:-translate-y-1 text-center group"
             >
-              <div className="w-16 h-16 mx-auto mb-4  rounded-2xl flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+              <div className="w-16 h-16 mx-auto mb-4  rounded-2xl flex items-center justify-center  transition-all duration-300">
                 <Image
                   src={item.icon}
                   alt={item.title}
                   width={40}
                   height={40}
-                  className="object-contain w-16 h-16"
+                  className="object-contain w-12 h-12 lg:w-16 lg:h-16"
                 />
               </div>
               <h3 className="text-xl lg:text-[28px] font-bold text-[#171A21] mb-2 group-hover:text-primary transition-colors">

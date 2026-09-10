@@ -5,11 +5,12 @@ import { PageBanner } from '@/src/components/common/PageBanner';
 import { ServiceCard } from '@/src/components/services/ServiceCard';
 import { Pagination } from '@/src/components/common/Pagination';
 import { useLanguage } from '@/src/hooks/useLanguage';
-import { getServices, Service } from '@/src/services/servicesApi';
+import { Banner, getServices, Service } from '@/src/services/servicesApi';
 
 export default function ServicesPage() {
   const { language, t } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
+    const [banner, setBanner] = useState<Banner | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -21,6 +22,7 @@ export default function ServicesPage() {
       console.log('🔄 Fetching services with language:', lang, 'page:', page);
       const response = await getServices(page, lang);
       setServices(response.data.services);
+       setBanner(response.data.banner);
       setCurrentPage(response.data.pagination.current_page);
       setLastPage(response.data.pagination.last_page);
       setTotal(response.data.pagination.total);
@@ -45,20 +47,23 @@ export default function ServicesPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading services...</p>
+    
         </div>
       </div>
     );
   }
+ const bannerTitle = banner?.title || t.servicesPage?.title || 'Services';
+  const bannerImage = banner?.image_url || '/images/banner/services-banner.png';
 
   return (
+    
     <main>
-      <PageBanner 
-        title={t.servicesPage?.title || 'Services'}
-        backgroundImage="/images/banner/services-banner.png"
+       <PageBanner 
+        title={bannerTitle}
+        backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
-          { label: t.servicesPage?.title || 'Services', href: '#' },
+          { label: bannerTitle, href: '#' },
         ]}
       />
 

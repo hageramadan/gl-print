@@ -27,16 +27,17 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
              
           <div className="w-full lg:w-1/2">
-            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="max-w-[653px] max-h-[436px] relative w-full aspect-4/3 rounded-xl overflow-hidden ">
               <Image
                 src={data.page_main_image}
                 alt={data.tagline}
-                fill
-                className="object-cover"
+                width={500}
+                height={500}
+                className="w-full h-auto object-cover"
               />
             </div>
           </div>
-          {/* ===== المحتوى ===== */}
+         
           <div className="w-full lg:w-1/2" dir={dir}>
             
                <div className="flex items-center gap-3 mb-3">

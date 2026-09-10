@@ -1,22 +1,36 @@
-export interface Service {
+export interface Product {
   id: number;
-  title: string;
+  service_id: number;
+  name: string;
   description: string;
-  icon: string;
-  image: string;
+  image: Array<{
+    id: number;
+    url: string;
+    file_name: string;
+    mime_type: string;
+  }>;
+  service: {
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+    image: string;
+  };
 }
+
 export interface Banner {
   page_key: string;
   title: string;
   image_url: string;
 }
-export interface ServicesResponse {
+
+export interface ProductsResponse {
   result: boolean;
   errNum: number;
   message: string;
   data: {
-     banner: Banner;
-    services: Service[];
+    banner: Banner;
+    products: Product[];
     pagination: {
       current_page: number;
       last_page: number;
@@ -30,20 +44,24 @@ export interface ServicesResponse {
   };
 }
 
-export const getServices = async (page: number = 1, language: string = 'en'): Promise<ServicesResponse> => {
-  console.log('🔄 Fetching services with language:', language, 'page:', page);
-  console.log('📌 Headers:', {
-    'Accept-Language': language,
-    'lang': language,
-  });
+export const getProducts = async (
+  page: number = 1,
+  serviceId: number | null = null,
+  language: string = 'en'
+): Promise<ProductsResponse> => {
+  let url = `https://glprint-eg.com/api/products?page=${page}`;
+  if (serviceId) {
+    url += `&service=${serviceId}`;
+  }
   
-  const response = await fetch(`https://glprint-eg.com/api/services?page=${page}`, {
+ 
+  const response = await fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Accept-Language': language,
-      'lang': language,
+    
     },
     cache: 'no-store',
   });
@@ -53,6 +71,6 @@ export const getServices = async (page: number = 1, language: string = 'en'): Pr
   }
 
   const data = await response.json();
-  console.log('✅ Services received with language:', language);
+
   return data;
 };

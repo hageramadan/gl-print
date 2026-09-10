@@ -54,7 +54,7 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={`
-          flex items-center gap-1 px-3 py-2 rounded-lg
+          flex items-center gap-1 px-3 py-3 rounded-lg
           transition-all duration-300
           ${currentPage === 1 
             ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400'
@@ -62,8 +62,8 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
           }
         `}
       >
-        <FiChevronLeft className={`${dir === 'rtl' ? 'rotate-180' : ''}`} />
-        <span className="text-sm font-medium">Previous</span>
+        <FiChevronLeft className={`text-xl ${dir === 'rtl' ? 'rotate-180' : ''}`} />
+        {/* <span className="text-sm font-medium">Previous</span> */}
       </button>
 
       {/* ===== أرقام الصفحات ===== */}
@@ -103,7 +103,7 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === lastPage}
         className={`
-          flex items-center gap-1 px-3 py-2 rounded-lg
+          flex items-center gap-1 px-3 py-3 rounded-lg
           transition-all duration-300
           ${currentPage === lastPage
             ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400'
@@ -111,8 +111,8 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
           }
         `}
       >
-        <span className="text-sm font-medium">Next</span>
-        <FiChevronRight className={`${dir === 'rtl' ? 'rotate-180' : ''}`} />
+        {/* <span className="text-sm font-medium">Next</span> */}
+        <FiChevronRight className={`text-xl  ${dir === 'rtl' ? 'rotate-180' : ''}`} />
       </button>
     </div>
   );
