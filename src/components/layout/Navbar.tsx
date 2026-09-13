@@ -1,23 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useLanguage } from "@/src/hooks/useLanguage";
 import { usePathname } from "next/navigation";
 import {
   FiMenu,
   FiX,
   FiGrid,
-  FiFacebook,
-  FiTwitter,
-  FiInstagram,
-  FiLinkedin,
-  FiYoutube,
   FiChevronDown,
   FiChevronRight,
 } from "react-icons/fi";
 import Image from "next/image";
-import { getServices, Service } from "@/src/services/servicesApi";
+import {
+  getNavbarData,
+  NavbarService,
+  NavbarIndustry,
+  NavbarProduct,
+} from "@/src/services/navbarApi";
+import { Sidebar } from "./Sidebar";
 
 interface SocialLinks {
   whatsapp: string;
@@ -27,81 +28,54 @@ interface SocialLinks {
   tik_tok: string;
 }
 
-interface NavbarProps {
-  socialLinks?: SocialLinks | null;
+interface ContactInfo {
+  phone: string;
+  email: string;
+  address: string;
 }
 
-export const Navbar = ({ socialLinks }: NavbarProps) => {
+interface NavbarProps {
+  socialLinks?: SocialLinks | null;
+  contactInfo?: ContactInfo;
+}
+
+export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
   const { t, dir, language } = useLanguage();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [isAppsOpen, setIsAppsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(
-    null,
-  );
+  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
   const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
-  const [servicesData, setServicesData] = useState<Service[]>([]);
-  const [isLoadingServices, setIsLoadingServices] = useState(true);
+  const [mobileSubSubOpen, setMobileSubSubOpen] = useState<string | null>(null);
 
-  const appsRef = useRef<HTMLDivElement>(null);
+  const [servicesData, setServicesData] = useState<NavbarService[]>([]);
+  const [industriesData, setIndustriesData] = useState<NavbarIndustry[]>([]);
+  const [productsData, setProductsData] = useState<NavbarProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [subDropdownPosition, setSubDropdownPosition] = useState({ top: 0, left: 0 });
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const defaultLinks = {
-    whatsapp: "https://wa.me/201234567890",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
-    instagram: "https://instagram.com",
-    tik_tok: "https://tiktok.com",
-  };
-
-  const links = socialLinks || defaultLinks;
-
-  const socialLinksFromAPI = [
-    { icon: FiFacebook, href: links.facebook, label: "Facebook" },
-    { icon: FiTwitter, href: "#", label: "Twitter" },
-    { icon: FiInstagram, href: links.instagram, label: "Instagram" },
-    { icon: FiLinkedin, href: links.linkedin, label: "LinkedIn" },
-    { icon: FiYoutube, href: "#", label: "YouTube" },
-  ];
-
-  // ✅ جلب الخدمات عند تحميل المكون وعند تغيير اللغة
-  const fetchServices = async () => {
+  const fetchNavbarData = async () => {
     try {
-      setIsLoadingServices(true);
-      console.log("🔄 Fetching services with language:", language);
-      const response = await getServices(1, language);
-      setServicesData(response.data.services);
-      console.log("✅ Services fetched with language:", language);
+      setIsLoading(true);
+      const response = await getNavbarData(language);
+      setServicesData(response.data.navbar.services);
+      setIndustriesData(response.data.navbar.industries);
+      setProductsData(response.data.navbar.products);
     } catch (error) {
-      console.error("Failed to fetch services for navbar:", error);
+      console.error("Failed to fetch navbar data:", error);
     } finally {
-      setIsLoadingServices(false);
+      setIsLoading(false);
     }
   };
 
-  // ✅ جلب الخدمات عند تحميل المكون
   useEffect(() => {
-    fetchServices();
-  }, []);
-
-  // ✅ إعادة جلب الخدمات عند تغيير اللغة
-  useEffect(() => {
-    fetchServices();
+    fetchNavbarData();
   }, [language]);
 
-  // إغلاق العناصر عند الضغط خارجها
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (appsRef.current && !appsRef.current.contains(event.target as Node)) {
-        setIsAppsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // تنظيف الـ timeout عند إلغاء التثبيت
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -113,193 +87,17 @@ export const Navbar = ({ socialLinks }: NavbarProps) => {
   const navItems = [
     { key: "home", href: "/" },
     { key: "about", href: "/about" },
-    { key: "services", href: "/services" },
-    { key: "products", href: "/products" },
-    { key: "industries", href: "/industries" },
+    { key: "services", href: "/services", hasSub: true },
+    { key: "products", href: "/products", hasSub: true },
+    { key: "industries", href: "/industries", hasSub: true },
     { key: "blogs", href: "/blogs" },
     { key: "contact", href: "/contact" },
   ];
 
-  // بناء قائمة الخدمات من API
-  const servicesMenuItems = servicesData.map((service) => ({
-    key: `service-${service.id}`,
-    href: `/services/${service.id}`,
-    label: service.title,
-    subItems: [],
-  }));
-
-  // القوائم الرئيسية مع القوائم الفرعية الجانبية
-  const menuItems = {
-    services: {
-      label: "Services",
-      items:
-        servicesMenuItems.length > 0
-          ? servicesMenuItems
-          : [
-              {
-                key: "digital-printing",
-                href: "/services/digital-printing",
-                label: "Digital Printing",
-                subItems: [
-                  {
-                    key: "small-format",
-                    href: "/services/digital/small-format",
-                    label: "Small Format",
-                  },
-                  {
-                    key: "large-format",
-                    href: "/services/digital/large-format",
-                    label: "Large Format",
-                  },
-                  {
-                    key: "wide-format",
-                    href: "/services/digital/wide-format",
-                    label: "Wide Format",
-                  },
-                ],
-              },
-              {
-                key: "offset-printing",
-                href: "/services/offset-printing",
-                label: "Offset Printing",
-                subItems: [
-                  {
-                    key: "sheet-fed",
-                    href: "/services/offset/sheet-fed",
-                    label: "Sheet Fed",
-                  },
-                  {
-                    key: "web-fed",
-                    href: "/services/offset/web-fed",
-                    label: "Web Fed",
-                  },
-                ],
-              },
-              {
-                key: "large-format",
-                href: "/services/large-format",
-                label: "Large Format",
-                subItems: [
-                  {
-                    key: "banners",
-                    href: "/services/large/banners",
-                    label: "Banners",
-                  },
-                  {
-                    key: "posters",
-                    href: "/services/large/posters",
-                    label: "Posters",
-                  },
-                  {
-                    key: "billboards",
-                    href: "/services/large/billboards",
-                    label: "Billboards",
-                  },
-                ],
-              },
-              {
-                key: "packaging",
-                href: "/services/packaging",
-                label: "Packaging",
-                subItems: [
-                  {
-                    key: "boxes",
-                    href: "/services/packaging/boxes",
-                    label: "Custom Boxes",
-                  },
-                  {
-                    key: "labels",
-                    href: "/services/packaging/labels",
-                    label: "Labels",
-                  },
-                ],
-              },
-            ],
-    },
-    products: {
-      label: "Products",
-      items: [
-        {
-          key: "business-cards",
-          href: "/products/business-cards",
-          label: "Business Cards",
-          subItems: [
-            {
-              key: "standard",
-              href: "/products/cards/standard",
-              label: "Standard",
-            },
-            {
-              key: "premium",
-              href: "/products/cards/premium",
-              label: "Premium",
-            },
-            { key: "luxury", href: "/products/cards/luxury", label: "Luxury" },
-          ],
-        },
-        {
-          key: "brochures",
-          href: "/products/brochures",
-          label: "Brochures",
-          subItems: [
-            {
-              key: "tri-fold",
-              href: "/products/brochures/tri-fold",
-              label: "Tri-Fold",
-            },
-            {
-              key: "bi-fold",
-              href: "/products/brochures/bi-fold",
-              label: "Bi-Fold",
-            },
-            {
-              key: "multi-page",
-              href: "/products/brochures/multi-page",
-              label: "Multi-Page",
-            },
-          ],
-        },
-        {
-          key: "flyers",
-          href: "/products/flyers",
-          label: "Flyers",
-          subItems: [
-            {
-              key: "single-sided",
-              href: "/products/flyers/single-sided",
-              label: "Single Sided",
-            },
-            {
-              key: "double-sided",
-              href: "/products/flyers/double-sided",
-              label: "Double Sided",
-            },
-          ],
-        },
-        {
-          key: "posters",
-          href: "/products/posters",
-          label: "Posters",
-          subItems: [
-            { key: "small", href: "/products/posters/small", label: "Small" },
-            {
-              key: "medium",
-              href: "/products/posters/medium",
-              label: "Medium",
-            },
-            { key: "large", href: "/products/posters/large", label: "Large" },
-          ],
-        },
-      ],
-    },
-  };
-
-  // التحقق مما إذا كان العنصر لديه قائمة فرعية
   const hasSubMenu = (key: string) => {
-    return key === "services" || key === "products";
+    return key === "services" || key === "products" || key === "industries";
   };
 
-  // ===== دوال التحكم في الـ Dropdown =====
   const handleMouseEnter = (key: string) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -312,21 +110,36 @@ export const Navbar = ({ socialLinks }: NavbarProps) => {
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
       setActiveSubDropdown(null);
-    }, 150);
+    }, 200);
   };
 
-  const handleSubMouseEnter = (key: string) => {
+  const handleSubMouseEnter = useCallback((serviceId: number, e: React.MouseEvent) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    setActiveSubDropdown(key);
-  };
+    setActiveSubDropdown(`service-${serviceId}`);
+
+    const target = e.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    
+    if (dir === "rtl") {
+      setSubDropdownPosition({
+        top: rect.top,
+        left: rect.left - 230,
+      });
+    } else {
+      setSubDropdownPosition({
+        top: rect.top,
+        left: rect.right + 2,
+      });
+    }
+  }, [dir]);
 
   const handleSubMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveSubDropdown(null);
-    }, 150);
+    }, 200);
   };
 
   const handleDropdownMouseEnter = () => {
@@ -336,332 +149,375 @@ export const Navbar = ({ socialLinks }: NavbarProps) => {
     }
   };
 
-  // ===== دوال التحكم في الموبايل =====
   const toggleMobileSub = (key: string) => {
     setMobileSubOpen(mobileSubOpen === key ? null : key);
   };
 
-  // ✅ بناء قائمة الخدمات للعرض
-  const getServicesMenu = () => {
-    if (isLoadingServices && servicesData.length === 0) {
-      return [
-        {
-          key: "loading",
-          href: "#",
-          label: "Loading services...",
-          subItems: [],
-        },
-      ];
-    }
-    if (servicesData.length === 0) {
-      return [
-        {
-          key: "empty",
-          href: "#",
-          label: "No services available",
-          subItems: [],
-        },
-      ];
-    }
-    return servicesMenuItems;
+  const toggleMobileSubSub = (key: string) => {
+    setMobileSubSubOpen(mobileSubSubOpen === key ? null : key);
   };
 
-  // ✅ تحديث menuItems.services.items بالقائمة الجاهزة
-  menuItems.services.items = getServicesMenu();
+  const activeService = servicesData.find(
+    (s) => `service-${s.id}` === activeSubDropdown,
+  );
 
   return (
-    <nav
-      className="bg-white text-[#3E3F42] shadow-lg sticky top-0 z-[999]"
-      dir={dir}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16 lg:h-20">
-          {/* Logo */}
-          <Link href="/">
-            <Image
-              src="/logo2.png"
-              alt="Logo"
-              width={100}
-              height={50}
-              className="object-contain w-20 h-12 lg:w-18 lg:h-14"
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              const hasSub = hasSubMenu(item.key);
-              const isDropdownOpen = activeDropdown === item.key;
-              const menuData = menuItems[item.key as keyof typeof menuItems];
-
-              return (
-                <div
-                  key={item.key}
-                  className="relative"
-                  onMouseEnter={() => hasSub && handleMouseEnter(item.key)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link
-                    href={item.href}
-                    className={`
-                      font-medium transition-colors relative flex items-center gap-1 py-2
-                      ${isActive ? "text-black" : "hover:text-secondary "}
-                      ${isActive ? " text-black font-semibold" : ""}
-                    `}
-                  >
-                    {t.nav[item.key as keyof typeof t.nav]}
-                    {hasSub && (
-                      <FiChevronDown
-                        className={`text-xs transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
-                      />
-                    )}
-                  </Link>
-
-                  {/* Dropdown SubMenu مع Sub-Dropdown جانبي */}
-                  {hasSub && isDropdownOpen && menuData && (
-                    <div
-                      className="absolute top-full start-0 mt-1 bg-white rounded-lg shadow-2xl min-w-[220px] max-h-[400px] overflow-y-auto overflow-visible z-[9999] border border-gray-100 py-1"
-                      onMouseEnter={handleDropdownMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {menuData.items.map((subItem) => {
-                        const hasSubSub =
-                          subItem.subItems && subItem.subItems.length > 0;
-                        const isSubOpen = activeSubDropdown === subItem.key;
-
-                        // ✅ تخطي عناصر التحميل والفارغة
-                        if (
-                          subItem.key === "loading" ||
-                          subItem.key === "empty"
-                        ) {
-                          return (
-                            <div
-                              key={subItem.key}
-                              className="px-4 py-2.5 text-gray-500 text-sm"
-                            >
-                              {subItem.label}
-                            </div>
-                          );
-                        }
-
-                        return (
-                          <div
-                            key={subItem.key}
-                            className="relative"
-                            onMouseEnter={() =>
-                              hasSubSub && handleSubMouseEnter(subItem.key)
-                            }
-                            onMouseLeave={handleSubMouseLeave}
-                          >
-                            <Link
-                              href={subItem.href}
-                              className="flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
-                            >
-                              <span>{subItem.label}</span>
-                              {hasSubSub && (
-                                <FiChevronRight
-                                  className={`text-xs transition-transform duration-300 ${isSubOpen ? "rotate-90" : ""}`}
-                                />
-                              )}
-                            </Link>
-
-                            {/* Sub-Dropdown الجانبي */}
-                            {hasSubSub && isSubOpen && (
-                              <div
-                                className="absolute top-0 bg-white rounded-lg shadow-2xl min-w-[200px] overflow-hidden z-[99999] border border-gray-100 py-1"
-                                style={{
-                                  left: dir === "rtl" ? "auto" : "100%",
-                                  right: dir === "rtl" ? "100%" : "auto",
-                                  marginLeft: dir === "rtl" ? "0" : "4px",
-                                  marginRight: dir === "rtl" ? "4px" : "0",
-                                }}
-                                onMouseEnter={handleDropdownMouseEnter}
-                                onMouseLeave={handleSubMouseLeave}
-                              >
-                                {subItem.subItems.map((subSubItem) => (
-                                  <Link
-                                    key={subSubItem.key}
-                                    href={subSubItem.href}
-                                    className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
-                                  >
-                                    {subSubItem.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Actions: Apps + Quote + Mobile Menu */}
-          <div className="flex items-center gap-3">
-            {/* Apps Icon (Social Media) */}
-            <div className="relative" ref={appsRef}>
-              <button
-                onClick={() => setIsAppsOpen(!isAppsOpen)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer shadow-lg"
-                aria-label="Apps"
-              >
-                <FiGrid className="text-xl" />
-              </button>
-
-              {/* Social Media Dropdown */}
-              {isAppsOpen && (
-                <div className="absolute top-full end-0 mt-2 bg-white rounded-lg shadow-2xl p-4 w-56 z-[9999] border border-gray-200">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-3">
-                    Follow Us
-                  </h3>
-                  <div className="flex flex-col gap-2">
-                    {socialLinksFromAPI.map((social) => (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded-lg transition-colors"
-                      >
-                        <social.icon className="text-xl text-gray-600 hover:text-secondary transition-colors" />
-                        <span className="text-sm text-gray-700">
-                          {social.label}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Get a Quote Button */}
-            <Link
-              href="/quote"
-              className="hidden lg:block bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-6 py-2 text-white rounded-xl transition-all duration-300 font-medium hover:-translate-y-1 hover:shadow-xl"
-            >
-              {t.nav.quote || "Get a Quote"}
+    <>
+      <nav
+        className="bg-white text-[#3E3F42] shadow-lg sticky top-0 z-[999]"
+        dir={dir}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center h-16 lg:h-20">
+            <Link href="/">
+              <Image
+                src="/logo2.png"
+                alt="Logo"
+                width={100}
+                height={50}
+                className="object-contain w-20 h-12 lg:w-18 lg:h-14"
+              />
             </Link>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden text-2xl p-2 hover:bg-gray-100 rounded-full transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <FiX /> : <FiMenu />}
-            </button>
-          </div>
-        </div>
-        {/* Mobile Navigation */}
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200">
-            <div className="flex flex-col gap-2">
+            <div className="hidden lg:flex items-center gap-6">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 const hasSub = hasSubMenu(item.key);
-                const menuData = menuItems[item.key as keyof typeof menuItems];
-                const isSubOpen = mobileSubOpen === item.key;
+                const isDropdownOpen = activeDropdown === item.key;
 
                 return (
-                  <div key={item.key}>
-                    <div
+                  <div
+                    key={item.key}
+                    className="relative"
+                    onMouseEnter={() => hasSub && handleMouseEnter(item.key)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <Link
+                      href={item.href}
                       className={`
-                font-medium py-2 px-4 rounded transition-colors flex items-center justify-between cursor-pointer
-                ${isActive ? "bg-secondary text-white" : "hover:bg-gray-100"}
-              `}
+                        font-medium transition-colors relative flex items-center gap-1 py-2
+                        ${isActive ? "text-black" : "hover:text-secondary"}
+                        ${isActive ? "text-black font-semibold" : ""}
+                      `}
                     >
-                      {/* ✅ الرابط الرئيسي - ينتقل إلى الصفحة */}
-                      <Link
-                        href={item.href}
-                        className="flex-1"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {t.nav[item.key as keyof typeof t.nav]}
-                      </Link>
-
-                      {/* ✅ زر السهم - يفتح/يغلق القائمة الفرعية */}
+                      {t.nav[item.key as keyof typeof t.nav]}
                       {hasSub && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleMobileSub(item.key);
-                          }}
-                          className="p-1 hover:bg-gray-200 rounded transition-colors"
-                          aria-label="Toggle submenu"
-                        >
-                          <FiChevronDown
-                            className={`text-sm transition-transform duration-300 ${isSubOpen ? "rotate-180" : ""}`}
-                          />
-                        </button>
+                        <FiChevronDown
+                          className={`text-xs transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
+                        />
                       )}
-                    </div>
+                    </Link>
 
-                    {/* Mobile Sub-Menu */}
-                    {hasSub && isSubOpen && menuData && (
-                      <div className="ms-4 mt-1 border-l-2 border-gray-200 ps-4">
-                        {menuData.items.map((subItem) => {
-                          if (
-                            subItem.key === "loading" ||
-                            subItem.key === "empty"
-                          ) {
-                            return (
-                              <div
-                                key={subItem.key}
-                                className="px-4 py-2 text-gray-500 text-sm"
-                              >
-                                {subItem.label}
-                              </div>
-                            );
-                          }
-                          return (
-                            <div key={subItem.key}>
-                              <Link
-                                href={subItem.href}
-                                className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
-                                onClick={() => setIsOpen(false)}
-                              >
-                                {subItem.label}
-                              </Link>
-                              {subItem.subItems &&
-                                subItem.subItems.length > 0 && (
-                                  <div className="ms-4 mt-1 border-l-2 border-gray-200 ps-4">
-                                    {subItem.subItems.map((subSubItem) => (
-                                      <Link
-                                        key={subSubItem.key}
-                                        href={subSubItem.href}
-                                        className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
-                                        onClick={() => setIsOpen(false)}
-                                      >
-                                        {subSubItem.label}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                )}
+                    {hasSub && isDropdownOpen && (
+                      <div
+                        className="absolute top-full start-0 mt-1 bg-white rounded-lg shadow-2xl min-w-[250px] max-h-[450px] overflow-y-auto z-[9999] border border-gray-100 py-1"
+                        onMouseEnter={handleDropdownMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        {item.key === "services" &&
+                          (isLoading && servicesData.length === 0 ? (
+                            <div className="px-4 py-2.5 text-gray-500 text-sm">
+                              Loading...
                             </div>
-                          );
-                        })}
+                          ) : servicesData.length === 0 ? (
+                            <div className="px-4 py-2.5 text-gray-500 text-sm">
+                              No services available
+                            </div>
+                          ) : (
+                            servicesData.map((service) => {
+                              const hasProducts =
+                                service.products && service.products.length > 0;
+                              const isSubOpen =
+                                activeSubDropdown === `service-${service.id}`;
+
+                              return (
+                                <div
+                                  key={service.id}
+                                  className="relative"
+                                  onMouseEnter={(e) => {
+                                    if (hasProducts) {
+                                      handleSubMouseEnter(service.id, e);
+                                    }
+                                  }}
+                                  onMouseLeave={handleSubMouseLeave}
+                                >
+                                  <Link
+                                    href={`/services/${service.id}`}
+                                    className={`
+                                      flex items-center justify-between px-4 py-2.5 transition-colors
+                                      ${isSubOpen ? "bg-primary/5 text-primary" : "text-gray-700 hover:bg-gray-50 hover:text-black"}
+                                    `}
+                                  >
+                                    <span>{service.title}</span>
+                                    {hasProducts && (
+                                      <FiChevronRight
+                                        className={`text-xs transition-transform duration-300 ${
+                                          language === "ar" ? "rotate-180" : ""
+                                        } ${isSubOpen ? "rotate-90" : ""}`}
+                                      />
+                                    )}
+                                  </Link>
+                                </div>
+                              );
+                            })
+                          ))}
+
+                        {item.key === "products" &&
+                          (isLoading && productsData.length === 0 ? (
+                            <div className="px-4 py-2.5 text-gray-500 text-sm">
+                              Loading...
+                            </div>
+                          ) : productsData.length === 0 ? (
+                            <div className="px-4 py-2.5 text-gray-500 text-sm">
+                              No products available
+                            </div>
+                          ) : (
+                            productsData.map((product) => (
+                              <Link
+                                key={product.id}
+                                href={`/products/${product.id}`}
+                                className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
+                              >
+                                {product.name}
+                              </Link>
+                            ))
+                          ))}
+
+                        {item.key === "industries" &&
+                          (isLoading && industriesData.length === 0 ? (
+                            <div className="px-4 py-2.5 text-gray-500 text-sm">
+                              Loading...
+                            </div>
+                          ) : industriesData.length === 0 ? (
+                            <div className="px-4 py-2.5 text-gray-500 text-sm">
+                              No industries available
+                            </div>
+                          ) : (
+                            industriesData.map((industry) => (
+                              <Link
+                                key={industry.id}
+                                href={`/industries/${industry.id}`}
+                                className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
+                              >
+                                {industry.name}
+                              </Link>
+                            ))
+                          ))}
                       </div>
                     )}
                   </div>
                 );
               })}
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer shadow-lg"
+                aria-label="Open sidebar"
+              >
+                <FiGrid className="text-xl" />
+              </button>
+
               <Link
                 href="/quote"
-                className="bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-4 py-2 rounded-xl transition-all duration-300 font-medium text-center mt-2 text-white hover:-translate-y-1 hover:shadow-xl"
-                onClick={() => setIsOpen(false)}
+                className="hidden lg:block bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-6 py-2 text-white rounded-xl transition-all duration-300 font-medium hover:-translate-y-1 hover:shadow-xl"
               >
                 {t.nav.quote || "Get a Quote"}
               </Link>
+
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="lg:hidden text-2xl p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <FiX /> : <FiMenu />}
+              </button>
             </div>
           </div>
-        )}
-      
-      </div>
-    </nav>
+
+          {isOpen && (
+            <div className="lg:hidden py-4 border-t border-gray-200">
+              <div className="flex flex-col gap-2">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  const hasSub = hasSubMenu(item.key);
+                  const isSubOpen = mobileSubOpen === item.key;
+
+                  return (
+                    <div key={item.key}>
+                      <div
+                        className={`
+                          font-medium py-2 px-4 rounded transition-colors flex items-center justify-between
+                          ${isActive ? "bg-secondary text-white" : "hover:bg-gray-100"}
+                        `}
+                      >
+                        <Link
+                          href={item.href}
+                          className="flex-1"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {t.nav[item.key as keyof typeof t.nav]}
+                        </Link>
+
+                        {hasSub && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleMobileSub(item.key);
+                            }}
+                            className="p-1 hover:bg-gray-200 rounded transition-colors"
+                          >
+                            <FiChevronDown
+                              className={`text-sm transition-transform duration-300 ${isSubOpen ? "rotate-180" : ""}`}
+                            />
+                          </button>
+                        )}
+                      </div>
+
+                      {hasSub && isSubOpen && (
+                        <div className="ms-4 mt-1 border-l-2 border-gray-200 ps-4 max-h-[300px] overflow-y-auto">
+                          {item.key === "services" &&
+                            (isLoading && servicesData.length === 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Loading...
+                              </div>
+                            ) : (
+                              servicesData.map((service) => {
+                                const hasProducts =
+                                  service.products &&
+                                  service.products.length > 0;
+                                const isSubSubOpen =
+                                  mobileSubSubOpen ===
+                                  `mobile-service-${service.id}`;
+
+                                return (
+                                  <div key={service.id}>
+                                    <div className="flex items-center justify-between py-2 px-4">
+                                      <Link
+                                        href={`/services/${service.id}`}
+                                        className="flex-1 text-sm hover:text-black transition-colors"
+                                        onClick={() => setIsOpen(false)}
+                                      >
+                                        {service.title}
+                                      </Link>
+                                      {hasProducts && (
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleMobileSubSub(
+                                              `mobile-service-${service.id}`,
+                                            );
+                                          }}
+                                          className="p-1"
+                                        >
+                                          <FiChevronDown
+                                            className={`text-xs transition-transform duration-300 ${isSubSubOpen ? "rotate-180" : ""}`}
+                                          />
+                                        </button>
+                                      )}
+                                    </div>
+
+                                    {hasProducts && isSubSubOpen && (
+                                      <div className="ms-4 border-l-2 border-gray-100 ps-4">
+                                        {service.products.map((product) => (
+                                          <Link
+                                            key={product.id}
+                                            href={`/products/${product.id}`}
+                                            className="block py-2 px-4 text-xs hover:bg-gray-100 rounded transition-colors hover:text-black"
+                                            onClick={() => setIsOpen(false)}
+                                          >
+                                            {product.name}
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })
+                            ))}
+
+                          {item.key === "products" &&
+                            (isLoading && productsData.length === 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Loading...
+                              </div>
+                            ) : (
+                              productsData.map((product) => (
+                                <Link
+                                  key={product.id}
+                                  href={`/products/${product.id}`}
+                                  className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {product.name}
+                                </Link>
+                              ))
+                            ))}
+
+                          {item.key === "industries" &&
+                            (isLoading && industriesData.length === 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Loading...
+                              </div>
+                            ) : (
+                              industriesData.map((industry) => (
+                                <Link
+                                  key={industry.id}
+                                  href={`/industries/${industry.id}`}
+                                  className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {industry.name}
+                                </Link>
+                              ))
+                            ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                <Link
+                  href="/quote"
+                  className="bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-4 py-2 rounded-xl transition-all duration-300 font-medium text-center mt-2 text-white hover:-translate-y-1 hover:shadow-xl"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t.nav.quote || "Get a Quote"}
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {activeService && activeService.products && activeService.products.length > 0 && (
+        <div
+          className="fixed bg-white rounded-lg shadow-2xl min-w-[230px] max-h-[400px] overflow-y-auto z-[99999] border border-gray-100 py-1"
+          style={{
+            top: `${subDropdownPosition.top}px`,
+            left: `${subDropdownPosition.left}px`,
+          }}
+          onMouseEnter={handleDropdownMouseEnter}
+          onMouseLeave={handleSubMouseLeave}
+        >
+          {activeService.products.map((product) => (
+            <Link
+              key={product.id}
+              href={`/products/${product.id}`}
+              className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black text-sm whitespace-nowrap"
+            >
+              {product.name}
+            </Link>
+          ))}
+        </div>
+      )}
+
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        socialLinks={socialLinks || undefined}
+        contactInfo={contactInfo}
+      />
+    </>
   );
 };

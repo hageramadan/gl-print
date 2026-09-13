@@ -67,7 +67,7 @@ export default function ProductDetailsPage() {
         backgroundImage={product.banner_image || '/images/banner/products-banner.png'}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
-          { label: t.products?.title || 'Products', href: '/products' },
+          { label: t.products?.products2 || 'Products', href: '/products' },
           { label: product.name, href: '#' },
         ]}
       />
@@ -76,10 +76,10 @@ export default function ProductDetailsPage() {
       <ProductDetails product={product} />
 
       {/* ===== 3. المنتجات ذات الصلة ===== */}
-      {/* <RelatedProducts products={relatedProducts} /> */}
+      <RelatedProducts products={relatedProducts} />
 
       {/* ===== 4. CTA ===== */}
-      {/* <ProductCTA /> */}
+      <ProductCTA />
     </main>
   );
 }

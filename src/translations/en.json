@@ -94,7 +94,7 @@
     "relatedTitle": "You May Also Like",
     "ctaTitle": "Need a Custom Quote?",
     "ctaDescription": "Contact us today and get a personalized quote for your project.",
-    "ctaButton": "Get a Quote",
+    "ctaButton": "Get a custom Quote",
      "specs": {
       "size": "Size",
       "paper": "Paper",
@@ -102,7 +102,15 @@
       "quantity": "Quantity"
     }
   },
+   "sidebar": {
+    "searchPlaceholder": "Search...",
+    "callUs": "Call us now",
+    "emailAddress": "Email Address",
+    "officeAddress": "Office Address",
+    "followUs": "Follow Us"
+  },
   "products": {
+    "products2":"Products",
     "title": "Our Products",
     "subtitle": "Premium printing products for every need",
     "viewDetails": "View Details",

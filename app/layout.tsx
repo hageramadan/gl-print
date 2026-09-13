@@ -48,11 +48,17 @@ export default async function RootLayout({
 }) {
   let footerData = null;
   let socialLinks = null;
+  let contactInfo = null;
   
   try {
     const homeData = await getHomeData('en');
     footerData = homeData.footer;
     socialLinks = homeData.footer?.social_links || null;
+     contactInfo = {
+      phone: homeData.footer?.phone || '',
+      email: homeData.footer?.email || '',
+      address: homeData.footer?.address || '',
+    };
   } catch (error) {
     console.error('Failed to fetch footer data:', error);
   }
@@ -62,7 +68,7 @@ export default async function RootLayout({
       <body className={`${montserrat.variable} ${almarai.variable} antialiased`}>
         <LanguageProvider>
           <div className="flex flex-col min-h-screen">
-            <Header socialLinks={socialLinks || undefined} />
+            <Header socialLinks={socialLinks || undefined} contactInfo={contactInfo || undefined} />
             <main className="grow">{children}</main>
             <Footer data={footerData} />
             {/* ===== زر واتساب الثابت ===== */}

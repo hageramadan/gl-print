@@ -9,7 +9,7 @@ export interface Product {
     file_name: string;
     mime_type: string;
   }>;
-  service: {
+  service?: {
     id: number;
     title: string;
     description: string;
@@ -24,25 +24,51 @@ export interface Banner {
   image_url: string;
 }
 
+export interface Pagination {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+  from: number;
+  to: number;
+  next_page: number | null;
+  previous_page: number | null;
+}
+
 export interface ProductsResponse {
   result: boolean;
   errNum: number;
   message: string;
   data: {
-    banner: Banner;
+    banner?: Banner;
     products: Product[];
-    pagination: {
-      current_page: number;
-      last_page: number;
-      per_page: number;
-      total: number;
-      from: number;
-      to: number;
-      next_page: number | null;
-      previous_page: number | null;
-    };
+    pagination?: Pagination;
   };
 }
+
+export const getAllProducts = async (
+  language: string = 'en'
+): Promise<ProductsResponse> => {
+  console.log('🔄 Fetching ALL products with language:', language);
+  
+  const response = await fetch('https://glprint-eg.com/api/products', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Language': language,
+      'lang': language,
+    },
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data;
+};
 
 export const getProducts = async (
   page: number = 1,
@@ -54,14 +80,15 @@ export const getProducts = async (
     url += `&service=${serviceId}`;
   }
   
- 
+  console.log('🔄 Fetching products with language:', language, 'page:', page, 'service:', serviceId);
+  
   const response = await fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Accept-Language': language,
-    
+      'lang': language,
     },
     cache: 'no-store',
   });
@@ -71,6 +98,5 @@ export const getProducts = async (
   }
 
   const data = await response.json();
-
   return data;
 };

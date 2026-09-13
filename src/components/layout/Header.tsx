@@ -11,15 +11,22 @@ interface SocialLinks {
   tik_tok: string;
 }
 
-interface HeaderProps {
-  socialLinks?: SocialLinks | null;
+interface ContactInfo {
+  phone: string;
+  email: string;
+  address: string;
 }
 
-export const Header = ({ socialLinks }: HeaderProps) => {
+interface HeaderProps {
+  socialLinks?: SocialLinks | null;
+  contactInfo?: ContactInfo;
+}
+
+export const Header = ({ socialLinks, contactInfo }: HeaderProps) => {
   return (
     <header className="relative z-50">
       <SubNavbar socialLinks={socialLinks} />
-      <Navbar socialLinks={socialLinks} />
+      <Navbar socialLinks={socialLinks} contactInfo={contactInfo} />
     </header>
   );
 };

@@ -26,84 +26,76 @@ interface ProductDetailsProps {
 export const ProductDetails = ({ product }: ProductDetailsProps) => {
   const { t, dir } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
   const images = product.image || [];
-  const hasMultipleImages = images.length > 3;
-
-  // ✅ للتأكد من أن Swiper تم تحميله
-  useState(() => {
-    setIsMounted(true);
-  });
+  const hasMultipleImages = images.length > 2;
 
   // المواصفات الثابتة مع الأيقونات
   const specifications = [
-    {
-      id: 1,
-      icon: LuRuler,
-      label: t.productDetails?.specs?.size || 'Size',
-      value: 'A5 , A6 , A4',
-    },
-    {
-      id: 2,
-      icon: LuFileText,
-      label: t.productDetails?.specs?.paper || 'Paper',
-      value: '150... 170.... more',
-    },
-    {
-      id: 3,
-      icon: LuPrinter,
-      label: t.productDetails?.specs?.printing || 'Printing',
-      value: 'Single or Double sided',
-    },
-    {
-      id: 4,
-      icon: LuPackage,
-      label: t.productDetails?.specs?.quantity || 'Quantity',
-      value: 'Low to high....',
-    },
+    { id: 1, icon: LuRuler, label: t.productDetails?.specs?.size || 'Size', value: 'A5 , A6 , A4' },
+    { id: 2, icon: LuFileText, label: t.productDetails?.specs?.paper || 'Paper', value: '150... 170.... more' },
+    { id: 3, icon: LuPrinter, label: t.productDetails?.specs?.printing || 'Printing', value: 'Single or Double sided' },
+    { id: 4, icon: LuPackage, label: t.productDetails?.specs?.quantity || 'Quantity', value: 'Low to high....' },
   ];
 
-  // ✅ التمرير في الصور المصغرة
-  const scrollThumbnails = (direction: 'left' | 'right') => {
+  // ✅ الانتقال لصورة معينة + تمرير الصور المصغرة
+  const goToImage = (index: number) => {
+    const total = images.length;
+    if (total === 0) return;
+
+    // loop
+    let newIndex = index;
+    if (newIndex < 0) newIndex = total - 1;
+    if (newIndex >= total) newIndex = 0;
+
+    setSelectedImage(newIndex);
+
+    // تغيير الصورة الرئيسية
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(newIndex);
+    }
+
+    // تمرير الصور المصغرة عشان الصورة المختارة تبان
     if (thumbnailsRef.current) {
-      const scrollAmount = 300;
-      thumbnailsRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
+      const thumb = thumbnailsRef.current.children[newIndex] as HTMLElement;
+      if (thumb) {
+        const container = thumbnailsRef.current;
+        const thumbLeft = thumb.offsetLeft;
+        const thumbWidth = thumb.offsetWidth;
+        const containerWidth = container.clientWidth;
+
+        container.scrollTo({
+          left: thumbLeft - containerWidth / 2 + thumbWidth / 2,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
-  // ✅ عند الضغط على صورة مصغرة
-  const handleThumbnailClick = (index: number) => {
-    setSelectedImage(index);
-    if (swiperRef.current) {
-      swiperRef.current.slideTo(index);
-    }
-  };
+  // ✅ السهم السابق
+  const handlePrev = () => goToImage(selectedImage - 1);
+
+  // ✅ السهم التالي
+  const handleNext = () => goToImage(selectedImage + 1);
 
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-white" dir={dir}>
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
-          
+
           {/* ===== الصور ===== */}
           <div className="w-full lg:w-1/2">
-            {/* ===== البوكس الكبير ===== */}
             <div className="relative w-full max-h-[702px] aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              
-              {/* ===== سلايدر الصور ===== */}
+
+              {/* ===== سلايدر الصور الرئيسي ===== */}
               {images.length > 0 && (
                 <Swiper
                   modules={[Navigation, EffectFade]}
                   effect="fade"
                   fadeEffect={{ crossFade: true }}
-                  onSwiper={(swiper) => {
-                    swiperRef.current = swiper;
-                  }}
+                  onSwiper={(swiper) => { swiperRef.current = swiper; }}
                   onSlideChange={(swiper) => setSelectedImage(swiper.activeIndex)}
                   loop={false}
                   allowTouchMove={true}
@@ -112,51 +104,60 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                   {images.map((img) => (
                     <SwiperSlide key={img.id}>
                       <div className="relative w-full h-full">
-                        <Image
-                          src={img.url}
-                          alt={product.name}
-                          fill
-                          className="object-cover"
-                        />
+                        <Image src={img.url} alt={product.name} fill className="object-cover" />
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               )}
 
-              {/* ===== خلفية سوداء شفافة ===== */}
               <div className="absolute inset-0 bg-black/20 pointer-events-none z-10"></div>
 
-              {/* ===== الصور المصغرة فوق الصورة من الأسفل ===== */}
+              {/* ===== الصور المصغرة + الأسهم ===== */}
               {images.length > 1 && (
-                <div className="absolute bottom-4 left-0 right-0 z-20 px-4">
-                  <div className="flex items-center gap-2">
-                    {/* ===== سهم اليسار ===== */}
+                <div className="absolute bottom-4 start-0 end-0 z-20 px-4">
+                  <div className="flex items-center justify-center gap-3">
+
+                    {/* ===== سهم السابق ===== */}
                     {hasMultipleImages && (
                       <button
-                        onClick={() => scrollThumbnails('left')}
-                        className="shrink-0 w-8 h-8 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-30"
-                        aria-label="Scroll left"
+                        type="button"
+                        onClick={handlePrev}
+                        className="
+                          shrink-0 w-10 h-10 md:w-12 md:h-12
+                          bg-white/90 hover:bg-white
+                          rounded-full shadow-lg
+                          flex items-center justify-center
+                          transition-all duration-300 hover:scale-110
+                          z-30 cursor-pointer
+                        "
+                        aria-label="Previous image"
                       >
-                        <FiChevronLeft className="text-primary text-lg" />
+                        <FiChevronLeft className="text-primary text-xl md:text-2xl" />
                       </button>
                     )}
 
                     {/* ===== الصور المصغرة ===== */}
                     <div
                       ref={thumbnailsRef}
-                      className="flex items-center gap-2 overflow-x-auto scrollbar-hide scroll-smooth"
-                      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                      className="flex items-center gap-5 lg:gap-[32px] overflow-x-auto scroll-smooth scrollbar-hide"
+                      style={{
+                        scrollbarWidth: 'none',
+                        msOverflowStyle: 'none',
+                       
+                        padding: '8px 4px',
+                        maxWidth: '100%',
+                      }}
                     >
                       {images.map((img, index) => (
                         <button
                           key={img.id}
-                          onClick={() => handleThumbnailClick(index)}
-                          className="shrink-0 transition-all duration-300 hover:scale-105"
+                          type="button"
+                          onClick={() => goToImage(index)}
+                          className="shrink-0 w-20 h-20 lg:w-37.5 lg:h-37.5 transition-all duration-300 hover:scale-105 cursor-pointer"
                           style={{
-                            width: '70px',
-                            height: '70px',
-                            borderRadius: '8px',
+                          
+                            borderRadius: '12px',
                             boxShadow: '#00000040 0px 4px 12px',
                             overflow: 'hidden',
                             position: 'relative',
@@ -168,26 +169,32 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                             fill
                             className="object-cover"
                           />
-                          {/* ===== خلفية سوداء شفافة على الصور غير المختارة ===== */}
                           {index !== selectedImage && (
                             <div className="absolute inset-0 bg-black/40"></div>
                           )}
-                          {/* ===== إطار أحمر للصورة المختارة ===== */}
                           {index === selectedImage && (
-                            <div className="absolute inset-0 border-2 border-secondary rounded-lg"></div>
+                            <div className="absolute inset-0 border-2 border-secondary rounded-xl"></div>
                           )}
                         </button>
                       ))}
                     </div>
 
-                    {/* ===== سهم اليمين ===== */}
+                    {/* ===== سهم التالي ===== */}
                     {hasMultipleImages && (
                       <button
-                        onClick={() => scrollThumbnails('right')}
-                        className="shrink-0 w-8 h-8 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-30"
-                        aria-label="Scroll right"
+                        type="button"
+                        onClick={handleNext}
+                        className="
+                          shrink-0 w-10 h-10 md:w-12 md:h-12
+                          bg-white/90 hover:bg-white
+                          rounded-full shadow-lg
+                          flex items-center justify-center
+                          transition-all duration-300 hover:scale-110
+                          z-30 cursor-pointer
+                        "
+                        aria-label="Next image"
                       >
-                        <FiChevronRight className="text-primary text-lg" />
+                        <FiChevronRight className="text-primary text-xl md:text-2xl" />
                       </button>
                     )}
                   </div>
@@ -205,26 +212,18 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
               {product.description}
             </p>
 
-            {/* ===== المواصفات الثابتة مع الأيقونات ===== */}
             <div className="grid grid-cols-1 gap-4 mb-8">
               {specifications.map((spec) => {
                 const Icon = spec.icon;
                 return (
-                  <div 
-                    key={spec.id}
-                    className="p-4 border-b border-[#E6E8ED] hover:border-primary/30 transition-all duration-300"
-                  >
+                  <div key={spec.id} className="p-4 border-b border-[#E6E8ED] hover:border-primary/30 transition-all duration-300">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-14 h-14 rounded-lg bg-[#F6F7F9] flex items-center justify-center shrink-0">
                         <Icon className="text-primary text-2xl" />
                       </div>
                       <div>
-                        <span className="font-bold text-primary text-sm md:text-[20px]">
-                          {spec.label}
-                        </span>
-                        <p className="text-sm lg:text-[18px] font-medium text-[#667085]">
-                          {spec.value}
-                        </p>
+                        <span className="font-bold text-primary text-sm md:text-[20px]">{spec.label}</span>
+                        <p className="text-sm lg:text-[18px] font-medium text-[#667085]">{spec.value}</p>
                       </div>
                     </div>
                   </div>

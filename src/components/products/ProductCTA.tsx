@@ -4,24 +4,25 @@ import Link from 'next/link';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { FaArrowRight } from 'react-icons/fa6';
 import { FiPackage } from 'react-icons/fi';
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 export const ProductCTA = () => {
   const { t, dir } = useLanguage();
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-primary">
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-16 lg:py-20 bg-[#D2D6DF7A] rounded-2xl lg:rounded-3xl my-6 lg:my-12 container mx-auto">
+      <div className="container mx-auto px-4 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* ===== الأيقونة والمحتوى ===== */}
-          <div className="flex items-center gap-6 text-center lg:text-start">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-              <FiPackage className="text-white text-3xl md:text-4xl" />
+          <div className="flex items-center gap-3 lg:gap-8 ">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shrink-0">
+              <IoDocumentTextOutline className="text-white text-3xl md:text-4xl" />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-2">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#171A21] mb-2">
                 {t.productDetails?.ctaTitle || 'Need a Custom Quote?'}
               </h2>
-              <p className="text-sm md:text-base text-gray-300 max-w-xl">
+              <p className="text-sm md:text-[24px] font-medium text-[#667085] max-w-xl">
                 {t.productDetails?.ctaDescription || 'Contact us today and get a personalized quote for your project.'}
               </p>
             </div>
@@ -30,7 +31,7 @@ export const ProductCTA = () => {
           {/* ===== الزر ===== */}
           <Link
             href="/quote"
-            className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary-dark text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl whitespace-nowrap"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl whitespace-nowrap"
           >
             <span>{t.productDetails?.ctaButton || 'Get a Quote'}</span>
             <FaArrowRight className={dir === 'rtl' ? 'rotate-180' : ''} />

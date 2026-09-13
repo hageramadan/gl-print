@@ -99,7 +99,15 @@
       "quantity": "الكمية"
     }
   },
+    "sidebar": {
+    "searchPlaceholder": "ابحث هنا...",
+    "callUs": "اتصل بنا الآن",
+    "emailAddress": "البريد الإلكتروني",
+    "officeAddress": "عنوان المكتب",
+    "followUs": "تابعنا"
+  },
   "products": {
+    "products2":"المنتاجات",
     "title": "منتجاتنا",
     "subtitle": "منتجات طباعة متميزة لكل الاحتياجات",
     "viewDetails": "عرض التفاصيل",

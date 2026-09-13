@@ -53,12 +53,12 @@ export const ProductCard = ({ product, delay = 0 }: ProductCardProps) => {
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
         `}
         style={{
-          transitionDelay: `${delay}s`,
+          // transitionDelay: `${delay}s`,
           transitionProperty: 'all',
           transitionDuration: '0.6s',
         }}
       >
-        <div className="relative w-full h-64 md:h-72 lg:h-80">
+        <div className="relative w-full h-45 md:h-72 lg:h-80">
           <Image
             src={imageUrl}
             alt={product.name}
