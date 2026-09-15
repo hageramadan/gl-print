@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,11 +12,7 @@ import {
 } from '@/src/services/industriesApi';
 import { getProducts, Product } from '@/src/services/productsApi';
 import { FaArrowRight } from 'react-icons/fa6';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/free-mode';
+import { FiChevronDown } from 'react-icons/fi';
 
 export default function IndustryDetailsPage() {
   const params = useParams();
@@ -30,6 +26,13 @@ export default function IndustryDetailsPage() {
   const [productsLoading, setProductsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
+
+  // ✅ إدارة عرض الفئات
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(5);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const fetchData = useCallback(async (id: number, lang: string) => {
     try {
@@ -51,13 +54,7 @@ export default function IndustryDetailsPage() {
     async (id: number, categoryId: number | null, lang: string) => {
       try {
         setProductsLoading(true);
-        const response = await getProducts(
-          1,
-          null,
-          lang,
-          id,
-          categoryId
-        );
+        const response = await getProducts(1, null, lang, id, categoryId);
         setProducts(response.data.products);
       } catch (err) {
         console.error('Failed to fetch products:', err);
@@ -75,8 +72,94 @@ export default function IndustryDetailsPage() {
     }
   }, [industryId, language, fetchData, fetchProducts]);
 
+  // ✅ كل الفئات (مع "الكل")
+  const allCategories = industry
+    ? [
+        { id: null, name: t.industryDetails?.all || 'All' },
+        ...industry.categories,
+      ]
+    : [];
+
+  const visibleCategories = allCategories.slice(0, visibleCount);
+  const hiddenCategories = allCategories.slice(visibleCount);
+  const hasHiddenCategories = hiddenCategories.length > 0;
+
+  // ✅ قياس ديناميكي لعدد الفئات التي تتناسب مع السطر
+  useEffect(() => {
+    if (!industry) return;
+
+    const calculateVisibleCount = () => {
+      if (!containerRef.current || !measureRef.current) return;
+
+      const containerWidth = containerRef.current.offsetWidth;
+      const buttons =
+        measureRef.current.querySelectorAll<HTMLElement>('[data-measure]');
+      if (buttons.length === 0) return;
+
+      const isMobile = window.innerWidth < 640;
+      const gap = isMobile ? 8 : 12;
+
+      const moreButtonWidth = isMobile ? 85 : 100;
+      const moreButtonWithGap = moreButtonWidth + gap;
+
+      let totalWidth = 0;
+      let count = 0;
+
+      for (let i = 0; i < buttons.length; i++) {
+        const btnWidth = buttons[i].offsetWidth + gap;
+        const isLast = i === buttons.length - 1;
+
+        if (isLast) {
+          if (totalWidth + btnWidth <= containerWidth) {
+            count = i + 1;
+          }
+          break;
+        }
+
+        const remaining = buttons.length - (i + 1);
+        const needsMoreButton = remaining > 0;
+
+        if (
+          totalWidth +
+            btnWidth +
+            (needsMoreButton ? moreButtonWithGap : 0) <=
+          containerWidth
+        ) {
+          totalWidth += btnWidth;
+          count = i + 1;
+        } else {
+          break;
+        }
+      }
+
+      setVisibleCount(Math.max(1, count));
+    };
+
+    calculateVisibleCount();
+
+    const resizeObserver = new ResizeObserver(calculateVisibleCount);
+    if (containerRef.current) resizeObserver.observe(containerRef.current);
+
+    return () => resizeObserver.disconnect();
+  }, [industry, language, t]);
+
+  // ✅ إغلاق القائمة عند النقر خارجها
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleCategoryChange = (categoryId: number | null) => {
     setActiveCategory(categoryId);
+    setIsDropdownOpen(false);
     fetchProducts(industryId, categoryId, language);
 
     // ✅ تحديث الـ URL
@@ -140,77 +223,36 @@ export default function IndustryDetailsPage() {
               </h2>
             </div>
 
-            {/* ===== الموبايل: سلايدر ===== */}
-            <div className="lg:hidden mb-10 overflow-hidden">
-              <Swiper
-                modules={[FreeMode]}
-                spaceBetween={10}
-                slidesPerView="auto"
-                freeMode={true}
-                className="!overflow-visible"
+            {/* ===== الفئات: نفس التصميم للموبايل والديسكتوب ===== */}
+            <div
+              ref={containerRef}
+              className="flex flex-wrap items-center gap-2 sm:gap-3 mb-10 relative"
+            >
+              {/* ✅ عناصر قياس مخفية - معزولة تماماً */}
+              <div
+                ref={measureRef}
+                className="absolute top-0 start-0 w-0 h-0 overflow-hidden flex gap-2 sm:gap-3"
+                aria-hidden="true"
               >
-                <SwiperSlide className="!w-auto">
+                {allCategories.map((category, idx) => (
                   <button
-                    onClick={() => handleCategoryChange(null)}
-                    className={`
-                      px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap
-                      transition-all duration-300 border-2
-                      ${
-                        activeCategory === null
-                          ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30'
-                          : 'bg-white text-[#667085] border-[#E6E8ED]'
-                      }
-                    `}
+                    key={idx}
+                    data-measure
+                    className="px-4 sm:px-5 py-3 rounded-xl text-sm sm:text-base font-semibold border-2 border-[#E6E8ED] whitespace-nowrap"
                   >
-                    {t.industryDetails?.all || 'All'}
+                    {category.name}
                   </button>
-                </SwiperSlide>
-
-                {industry.categories.map((category) => (
-                  <SwiperSlide key={category.id} className="!w-auto">
-                    <button
-                      onClick={() => handleCategoryChange(category.id)}
-                      className={`
-                        px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap
-                        transition-all duration-300 border-2
-                        ${
-                          activeCategory === category.id
-                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30'
-                            : 'bg-white text-[#667085] border-[#E6E8ED]'
-                        }
-                      `}
-                    >
-                      {category.name}
-                    </button>
-                  </SwiperSlide>
                 ))}
-              </Swiper>
-            </div>
+              </div>
 
-            {/* ===== الديسكتوب ===== */}
-            <div className="hidden lg:flex flex-wrap items-center gap-3 mb-10">
-              <button
-                onClick={() => handleCategoryChange(null)}
-                className={`
-                  px-5 py-3 rounded-xl text-base font-semibold
-                  transition-all duration-300 border-2
-                  ${
-                    activeCategory === null
-                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30'
-                      : 'bg-white text-[#667085] border-[#E6E8ED] hover:border-primary/40 hover:text-primary'
-                  }
-                `}
-              >
-                {t.industryDetails?.all || 'All'}
-              </button>
-
-              {industry.categories.map((category) => (
+              {/* ✅ الفئات المرئية */}
+              {visibleCategories.map((category) => (
                 <button
-                  key={category.id}
+                  key={category.id ?? 'all'}
                   onClick={() => handleCategoryChange(category.id)}
                   className={`
-                    px-5 py-3 rounded-xl text-base font-semibold
-                    transition-all duration-300 border-2
+                    px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold
+                    whitespace-nowrap transition-all duration-300 border-2 cursor-pointer
                     ${
                       activeCategory === category.id
                         ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30'
@@ -221,6 +263,54 @@ export default function IndustryDetailsPage() {
                   {category.name}
                 </button>
               ))}
+
+              {/* ✅ زر المزيد */}
+              {hasHiddenCategories && (
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className={`
+                      flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold
+                      whitespace-nowrap transition-all duration-300 border-2 cursor-pointer
+                      ${
+                        hiddenCategories.some(
+                          (c) => c.id === activeCategory
+                        )
+                          ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30'
+                          : 'bg-white text-[#667085] border-[#E6E8ED] hover:border-primary/40 hover:text-primary'
+                      }
+                    `}
+                  >
+                    <span>{t.products?.more || 'More'}</span>
+                    <FiChevronDown
+                      className={`transition-transform duration-300 ${
+                        isDropdownOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {isDropdownOpen && (
+                    <div className="absolute top-full -start-[7rem] lg:start-0 mt-2 bg-white rounded-xl shadow-2xl min-w-[200px] max-h-[300px] overflow-y-auto z-30 border border-gray-100 py-1">
+                      {hiddenCategories.map((category) => (
+                        <button
+                          key={category.id ?? 'all'}
+                          onClick={() => handleCategoryChange(category.id)}
+                          className={`
+                            w-full text-start px-4 py-2.5 text-sm transition-colors whitespace-nowrap cursor-pointer
+                            ${
+                              activeCategory === category.id
+                                ? 'bg-primary/5 text-primary font-semibold'
+                                : 'text-gray-700 hover:bg-gray-50'
+                            }
+                          `}
+                        >
+                          {category.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* ===== المنتجات ===== */}
@@ -237,9 +327,12 @@ export default function IndustryDetailsPage() {
                     className="block group"
                   >
                     <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                      <div className="relative w-full h-56 md:h-64 lg:h-72">
+                      <div className="relative w-full h-45 md:h-64 lg:h-72">
                         <Image
-                          src={product.image?.[0]?.url || '/images/products/placeholder.png'}
+                          src={
+                            product.image?.[0]?.url ||
+                            '/images/products/placeholder.png'
+                          }
                           alt={product.name}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -251,8 +344,12 @@ export default function IndustryDetailsPage() {
                             {product.name}
                           </h3>
                           <div className="inline-flex items-center gap-2 text-white font-medium text-sm">
-                            <span>{t.industryDetails?.getQuote || 'Get a Quote'}</span>
-                            <FaArrowRight className={dir === 'rtl' ? 'rotate-180' : ''} />
+                            <span>
+                              {t.industryDetails?.getQuote || 'Get a Quote'}
+                            </span>
+                            <FaArrowRight
+                              className={dir === 'rtl' ? 'rotate-180' : ''}
+                            />
                           </div>
                         </div>
                       </div>

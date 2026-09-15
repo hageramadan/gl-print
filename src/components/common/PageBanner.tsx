@@ -65,7 +65,7 @@ export const PageBanner = ({
                   />
                 )}
                 {isLast ? (
-                  <span className="text-white font-medium">{crumb.label}</span>
+                  <span className="text-white font-medium line-clamp-1">{crumb.label}</span>
                 ) : (
                   <Link
                     href={crumb.href}

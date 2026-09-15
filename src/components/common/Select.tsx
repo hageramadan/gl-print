@@ -11,10 +11,12 @@ interface SelectOption {
 interface SelectProps {
   options: SelectOption[];
   value: string | number;
+   onBlur?: () => void; 
   onChange: (value: string | number) => void;
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
+  error?: boolean;  
   name?: string;
 }
 

@@ -80,14 +80,14 @@ export const HeroContent = ({ data }: HeroContentProps) => {
           className="text-[10px] sm:text-[14.5px] font-bold flex items-center gap-1 sm:gap-2 bg-secondary hover:bg-secondary-dark text-white px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 rounded-2xl shadow-lg shadow-red-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
           <span>{data.primary_button.text}</span>
-          <FaArrowRight className="text-white text-xs sm:text-sm" />
+          <FaArrowRight className={`text-white text-xs sm:text-sm ${dir==='rtl'?'rotate-180':''}`} />
         </Link>
         <Link
           href={data.secondary_button.action_type === 'view_services' ? '/services' : '/'}
           className="text-[10px] sm:text-[14.5px] font-bold flex items-center gap-1 sm:gap-2 bg-primary text-white px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-white/30"
         >
           <span>{data.secondary_button.text}</span>
-          <FaArrowRight className="text-white text-xs sm:text-sm" />
+          <FaArrowRight className={`text-white text-xs sm:text-sm ${dir==='rtl'?'rotate-180':''}`}  />
         </Link>
       </div>
 

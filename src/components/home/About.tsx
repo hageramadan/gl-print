@@ -246,7 +246,7 @@ export const About = ({ data }: AboutProps) => {
                 style={{ transitionDelay: "0.8s" }}
               >
                 <span>{data?.button?.text || 'Get a Quote'}</span>
-                <FaArrowRight className="ms-1 md:ms-2 text-white text-xs md:text-sm" />
+                <FaArrowRight className={`ms-1 md:ms-2 text-white text-xs md:text-sm ${dir==='rtl'?'rotate-180':''}`} />
               </Link>
             </div>
           </div>

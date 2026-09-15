@@ -76,18 +76,18 @@ export default async function RootLayout({
       >
         <Toaster
           position="top-center"
-          toastOptions={{
-            style: {
-              background: "#1F3161",
-              color: "#fff",
-            },
-            success: {
-              style: { background: "#1F3161" },
-            },
-            error: {
-              style: { background: "#C62127" },
-            },
-          }}
+          // toastOptions={{
+          //   style: {
+          //     background: "#1F3161",
+          //     color: "#fff",
+          //   },
+          //   success: {
+          //     style: { background: "#1F3161" },
+          //   },
+          //   error: {
+          //     style: { background: "#C62127" },
+          //   },
+          // }}
         />
         <LanguageProvider>
           <div className="flex flex-col min-h-screen">

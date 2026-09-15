@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
@@ -16,6 +16,15 @@ export const HeroServices = () => {
   const { language } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // ✅ تحديد اللغة العربية
+  const isArabic = language === 'ar';
+
+  // ✅ نص "Learn more" حسب اللغة
+  const learnMoreText = isArabic ? 'اعرف المزيد' : 'Learn more';
+
+  // ✅ أيقونة السهم حسب اللغة (معكوسة في العربية)
+  const ArrowIcon = isArabic ? FiArrowLeft : FiArrowRight;
 
   // ✅ جلب أول 3 خدمات من API
   useEffect(() => {
@@ -111,11 +120,12 @@ export const HeroServices = () => {
                       group-hover:gap-2 transition-all duration-300
                     "
                   >
-                    Learn more
-                    <FiArrowRight
+                    {learnMoreText}
+                    <ArrowIcon
                       className="
                         text-[10px] sm:text-xs md:text-sm 
-                        transition-transform duration-300 group-hover:translate-x-1
+                        transition-transform duration-300
+                        group-hover:translate-x-1
                       "
                     />
                   </Link>
@@ -203,11 +213,12 @@ export const HeroServices = () => {
                           group-hover:gap-2 transition-all duration-300
                         "
                       >
-                        Learn more
-                        <FiArrowRight
+                        {learnMoreText}
+                        <ArrowIcon
                           className="
                             text-xs 
-                            transition-transform duration-300 group-hover:translate-x-1
+                            transition-transform duration-300
+                            group-hover:translate-x-1
                           "
                         />
                       </Link>

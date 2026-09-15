@@ -132,8 +132,9 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                           z-30 cursor-pointer
                         "
                         aria-label="Previous image"
+                        
                       >
-                        <FiChevronLeft className="text-primary text-xl md:text-2xl" />
+                        <FiChevronLeft className={`text-primary text-xl md:text-2xl ${dir==='rtl'?'rotate-180':''}`} />
                       </button>
                     )}
 
@@ -194,7 +195,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                         "
                         aria-label="Next image"
                       >
-                        <FiChevronRight className="text-primary text-xl md:text-2xl" />
+                        <FiChevronRight className={`text-primary text-xl md:text-2xl ${dir==='rtl'?'rotate-180':''}`} />
                       </button>
                     )}
                   </div>

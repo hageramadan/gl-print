@@ -40,7 +40,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
   const bottomProducts = formattedProducts.slice(2, 5);
 
   return (
-    <section className="py-5 lg:py-12 bg-white" dir={dir}>
+    <section className="py-5  bg-white" dir={dir}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-end mb-5 md:mb-12">
           <div>

@@ -70,28 +70,25 @@ export default function FAQsPage() {
       />
 
       {/* ===== قسم الأسئلة الشائعة ===== */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gray-50">
+      <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4">
           {/* ===== العنوان ===== */}
-          <div className="text-center mb-12 md:mb-16">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="w-10 h-0.5 bg-secondary"></div>
-              <span className="text-xs md:text-sm lg:text-base text-secondary uppercase tracking-wider font-bold">
-                {t.faqs?.tag || 'FAQs'}
-              </span>
-              <div className="w-10 h-0.5 bg-secondary"></div>
-            </div>
+          <div className=" mb-12 md:mb-16">
+          
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] mb-4">
-              {t.faqs?.title || 'Frequently Asked Questions'}
+              {t.faqs?.title || 'Do you have a question?'}
             </h2>
-            <p className="text-base md:text-lg text-[#667085] max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-[#667085]  lg:max-w-lg">
               {t.faqs?.subtitle ||
-                'Find answers to the most common questions about our printing services.'}
+                'Your Trusted Printing & Advertising Partner in Egypt,'}
+            </p >
+            <p className="text-base md:text-lg text-[#667085] ">
+               {t.faqs?.subtitle2 }
             </p>
           </div>
 
           {/* ===== قائمة الأسئلة ===== */}
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-7xl space-y-4">
             {faqs.map((faq) => (
               <FAQItem key={faq.id} faq={faq} />
             ))}

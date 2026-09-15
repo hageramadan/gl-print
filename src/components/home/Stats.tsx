@@ -86,7 +86,7 @@ export const Stats = ({ data }: StatsProps) => {
   return (
     <section 
       ref={sectionRef}
-      className="py-2 md:py-20 bg-white lg:mt-5"
+      className="py-5 md:pb-10 bg-white lg:mt-5"
       dir={dir}
     >
       <div className="container mx-auto px-4">

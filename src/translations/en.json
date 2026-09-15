@@ -1,5 +1,5 @@
 {
- "nav": {
+  "nav": {
     "home": "Home",
     "about": "About Us",
     "services": "Services",
@@ -13,7 +13,7 @@
     "faqs": "FAQs",
     "careers": "Careers"
   },
-  
+
   "hero": {
     "title": "Printing Excellence",
     "subtitle": "We bring your ideas to life",
@@ -30,14 +30,13 @@
       "clients": "Happy Clients",
       "awards": "Awards Won"
     },
-   
+
     "pageTitle": "About Us",
     "howWeWork": "How do we work?",
     "implementationStages": "Implementation Stages From concept to final product",
     "fromConcept": "From concept to final product",
     "partners": "Our Partners",
     "trustedBy": "Trusted by leading companies"
-  
   },
   "services": {
     "title": "Our Services",
@@ -70,7 +69,7 @@
       }
     ]
   },
-   "services2": {
+  "services2": {
     "tag": "Our Services",
     "title": "Everything Your Brand",
     "subtitle": "Needs In One Place.",
@@ -88,21 +87,21 @@
     "placeholder": "Search for products, services...",
     "button": "Search"
   },
-   "productDetails": {
+  "productDetails": {
     "requestQuote": "Request a Quote",
     "relatedTag": "Related Products",
     "relatedTitle": "You May Also Like",
     "ctaTitle": "Need a Custom Quote?",
     "ctaDescription": "Contact us today and get a personalized quote for your project.",
     "ctaButton": "Get a custom Quote",
-     "specs": {
+    "specs": {
       "size": "Size",
       "paper": "Paper",
       "printing": "Printing",
       "quantity": "Quantity"
     }
   },
-   "industriesPage": {
+  "industriesPage": {
     "title": "Industries",
     "tag": "Our Industries",
     "subtitle": "Everything Your Brand Needs In One Place.",
@@ -114,11 +113,11 @@
     "categoriesTag": "Categories",
     "categoriesTitle": "What We Serve",
     "all": "All",
-      "getQuote": "Get a Quote",
+    "getQuote": "Get a Quote",
     "noProducts": "No products found."
   },
-  
-   "sidebar": {
+
+  "sidebar": {
     "searchPlaceholder": "Search...",
     "callUs": "Call us now",
     "emailAddress": "Email Address",
@@ -126,15 +125,15 @@
     "followUs": "Follow Us"
   },
   "products": {
-    "products2":"Products",
+    "products2": "Products",
     "title": "Our Products",
     "subtitle": "Premium printing products for every need",
     "viewDetails": "View Details",
-     "tag": "Featured Products",
-     "tag2":"All Products",
+    "tag": "Featured Products",
+    "tag2": "All Products",
     "title2": "Latest Products",
     "viewAll": "View All",
-  "more": "More" ,
+    "more": "More",
     "all": "All",
     "showing": "Showing",
     "of": "of",
@@ -245,17 +244,19 @@
       "submit": "Send Message"
     }
   },
-   "faqs": {
+  "faqs": {
     "pageTitle": "FAQs",
     "tag": "FAQs",
-    "title": "Frequently Asked Questions",
-    "subtitle": "Find answers to the most common questions about our printing services.",
+    "title": "Do you have a question?",
+    "subtitle": "Your Trusted Printing & Advertising Partner in Egypt,",
+    "subtitle2": "Let’s discuss your next project and find the right printing solution for your business.",
+
     "notFound": "No FAQs Found"
   },
   "quote": {
-      "selectPaperType": "Select Paper Type...",
+    "selectPaperType": "Select Paper Type...",
     "selectBrandIdentity": "Select Brand Identity...",
-       "phoneNumber": "Phone Number",
+    "phoneNumber": "Phone Number",
     "selectPriority": "Select Priority...",
     "selectPaperWeight": "Select Paper Weight...",
     "artworkFile": "Artwork File",
@@ -273,10 +274,10 @@
       "message": "Project Details",
       "submit": "Request Quote"
     },
-  
+
     "pageTitle": "Get a Quote",
     "tag": "Get a Quote",
-   
+
     "description": "Tell us about your project, and our print specialists will provide a detailed estimate.",
     "quickInquiry": "Quick Inquiry",
     "getQuote": "Get a Quote",
@@ -349,11 +350,22 @@
       "largeFormat": "Large Format",
       "screen": "Screen"
     }
-  }
-
-  ,
-    "footer": {
-       "company": "Company",
+  },
+"blogs": {
+    "pageTitle": "Blogs",
+    "tag": "Our Blog",
+    "title": "Latest Articles",
+    "subtitle": "Insights and tips from our printing experts.",
+    "readMore": "Read more",
+    "noBlogs": "No blogs found.",
+    "notFound": "Blog Not Found",
+    "relatedTag": "Related Articles",
+    "relatedTitle": "Related Blogs"
+  },
+  "footer": {
+    "tagline": "Experience Comfort & Creative at GL Print",
+    "description": "GL Print is your trusted partner for professional printing, advertising, branding, and promotional solutions.",
+    "company": "Company",
     "support": "Support",
     "follow": "Follow Us",
     "about": "About GL Print",
@@ -368,16 +380,16 @@
     "emailPlaceholder": "Email",
     "copyright": "All rights reserved."
   },
-   "banner": {
+  "banner": {
     "home": "Home"
   },
-   "servicesPage": {
+  "servicesPage": {
     "title": "Services",
     "tag": "Our Services",
     "subtitle": "Everything Your Brand",
     "subtitle2": "Needs In One Place."
   },
-  
+
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",

@@ -29,7 +29,7 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
   }
 
   return (
-    <section className="py-5 md:py-12 lg:py-12 overflow-hidden" dir={dir}>
+    <section className="py-5 md:py-12 lg:pt-20 overflow-hidden" dir={dir}>
       <div className="container mx-auto px-4 relative">
         <div className="mb-3 md:mb-10">
           <div className="flex items-center gap-3 mb-3">
@@ -57,6 +57,8 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
           </div>
 
           <Swiper
+          key={dir}
+            dir={dir}
             modules={[Autoplay, Pagination, Navigation]}
             spaceBetween={24}
             slidesPerView={1}
@@ -64,7 +66,7 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
               nextEl: '.swiper-button-next-custom',
               prevEl: '.swiper-button-prev-custom',
             }}
-            dir='ltr'
+           
             breakpoints={{
               640: {
                 slidesPerView: 1.5,

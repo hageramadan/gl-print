@@ -17,26 +17,33 @@ export const FAQItem = ({ faq }: FAQItemProps) => {
   return (
     <div
       className={`
-        bg-white rounded-2xl border transition-all duration-300
+        rounded-2xl border transition-all duration-300 overflow-hidden
         ${
           isOpen
-            ? 'border-primary/30 shadow-lg'
-            : 'border-[#E6E8ED] hover:border-primary/20 hover:shadow-md'
+            ? 'border-[#B5B7BA] shadow-lg'
+            : 'bg-white border-[#B5B7BA52] hover:border-primary/20 hover:shadow-md'
         }
       `}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-start"
+        className={`
+          w-full flex items-center justify-between gap-4 px-4 py-3 md:px-5 md:py-3 text-start cursor-pointer
+          transition-colors duration-300
+          ${isOpen ? 'bg-primary' : 'bg-white'}
+        `}
         aria-expanded={isOpen}
       >
         <h3
           className={`
-            text-base md:text-lg font-bold transition-colors flex-1
-            ${isOpen ? 'text-primary' : 'text-[#171A21]'}
+            text-sm md:text-xl font-medium transition-colors flex-1 flex items-start gap-2
+            ${isOpen ? 'text-white' : 'text-primary'}
           `}
         >
-          {faq.question}
+          <span className="shrink-0">
+            {faq.id}.
+          </span>
+          <span >{faq.question}</span>
         </h3>
 
         <div
@@ -45,28 +52,28 @@ export const FAQItem = ({ faq }: FAQItemProps) => {
             transition-all duration-300
             ${
               isOpen
-                ? 'bg-primary text-white rotate-180'
-                : 'bg-primary/10 text-primary'
+                ? 'text-white  rotate-180'
+                : ' text-primary'
             }
           `}
         >
           {isOpen ? (
-            <FiMinus className="text-lg" />
+            <FiMinus className="text-lg lg:text-xl" />
           ) : (
-            <FiPlus className="text-lg" />
+            <FiPlus className="text-lg lg:text-xl" />
           )}
         </div>
       </button>
 
       <div
         className={`
-          overflow-hidden transition-all duration-300 ease-in-out
+          overflow-hidden transition-all duration-300 ease-in-out bg-white
           ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
         `}
       >
         <div className="px-5 md:px-6 pb-5 md:pb-6 pt-0">
-          <div className="border-t border-[#E6E8ED] pt-4">
-            <p className="text-sm md:text-base text-[#667085] leading-relaxed">
+          <div className="border-t border-[#B5B7BA] pt-4">
+            <p className="text-sm md:text-lg text-[#74767B] leading-relaxed">
               {faq.answer}
             </p>
           </div>

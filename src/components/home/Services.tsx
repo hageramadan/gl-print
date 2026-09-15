@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useLanguage } from "@/src/hooks/useLanguage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { FiArrowRight } from "react-icons/fi";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
+import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 // استيراد الـ CSS الخاص بـ Swiper
 import "swiper/css";
 import "swiper/css/pagination";
@@ -22,7 +22,18 @@ interface ServicesProps {
 }
 
 export const Services = ({ data }: ServicesProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  // ✅ تحديد اللغة العربية
+  const isArabic = language === 'ar';
+
+  // ✅ نصوص الترجمة
+  const learnMoreText = isArabic ? 'اعرف المزيد' : 'Learn More';
+  const viewAllText = t.services2?.viewAll || (isArabic ? 'عرض كل الخدمات' : 'View All Services');
+
+  // ✅ أيقونات الأسهم حسب اللغة
+  const ArrowLongIcon = isArabic ? FaArrowLeftLong : FaArrowRightLong;
+  const ArrowIcon = isArabic ? FiArrowLeft : FiArrowRight;
 
   // استخدام البيانات من API أو بيانات افتراضية إذا لم تكن موجودة
   const servicesData = data && data.length > 0 ? data : [
@@ -53,7 +64,7 @@ export const Services = ({ data }: ServicesProps) => {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section className="py-5 md:py-10 lg:py-20 overflow-hidden">
       <div className="mx-auto">
         <div className="container mx-auto mb-5 md:mb-16 px-3">
           <div className="flex items-center gap-3 mb-3">
@@ -120,9 +131,6 @@ export const Services = ({ data }: ServicesProps) => {
                     {/* ===== الكفر الأحمر الشفاف ===== */}
                     <div className="absolute inset-0 bg-gradient-to-r from-secondary/90  to-[#C621278C]/70 group-hover:from-secondary/90 group-hover:via-secondary/50 group-hover:to-secondary/30 transition-all duration-500"></div>
 
-                    {/* ===== الكفر الأحمر مع تأثير من الشمال ===== */}
-                    {/* <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/0 to-secondary/0 group-hover:from-secondary/70 group-hover:via-secondary/40 group-hover:to-secondary/10 transition-all duration-700 ease-out"></div> */}
-
                     {/* ===== المحتوى ===== */}
                     <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8">
                       <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-bold mb-2 group-hover:translate-x-2 transition-all duration-300">
@@ -137,9 +145,9 @@ export const Services = ({ data }: ServicesProps) => {
                       {/* ===== Learn More مع حدود (يظهر عند hover) ===== */}
                       <div className="inline-flex items-center gap-2 text-white w-fit font-medium border-2 border-white/80 px-2 py-2 rounded-2xl group-hover:rounded-full transition-all duration-500 group-hover:px-4 group-hover:border-white">
                         <span className="text-sm transition-all duration-500 lg:hidden group-hover:block">
-                          Learn More
+                          {learnMoreText}
                         </span>
-                        <FaArrowRightLong className="text-xl transition-transform duration-300 group-hover:translate-x-1 mx-2" />
+                        <ArrowLongIcon className="text-xl transition-transform duration-300 group-hover:translate-x-1 mx-2" />
                       </div>
                     </div>
                   </div>
@@ -155,8 +163,8 @@ export const Services = ({ data }: ServicesProps) => {
             href="/services"
             className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-8 md:px-10 py-3 md:py-4 rounded-2xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            <span>{t.services2?.viewAll || "View All Services"}</span>
-            <FiArrowRight className="text-lg" />
+            <span>{viewAllText}</span>
+            <ArrowIcon className="text-lg" />
           </Link>
         </div>
       </div>

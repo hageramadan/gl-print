@@ -36,7 +36,10 @@ interface FooterProps {
 }
 
 export const Footer = ({ data }: FooterProps) => {
-  const { t, dir } = useLanguage();
+  const { t, dir, language } = useLanguage();
+
+  // ✅ تحديد اللغة العربية
+  const isArabic = language === "ar";
 
   const footerData = data || {
     phone: "+20 123 456 7890",
@@ -78,12 +81,21 @@ export const Footer = ({ data }: FooterProps) => {
                 />
               </div>
             </Link>
+
+            {/* ✅ العنوان المترجم */}
             <p className="text-base lg:text-[20px] text-white leading-relaxed font-semibold mb-3">
-              Experience Comfort &amp; Creative at GL Print
+              {t.footer?.tagline ||
+                (isArabic
+                  ? "اختبر الراحة والإبداع في GL Print"
+                  : "Experience Comfort & Creative at GL Print")}
             </p>
+
+            {/* ✅ الوصف المترجم */}
             <p className="text-[15px] lg:text-lg font-bold text-[#B3B3B3] leading-relaxed">
-              GL Print is your trusted partner for professional printing,
-              advertising, branding, and promotional solutions.
+              {t.footer?.description ||
+                (isArabic
+                  ? "GL Print هو شريكك الموثوق لحلول الطباعة والإعلان والعلامات التجارية والمواد الترويجية الاحترافية."
+                  : "GL Print is your trusted partner for professional printing, advertising, branding, and promotional solutions.")}
             </p>
           </div>
 

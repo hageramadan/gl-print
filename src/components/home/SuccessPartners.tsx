@@ -22,7 +22,7 @@ export const SuccessPartners = ({ data }: SuccessPartnersProps) => {
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-white" dir={dir}>
+    <section className="py-12 md:py-16 lg:py-2 bg-white" dir={dir}>
       <div className="container mx-auto px-4">
         <div className="mb-10 md:mb-14">
           <div className="flex items-center gap-3 mb-3">

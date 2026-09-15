@@ -33,16 +33,19 @@ export interface QuoteEnumsResponse {
 export const getQuoteEnums = async (
   language: string = 'en'
 ): Promise<QuoteEnumsResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/request-quotes/enums', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Accept-Language': language,
-      'lang': language,
-    },
-    cache: 'no-store',
-  });
+  const response = await fetch(
+    'https://glprint-eg.com/api/request-quotes/enums',
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Accept-Language': language,
+        'lang': language,
+      },
+      cache: 'no-store',
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -51,18 +54,18 @@ export const getQuoteEnums = async (
   return response.json();
 };
 
-export interface SubmitQuoteResponse {
+export interface SubmitResponse {
   result: boolean;
   errNum: number;
   message: string;
   data?: any;
 }
 
-// ✅ إرسال عرض السعر (يدعم FormData للـ artwork_file)
+// ✅ إرسال عرض السعر (Get a Quote) - FormData
 export const submitQuote = async (
   formData: FormData,
   language: string = 'en'
-): Promise<SubmitQuoteResponse> => {
+): Promise<SubmitResponse> => {
   const response = await fetch('https://glprint-eg.com/api/request-quotes', {
     method: 'POST',
     headers: {
@@ -75,36 +78,39 @@ export const submitQuote = async (
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    throw new Error(
+      errorData.message || `HTTP error! status: ${response.status}`
+    );
   }
 
   return response.json();
 };
 
-// ✅ إرسال استفسار سريع
+// ✅ إرسال استفسار سريع (Quick Inquiry) → /inquiries
 export const submitQuickInquiry = async (
   data: { name: string; email: string; message: string },
   language: string = 'en'
-): Promise<SubmitQuoteResponse> => {
-  const formData = new FormData();
-  formData.append('name', data.name);
-  formData.append('email', data.email);
-  formData.append('project_description', data.message);
-  formData.append('type', 'quick_inquiry');
-
-  const response = await fetch('https://glprint-eg.com/api/request-quotes', {
+): Promise<SubmitResponse> => {
+  const response = await fetch('https://glprint-eg.com/api/inquiries', {
     method: 'POST',
     headers: {
+      'Content-Type': 'application/json',
       Accept: 'application/json',
       'Accept-Language': language,
-      lang: language,
+      'lang': language,
     },
-    body: formData,
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    }),
   });
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    throw new Error(
+      errorData.message || `HTTP error! status: ${response.status}`
+    );
   }
 
   return response.json();
