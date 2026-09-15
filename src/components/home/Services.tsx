@@ -106,7 +106,7 @@ export const Services = ({ data }: ServicesProps) => {
         >
           {servicesData.map((service) => (
             <SwiperSlide key={service.id}>
-              <Link href={`/services/${service.id}`} className="block group">
+              <Link href={`/products?service=${service.id}`} className="block group">
                 <div className="relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                   {/* ===== الصورة ===== */}
                   <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]">

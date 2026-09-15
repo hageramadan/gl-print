@@ -24,13 +24,10 @@ export const ServiceFilter = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // أول 5 خدمات
   const visibleServices = services.slice(0, 5);
-  // باقي الخدمات
   const hiddenServices = services.slice(5);
   const hasHiddenServices = hiddenServices.length > 0;
 
-  // إغلاق الـ Dropdown عند الضغط خارجها
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -48,10 +45,7 @@ export const ServiceFilter = ({
 
   return (
     <div className="mb-4 lg:mb-8">
-  
-      {/* ===== ديسكتوب: عرض 5 خدمات + Dropdown ===== */}
       <div className="hidden lg:flex flex-wrap items-center gap-3">
-        {/* زر الكل */}
         <button
           onClick={() => handleServiceSelect(null)}
           className={`
@@ -65,7 +59,6 @@ export const ServiceFilter = ({
           {t.products?.all || 'All'}
         </button>
 
-        {/* أول 5 خدمات */}
         {visibleServices.map((service) => (
           <button
             key={service.id}
@@ -82,7 +75,6 @@ export const ServiceFilter = ({
           </button>
         ))}
 
-        {/* Dropdown لباقي الخدمات */}
         {hasHiddenServices && (
           <div className="relative" ref={dropdownRef}>
             <button
@@ -99,7 +91,6 @@ export const ServiceFilter = ({
               <FiChevronDown className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Dropdown Menu */}
             {isDropdownOpen && (
               <div className="absolute top-full start-0 mt-2 bg-white rounded-xl shadow-2xl min-w-[200px] max-h-[300px] overflow-y-auto z-30 border border-gray-100 py-1">
                 {hiddenServices.map((service) => (
@@ -123,8 +114,7 @@ export const ServiceFilter = ({
         )}
       </div>
 
-      {/* ===== موبايل: سلايدر أفقي ===== */}
-      <div className="lg:hidden">
+      <div className="lg:hidden overflow-hidden">
         <Swiper
           modules={[FreeMode]}
           spaceBetween={10}
@@ -132,7 +122,6 @@ export const ServiceFilter = ({
           freeMode={true}
           className="!overflow-visible"
         >
-          {/* زر الكل */}
           <SwiperSlide className="!w-auto">
             <button
               onClick={() => handleServiceSelect(null)}
@@ -148,7 +137,6 @@ export const ServiceFilter = ({
             </button>
           </SwiperSlide>
 
-          {/* كل الخدمات */}
           {services.map((service) => (
             <SwiperSlide key={service.id} className="!w-auto">
               <button

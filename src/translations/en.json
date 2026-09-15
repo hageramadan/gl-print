@@ -102,6 +102,22 @@
       "quantity": "Quantity"
     }
   },
+   "industriesPage": {
+    "title": "Industries",
+    "tag": "Our Industries",
+    "subtitle": "Everything Your Brand Needs In One Place.",
+    "noIndustries": "No industries found."
+  },
+  "industryDetails": {
+    "tag": "Industry",
+    "cta": "Get a Quote",
+    "categoriesTag": "Categories",
+    "categoriesTitle": "What We Serve",
+    "all": "All",
+      "getQuote": "Get a Quote",
+    "noProducts": "No products found."
+  },
+  
    "sidebar": {
     "searchPlaceholder": "Search...",
     "callUs": "Call us now",
@@ -229,7 +245,23 @@
       "submit": "Send Message"
     }
   },
+   "faqs": {
+    "pageTitle": "FAQs",
+    "tag": "FAQs",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to the most common questions about our printing services.",
+    "notFound": "No FAQs Found"
+  },
   "quote": {
+      "selectPaperType": "Select Paper Type...",
+    "selectBrandIdentity": "Select Brand Identity...",
+       "phoneNumber": "Phone Number",
+    "selectPriority": "Select Priority...",
+    "selectPaperWeight": "Select Paper Weight...",
+    "artworkFile": "Artwork File",
+    "sending": "Sending...",
+    "yes": "Yes",
+    "no": "No",
     "title": "Get a Quote",
     "subtitle": "Tell us about your printing needs and we'll get back to you with a competitive quote",
     "form": {
@@ -240,8 +272,86 @@
       "service": "Service Required",
       "message": "Project Details",
       "submit": "Request Quote"
+    },
+  
+    "pageTitle": "Get a Quote",
+    "tag": "Get a Quote",
+   
+    "description": "Tell us about your project, and our print specialists will provide a detailed estimate.",
+    "quickInquiry": "Quick Inquiry",
+    "getQuote": "Get a Quote",
+    "contactName": "Contact Name",
+    "emailAddress": "Email Address",
+    "yourMessage": "Your Message",
+    "messagePlaceholder": "Tell us about your project, requirements, or any details you'd like us to know.",
+    "secureNote": "Your information is secure and will only be used to process your quote.",
+    "sidebarTitle": "Let's Talk About Your Project",
+    "sidebarDescription": "Need immediate assistance? We're here to help.",
+    "callUs": "CALL US",
+    "emailUs": "EMAIL US",
+    "visitUs": "VISIT US",
+    "workingHours": "WORKING HOURS",
+    "clientInfo": "Client Information",
+    "companyName": "Company Name",
+    "industry": "Industry",
+    "selectIndustry": "Select Industry...",
+    "projectInfo": "Project Information",
+    "projectType": "Project Type",
+    "selectProjectType": "Select Project Type...",
+    "projectDescription": "Project Description",
+    "projectDescriptionPlaceholder": "Provide a brief overview of your project needs...",
+    "deliveryDate": "Expected Delivery Date",
+    "priorityLevel": "Priority Level",
+    "priorities": {
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "printingDetails": "Printing Details",
+    "printingType": "Printing Type",
+    "selectPrintingType": "Select Printing Type...",
+    "otherPaperType": "Other Paper Type",
+    "fabricPaperWeight": "Fabric Paper Weight",
+    "selectFabric": "Select Fabric...",
+    "printingMethod": "Printing Method",
+    "selectMethod": "Select Method...",
+    "largeFormatColors": "Large Format Colors",
+    "selectColor": "Select Color...",
+    "fullColorFinishing": "Full Color Finishing",
+    "select": "Select...",
+    "brandIdentityNeed": "Brand Identity Need",
+    "packagingType": "Packaging Type",
+    "selectPackaging": "Select Packaging...",
+    "displayBoxMaterial": "Display Box Material",
+    "selectMaterial": "Select Material...",
+    "rigidBoardFinish": "Rigid Board Finish",
+    "embossPrototype": "Emboss Prototype Required",
+    "artworkAvailable": "Artwork Available",
+    "budget": "Budget",
+    "submit": "Get a Quote",
+    "industries": {
+      "education": "Education",
+      "realEstate": "Real Estate",
+      "healthcare": "Healthcare",
+      "hospitality": "Hospitality",
+      "retail": "Retail",
+      "restaurants": "Restaurants"
+    },
+    "projectTypes": {
+      "printing": "Printing",
+      "branding": "Branding",
+      "packaging": "Packaging",
+      "signage": "Signage"
+    },
+    "printingTypes": {
+      "offset": "Offset",
+      "digital": "Digital",
+      "largeFormat": "Large Format",
+      "screen": "Screen"
     }
-  },
+  }
+
+  ,
     "footer": {
        "company": "Company",
     "support": "Support",

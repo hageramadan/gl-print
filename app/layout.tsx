@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Montserrat, Almarai } from "next/font/google";
 import "./globals.css";
@@ -7,8 +6,9 @@ import { LanguageProvider } from "@/src/context/LanguageProvider";
 import { Footer } from "@/src/components/layout/Footer";
 import { WhatsAppButton } from "@/src/components/common/WhatsAppButton";
 import { getHomeData } from "@/src/services/homeApi";
+import { Toaster } from "react-hot-toast";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -26,11 +26,17 @@ const almarai = Almarai({
 
 export const metadata: Metadata = {
   title: {
-    default: "PrintCo - Printing Excellence",
+    default: "Gl-Print - Printing Excellence",
     template: "%s | PrintCo",
   },
-  description: "We bring your ideas to life with high-quality printing solutions",
-  keywords: ["printing", "digital printing", "offset printing", "printing company"],
+  description:
+    "We bring your ideas to life with high-quality printing solutions",
+  keywords: [
+    "printing",
+    "digital printing",
+    "offset printing",
+    "printing company",
+  ],
   authors: [{ name: "PrintCo" }],
   icons: {
     icon: "/logo1.png",
@@ -49,30 +55,50 @@ export default async function RootLayout({
   let footerData = null;
   let socialLinks = null;
   let contactInfo = null;
-  
+
   try {
-    const homeData = await getHomeData('en');
+    const homeData = await getHomeData("en");
     footerData = homeData.footer;
     socialLinks = homeData.footer?.social_links || null;
-     contactInfo = {
-      phone: homeData.footer?.phone || '',
-      email: homeData.footer?.email || '',
-      address: homeData.footer?.address || '',
+    contactInfo = {
+      phone: homeData.footer?.phone || "",
+      email: homeData.footer?.email || "",
+      address: homeData.footer?.address || "",
     };
   } catch (error) {
-    console.error('Failed to fetch footer data:', error);
+    console.error("Failed to fetch footer data:", error);
   }
 
   return (
     <html lang="en" className="lang-en">
-      <body className={`${montserrat.variable} ${almarai.variable} antialiased`}>
+      <body
+        className={`${montserrat.variable} ${almarai.variable} antialiased`}
+      >
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: "#1F3161",
+              color: "#fff",
+            },
+            success: {
+              style: { background: "#1F3161" },
+            },
+            error: {
+              style: { background: "#C62127" },
+            },
+          }}
+        />
         <LanguageProvider>
           <div className="flex flex-col min-h-screen">
-            <Header socialLinks={socialLinks || undefined} contactInfo={contactInfo || undefined} />
+            <Header
+              socialLinks={socialLinks || undefined}
+              contactInfo={contactInfo || undefined}
+            />
             <main className="grow">{children}</main>
             <Footer data={footerData} />
             {/* ===== زر واتساب الثابت ===== */}
-            <WhatsAppButton 
+            <WhatsAppButton
               phoneNumber="201234567890"
               message="Hello! I would like to inquire about your printing services."
             />

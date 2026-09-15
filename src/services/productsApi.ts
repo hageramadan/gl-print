@@ -49,8 +49,6 @@ export interface ProductsResponse {
 export const getAllProducts = async (
   language: string = 'en'
 ): Promise<ProductsResponse> => {
-  console.log('🔄 Fetching ALL products with language:', language);
-  
   const response = await fetch('https://glprint-eg.com/api/products', {
     method: 'GET',
     headers: {
@@ -66,22 +64,25 @@ export const getAllProducts = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  const data = await response.json();
-  return data;
+  return response.json();
 };
 
 export const getProducts = async (
   page: number = 1,
   serviceId: number | null = null,
-  language: string = 'en'
+  language: string = 'en',
+  industryId: number | null = null,
+  categoryId: number | null = null
 ): Promise<ProductsResponse> => {
-  let url = `https://glprint-eg.com/api/products?page=${page}`;
-  if (serviceId) {
-    url += `&service=${serviceId}`;
-  }
-  
-  console.log('🔄 Fetching products with language:', language, 'page:', page, 'service:', serviceId);
-  
+  const params = new URLSearchParams();
+  params.append('page', String(page));
+
+  if (serviceId) params.append('service', String(serviceId));
+  if (industryId) params.append('industry', String(industryId));
+  if (categoryId) params.append('category', String(categoryId));
+
+  const url = `https://glprint-eg.com/api/products?${params.toString()}`;
+
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -97,6 +98,5 @@ export const getProducts = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  const data = await response.json();
-  return data;
+  return response.json();
 };

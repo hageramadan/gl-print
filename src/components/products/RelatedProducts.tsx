@@ -40,7 +40,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
         <div className="relative">
           
           {/* زر السابق - على اليسار */}
-          <button
+          {products.length>2&&(   <button
             onClick={() => scroll(dir === "rtl" ? "right" : "left")}
             aria-label="Previous"
             className="
@@ -58,9 +58,8 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
             ) : (
               <FiChevronLeft className="text-xl md:text-2xl" />
             )}
-          </button>
-
-          {/* زر التالي - على اليمين */}
+          </button>)}
+          {products.length>2&&(     
           <button
             onClick={() => scroll(dir === "rtl" ? "left" : "right")}
             aria-label="Next"
@@ -79,7 +78,10 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
             ) : (
               <FiChevronRight className="text-xl md:text-2xl" />
             )}
-          </button>
+          </button>)}
+       
+
+     
 
           {/* ===== Slider ===== */}
           <div

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { PageBanner } from '@/src/components/common/PageBanner';
 import { ProductCard } from '@/src/components/products/ProductCard';
 import { ServiceFilter } from '@/src/components/products/ServiceFilter';
@@ -9,18 +10,24 @@ import { useLanguage } from '@/src/hooks/useLanguage';
 import { getProducts, Product, Banner } from '@/src/services/productsApi';
 import { getServices, Service } from '@/src/services/servicesApi';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const { language, t } = useLanguage();
+  const searchParams = useSearchParams();
+  
+  const serviceFromUrl = searchParams.get('service');
+  const initialServiceId = serviceFromUrl ? Number(serviceFromUrl) : null;
+
   const [products, setProducts] = useState<Product[]>([]);
   const [banner, setBanner] = useState<Banner | null>(null);
   const [services, setServices] = useState<Service[]>([]);
-  const [selectedService, setSelectedService] = useState<number | null>(null);
+  const [selectedService, setSelectedService] = useState<number | null>(initialServiceId);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const [total, setTotal] = useState(0);
 
   const initialLoadDone = useRef(false);
+  const lastFetchedKey = useRef<string>('');
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -34,34 +41,51 @@ export default function ProductsPage() {
     fetchServices();
   }, [language]);
 
-  const fetchProducts = useCallback(async (page: number, serviceId: number | null) => {
-    try {
-      setLoading(true);
-      const response = await getProducts(page, serviceId, language);
-      setProducts(response.data.products);
-      if (response.data.banner) {
-        setBanner(response.data.banner);
+  const fetchProducts = useCallback(
+    async (page: number, serviceId: number | null) => {
+      try {
+        setLoading(true);
+        console.log('🔄 Fetching products with serviceId:', serviceId, 'page:', page);
+        const response = await getProducts(page, serviceId, language);
+        setProducts(response.data.products);
+        if (response.data.banner) {
+          setBanner(response.data.banner);
+        }
+        if (response.data.pagination) {
+          setCurrentPage(response.data.pagination.current_page);
+          setLastPage(response.data.pagination.last_page);
+          setTotal(response.data.pagination.total);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
       }
-      if (response.data.pagination) {
-        setCurrentPage(response.data.pagination.current_page);
-        setLastPage(response.data.pagination.last_page);
-        setTotal(response.data.pagination.total);
-      }
-    } catch (error) {
-      console.error('Failed to fetch products:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, [language]);
+    },
+    [language]
+  );
 
+  // ✅ جلب المنتجات عند تغيير الصفحة أو الفلتر
   useEffect(() => {
-    if (!initialLoadDone.current) {
-      initialLoadDone.current = true;
-      fetchProducts(currentPage, selectedService);
-      return;
-    }
+    const key = `${currentPage}-${selectedService}-${language}`;
+    if (lastFetchedKey.current === key) return;
+    lastFetchedKey.current = key;
+
     fetchProducts(currentPage, selectedService);
-  }, [currentPage, selectedService, fetchProducts]);
+  }, [currentPage, selectedService, language, fetchProducts]);
+
+  // ✅ تحديث الفلتر عند تغيير الـ URL
+  useEffect(() => {
+    const serviceFromUrl = searchParams.get('service');
+    const serviceId = serviceFromUrl ? Number(serviceFromUrl) : null;
+    console.log('🔗 URL service param:', serviceId);
+
+    if (serviceId !== selectedService) {
+      setSelectedService(serviceId);
+      setCurrentPage(1);
+      lastFetchedKey.current = '';
+    }
+  }, [searchParams]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -71,11 +95,17 @@ export default function ProductsPage() {
   const handleServiceChange = (serviceId: number | null) => {
     setSelectedService(serviceId);
     setCurrentPage(1);
-  };
+    lastFetchedKey.current = '';
 
-  useEffect(() => {
-    initialLoadDone.current = false;
-  }, [language]);
+    // ✅ تحديث الـ URL
+    const url = new URL(window.location.href);
+    if (serviceId) {
+      url.searchParams.set('service', String(serviceId));
+    } else {
+      url.searchParams.delete('service');
+    }
+    window.history.pushState({}, '', url.toString());
+  };
 
   if (loading && products.length === 0) {
     return (
@@ -143,11 +173,27 @@ export default function ProductsPage() {
             </>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">{t.products?.noProducts || 'No products found.'}</p>
+              <p className="text-gray-500 text-lg">
+                {t.products?.noProducts || 'No products found.'}
+              </p>
             </div>
           )}
         </div>
       </section>
     </main>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      }
+    >
+      <ProductsContent />
+    </Suspense>
   );
 }

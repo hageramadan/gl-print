@@ -106,6 +106,21 @@
     "officeAddress": "عنوان المكتب",
     "followUs": "تابعنا"
   },
+  "industriesPage": {
+    "title": "قطاعات الأعمال",
+    "tag": "قطاعاتنا",
+   "subtitle": "كل ما تحتاجه علامتك التجارية في مكان واحد.",
+    "noIndustries": "لا توجد قطاعات."
+  },
+  "industryDetails": {
+    "tag": "قطاع",
+    "cta": "اطلب عرض سعر",
+    "categoriesTag": "الفئات",
+    "categoriesTitle": "ما نقدمه",
+    "all": "الكل",
+     "getQuote": "اطلب عرض سعر",
+    "noProducts": "لا توجد منتجات."
+  },
   "products": {
     "products2":"المنتاجات",
     "title": "منتجاتنا",
@@ -226,7 +241,23 @@
       "submit": "إرسال الرسالة"
     }
   },
+  "faqs": {
+    "pageTitle": "الأسئلة الشائعة",
+    "tag": "الأسئلة الشائعة",
+    "title": "الأسئلة الشائعة",
+    "subtitle": "اعثر على إجابات لأكثر الأسئلة شيوعاً حول خدمات الطباعة لدينا.",
+    "notFound": "لا توجد أسئلة شائعة"
+  },
   "quote": {
+    "selectPaperType": "اختر نوع الورق...",
+    "selectBrandIdentity": "اختر الهوية التجارية...",
+     "phoneNumber": "رقم الهاتف",
+    "selectPriority": "اختر الأولوية...",
+    "selectPaperWeight": "اختر وزن الورق...",
+    "artworkFile": "ملف العمل الفني",
+    "sending": "جاري الإرسال...",
+    "yes": "نعم",
+    "no": "لا",
     "title": "احصل على عرض سعر",
     "subtitle": "أخبرنا عن احتياجاتك من الطباعة وسنعود إليك بعرض سعر تنافسي",
     "form": {
@@ -237,8 +268,86 @@
       "service": "الخدمة المطلوبة",
       "message": "تفاصيل المشروع",
       "submit": "طلب عرض سعر"
+    },
+   
+    "pageTitle": "احصل على عرض سعر",
+    "tag": "احصل على عرض سعر",
+  
+    "description": "أخبرنا عن مشروعك، وسيقدم خبراء الطباعة لدينا عرضاً تفصيلياً.",
+    "quickInquiry": "استفسار سريع",
+    "getQuote": "احصل على عرض سعر",
+    "contactName": "اسم التواصل",
+    "emailAddress": "البريد الإلكتروني",
+    "yourMessage": "رسالتك",
+    "messagePlaceholder": "أخبرنا عن مشروعك، متطلباتك، أو أي تفاصيل تريدنا أن نعرفها.",
+    "secureNote": "معلوماتك آمنة وستُستخدم فقط لمعالجة عرض السعر.",
+    "sidebarTitle": "لنتحدث عن مشروعك",
+    "sidebarDescription": "تحتاج مساعدة فورية؟ نحن هنا للمساعدة.",
+    "callUs": "اتصل بنا",
+    "emailUs": "راسلنا",
+    "visitUs": "زُرنا",
+    "workingHours": "ساعات العمل",
+    "clientInfo": "معلومات العميل",
+    "companyName": "اسم الشركة",
+    "industry": "القطاع",
+    "selectIndustry": "اختر القطاع...",
+    "projectInfo": "معلومات المشروع",
+    "projectType": "نوع المشروع",
+    "selectProjectType": "اختر نوع المشروع...",
+    "projectDescription": "وصف المشروع",
+    "projectDescriptionPlaceholder": "قدم نظرة عامة موجزة عن احتياجات مشروعك...",
+    "deliveryDate": "تاريخ التسليم المتوقع",
+    "priorityLevel": "مستوى الأولوية",
+    "priorities": {
+      "normal": "عادي",
+      "high": "عالي",
+      "urgent": "عاجل"
+    },
+    "printingDetails": "تفاصيل الطباعة",
+    "printingType": "نوع الطباعة",
+    "selectPrintingType": "اختر نوع الطباعة...",
+    "otherPaperType": "نوع ورق آخر",
+    "fabricPaperWeight": "وزن الورق القماشي",
+    "selectFabric": "اختر القماش...",
+    "printingMethod": "طريقة الطباعة",
+    "selectMethod": "اختر الطريقة...",
+    "largeFormatColors": "ألوان الطباعة الكبيرة",
+    "selectColor": "اختر اللون...",
+    "fullColorFinishing": "تشطيب الألوان الكاملة",
+    "select": "اختر...",
+    "brandIdentityNeed": "الحاجة للهوية التجارية",
+    "packagingType": "نوع التغليف",
+    "selectPackaging": "اختر التغليف...",
+    "displayBoxMaterial": "مادة صندوق العرض",
+    "selectMaterial": "اختر المادة...",
+    "rigidBoardFinish": "تشطيب اللوح الصلب",
+    "embossPrototype": "نموذج النقش البارز مطلوب",
+    "artworkAvailable": "العمل الفني متاح",
+    "budget": "الميزانية",
+    "submit": "احصل على عرض سعر",
+    "industries": {
+      "education": "التعليم",
+      "realEstate": "العقارات",
+      "healthcare": "الرعاية الصحية",
+      "hospitality": "الفنادق والضيافة",
+      "retail": "تجارة التجزئة",
+      "restaurants": "المطاعم"
+    },
+    "projectTypes": {
+      "printing": "طباعة",
+      "branding": "هوية تجارية",
+      "packaging": "تغليف",
+      "signage": "لافتات"
+    },
+    "printingTypes": {
+      "offset": "أوفست",
+      "digital": "رقمي",
+      "largeFormat": "مقاس كبير",
+      "screen": "سلك سكرين"
     }
-  },
+  }
+
+  ,
   "footer": {
     "company": "الشركة",
     "support": "الدعم",

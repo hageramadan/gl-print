@@ -96,7 +96,7 @@ export default function ServicesPage() {
                     icon={service.icon}
                     title={service.title}
                     description={service.description}
-                    link={`/services/${service.id}`}
+                    link={`/products?service=${service.id}`}
                     delay={index * 0.1}
                   />
                 ))}

@@ -242,7 +242,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                   onMouseLeave={handleSubMouseLeave}
                                 >
                                   <Link
-                                    href={`/services/${service.id}`}
+                                    href={`/products?service=${service.id}`}
                                     className={`
                                       flex items-center justify-between px-4 py-2.5 transition-colors
                                       ${isSubOpen ? "bg-primary/5 text-primary" : "text-gray-700 hover:bg-gray-50 hover:text-black"}
@@ -395,7 +395,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                   <div key={service.id}>
                                     <div className="flex items-center justify-between py-2 px-4">
                                       <Link
-                                        href={`/services/${service.id}`}
+                                        href={`/products?service=${service.id}`}
                                         className="flex-1 text-sm hover:text-black transition-colors"
                                         onClick={() => setIsOpen(false)}
                                       >
