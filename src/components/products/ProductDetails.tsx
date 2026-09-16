@@ -87,7 +87,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 
           {/* ===== الصور ===== */}
           <div className="w-full lg:w-1/2">
-            <div className="relative w-full max-h-[702px] aspect-square rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative w-full  max-h-[702px] aspect-square rounded-2xl overflow-hidden shadow-2xl">
 
               {/* ===== سلايدر الصور الرئيسي ===== */}
               {images.length > 0 && (

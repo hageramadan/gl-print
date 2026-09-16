@@ -45,7 +45,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
               aria-label="Previous"
               className="
                 absolute top-1/2 -translate-y-1/2 z-20
-                -start-2 sm:-start-3 md:-start-6 lg:-start-10
+                start-0 sm:-start-3 md:-start-6 lg:-start-10
                 w-9 h-9 md:w-12 md:h-12
                 rounded-full bg-white shadow-lg border border-gray-100
                 flex items-center justify-center
@@ -68,7 +68,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
               aria-label="Next"
               className="
                 absolute top-1/2 -translate-y-1/2 z-20
-                -end-2 sm:-end-3 md:-end-6 lg:-end-10
+                end-0 sm:-end-3 md:-end-6 lg:-end-10
                 w-9 h-9 md:w-12 md:h-12
                 rounded-full bg-white shadow-lg border border-gray-100
                 flex items-center justify-center
@@ -94,7 +94,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
               pb-4 lg:justify-center
               [scrollbar-width:none] [-ms-overflow-style:none]
               [&::-webkit-scrollbar]:hidden
-              w-[85%] lg:w-full mx-auto
+              w-[80%] lg:w-full mx-auto
             "
           >
             {products.map((product, index) => (
