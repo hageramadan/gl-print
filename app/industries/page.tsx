@@ -85,7 +85,7 @@ export default function IndustriesPage() {
 
           {industries.length > 0 ? (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-12">
                 {industries.map((industry, index) => (
                   <IndustryCard
                     key={industry.id}

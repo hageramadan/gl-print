@@ -290,13 +290,13 @@ export default function IndustryDetailsPage() {
                   </button>
 
                   {isDropdownOpen && (
-                    <div className="absolute top-full -start-[7rem] lg:start-0 mt-2 bg-white rounded-xl shadow-2xl min-w-[200px] max-h-[300px] overflow-y-auto z-30 border border-gray-100 py-1">
+                    <div className="absolute top-full -start-[1rem] lg:start-0 mt-2 bg-white rounded-xl shadow-2xl min-w-[150px] max-h-[300px] overflow-y-auto z-30 border border-gray-100 py-1">
                       {hiddenCategories.map((category) => (
                         <button
                           key={category.id ?? 'all'}
                           onClick={() => handleCategoryChange(category.id)}
                           className={`
-                            w-full text-start px-4 py-2.5 text-sm transition-colors whitespace-nowrap cursor-pointer
+                            w-full text-start px-4 py-2.5 text-sm transition-colors  cursor-pointer
                             ${
                               activeCategory === category.id
                                 ? 'bg-primary/5 text-primary font-semibold'

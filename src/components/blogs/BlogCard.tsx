@@ -12,7 +12,7 @@ interface BlogCardProps {
     id: number;
     title: string;
     description: string;
-    image: string;
+    image: string | null;
     published_at: string;
   };
   delay?: number;
@@ -21,7 +21,16 @@ interface BlogCardProps {
 export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
   const { t, dir } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // ✅ صورة افتراضية في حالة عدم وجود صورة
+  const PLACEHOLDER_IMAGE = '/images/placeholder/placeholder.png';
+
+  const imageSrc =
+    !blog.image || blog.image.trim() === '' || imageError
+      ? PLACEHOLDER_IMAGE
+      : blog.image;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,14 +65,14 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
     >
       {/* ===== الصورة ===== */}
       <Link href={`/blogs/${blog.id}`} className="block">
-        <div className="relative w-full h-32 md:h-60 rounded-xl overflow-hidden">
+        <div className="relative w-full h-32 md:h-60 rounded-xl overflow-hidden bg-gray-100">
           <Image
-            src={blog.image}
-            alt={blog.title}
+            src={imageSrc}
+            alt={blog.title || 'Blog'}
             fill
-            className="object-cover  group-hover:scale-105 transition-transform duration-700"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
+            onError={() => setImageError(true)}
           />
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div> */}
         </div>
       </Link>
 
@@ -72,7 +81,9 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
         {/* التاريخ */}
         <div className="flex items-center gap-2 text-xs md:text-sm text-[#475156] mb-1.5 lg:mb-3">
           <BsCalendar4 className="text-primary w-3 h-3 lg:w-5 lg:h-5" />
-          <span className='text-xs lg:text-sm font-medium'>{blog.published_at}</span>
+          <span className="text-xs lg:text-sm font-medium">
+            {blog.published_at}
+          </span>
         </div>
 
         {/* العنوان */}
@@ -90,7 +101,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
         {/* اقرأ المزيد */}
         <Link
           href={`/blogs/${blog.id}`}
-          className="inline-flex   items-center border px-2 lg:px-3 py-1 lg:py-2 w-fit rounded-lg capitalize gap-2 text-primary font-semibold text-[10px] md:text-base hover:text-secondary transition-colors group-hover:gap-3 duration-300"
+          className="inline-flex items-center border px-2 lg:px-3 py-1 lg:py-2 w-fit rounded-lg capitalize gap-2 text-primary font-semibold text-[10px] md:text-base hover:text-secondary transition-colors group-hover:gap-3 duration-300"
         >
           {t.blogs?.readMore || 'Read more'}
           <FiArrowRight

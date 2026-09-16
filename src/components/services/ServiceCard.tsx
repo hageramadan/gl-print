@@ -82,7 +82,7 @@ export const ServiceCard = ({
       </h3>
 
       {/* ===== الوصف ===== */}
-      <p className="text-sm md:text-base text-[#667085] font-medium group-hover:text-white leading-relaxed mb-2 lg:mb-4 flex-1 line-clamp-3">
+      <p className="text-xs md:text-base text-[#667085] font-medium group-hover:text-white leading-relaxed mb-2 lg:mb-4 flex-1 line-clamp-3">
         {description}
       </p>
 

@@ -1,8 +1,17 @@
 'use client';
 
 import { useLanguage } from '@/src/hooks/useLanguage';
-import Image from 'next/image';
 import { FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
+import {
+  FaWhatsapp,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaInstagram,
+  FaTiktok,
+  FaTwitter,
+  FaPinterestP,
+} from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 interface ContactSidebarProps {
   contactInfo?: {
@@ -12,12 +21,21 @@ interface ContactSidebarProps {
     working_hours?: string;
   };
   socialLinks?: {
-    whatsapp: string;
-    facebook: string;
-    linkedin: string;
-    instagram: string;
-    tik_tok: string;
+    whatsapp?: string;
+    facebook?: string;
+    linkedin?: string;
+    instagram?: string;
+    tik_tok?: string;
+    twitter?: string;
+    pinterest?: string;
   };
+}
+
+interface SocialItem {
+  Icon: IconType;
+  href: string;
+  label: string;
+  bg: string;
 }
 
 export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps) => {
@@ -31,11 +49,13 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
   };
 
   const links = {
-    whatsapp: socialLinks?.whatsapp || 'https://wa.me/201234567890',
-    facebook: socialLinks?.facebook || 'https://facebook.com/glprint',
-    linkedin: socialLinks?.linkedin || 'https://linkedin.com/company/glprint',
-    instagram: socialLinks?.instagram || 'https://instagram.com/glprint',
-    tik_tok: socialLinks?.tik_tok || 'https://tiktok.com/@glprint',
+    whatsapp: socialLinks?.whatsapp,
+    facebook: socialLinks?.facebook,
+    linkedin: socialLinks?.linkedin,
+    instagram: socialLinks?.instagram,
+    tik_tok: socialLinks?.tik_tok,
+    twitter: socialLinks?.twitter,
+    pinterest: socialLinks?.pinterest,
   };
 
   const items = [
@@ -64,34 +84,21 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
     },
   ];
 
-  // ✅ صور السوشيال ميديا
-  const socialMediaLinks = [
-    {
-      image: '/images/social/whats.png',
-      href: links.whatsapp,
-      label: 'WhatsApp',
-    },
-    {
-      image: '/images/social/face.png',
-      href: links.facebook,
-      label: 'Facebook',
-    },
-    {
-      image: '/images/social/in.png',
-      href: links.linkedin,
-      label: 'LinkedIn',
-    },
-    {
-      image: '/images/social/insta.png',
-      href: links.instagram,
-      label: 'Instagram',
-    },
-    {
-      image: '/images/social/tiktok.png',
-      href: links.tik_tok,
-      label: 'TikTok',
-    },
+  // ✅ كل السوشيال مع خلفية مميزة
+  const allSocials: SocialItem[] = [
+    { Icon: FaWhatsapp, href: links.whatsapp || '', label: 'WhatsApp', bg: 'bg-[#25D366]' },
+    { Icon: FaFacebookF, href: links.facebook || '', label: 'Facebook', bg: 'bg-[#1877F2]' },
+    { Icon: FaTwitter, href: links.twitter || '', label: 'Twitter', bg: 'bg-[#1DA1F2]' },
+    { Icon: FaLinkedinIn, href: links.linkedin || '', label: 'LinkedIn', bg: 'bg-[#0A66C2]' },
+    { Icon: FaInstagram, href: links.instagram || '', label: 'Instagram', bg: 'bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#4F5BD5]' },
+    { Icon: FaTiktok, href: links.tik_tok || '', label: 'TikTok', bg: 'bg-black' },
+    { Icon: FaPinterestP, href: links.pinterest || '', label: 'Pinterest', bg: 'bg-[#E60023]' },
   ];
+
+  // ✅ عرض السوشيال التي لها لينك فقط
+  const socialMediaLinks = allSocials.filter(
+    (s) => s.href && s.href.trim() !== ''
+  );
 
   return (
     <div
@@ -134,29 +141,31 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
         ))}
       </div>
 
-      {/* ===== صور السوشيال ميديا ===== */}
-      <div className="mt-8 pt-6">
-        <div className="flex items-center justify-center gap-3 flex-wrap">
-          {socialMediaLinks.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 p-1 rounded-full overflow-hidden hover:scale-110 transition-all duration-300 flex items-center justify-center"
-              aria-label={social.label}
-            >
-              <Image
-                src={social.image}
-                alt={social.label}
-                width={400}
-                height={400}
-                className="object-contain w-full h-full"
-              />
-            </a>
-          ))}
+      {/* ===== أيقونات السوشيال ميديا ===== */}
+      {socialMediaLinks.length > 0 && (
+        <div className="mt-8 pt-6">
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            {socialMediaLinks.map(({ Icon, href, label, bg }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={`
+                  ${bg}
+                  w-8 h-8 rounded-full flex items-center justify-center
+                  text-white shadow-md
+                  transition-all duration-300
+                  hover:scale-110 hover:shadow-lg hover:brightness-110
+                `}
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

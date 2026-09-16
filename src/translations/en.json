@@ -229,6 +229,9 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "Get in touch with us for all your printing needs",
+       "title2": "Get in Touch",
+    "subtitle2": "Let’s discuss your next project and find the right printing solution for your business.",
+    
     "info": {
       "phone": "Phone",
       "email": "Email",
@@ -242,7 +245,21 @@
       "subject": "Subject",
       "message": "Your Message",
       "submit": "Send Message"
-    }
+    },
+   
+    "pageTitle": "Contact Us",
+    "tag": "Contact Us",
+    "formTitle": "Send Us a Message",
+    "name": "Your Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "messagePlaceholder": "Write your message here...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "secureNote": "Your information is secure and will only be used to contact you.",
+    "mapTitle": "Our Location",
+    "notFound": "Contact Information Not Found"
+  
   },
   "faqs": {
     "pageTitle": "FAQs",

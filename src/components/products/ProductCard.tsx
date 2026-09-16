@@ -49,7 +49,7 @@ export const ProductCard = ({ product, delay = 0 }: ProductCardProps) => {
       <div
         ref={cardRef}
         className={`
-          relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500
+          relative rounded-2xl overflow-hidden shadow-lg  transition-all duration-500
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
         `}
         style={{

@@ -32,10 +32,10 @@ export const CompanyValues = ({ data }: CompanyValuesProps) => {
                   className="object-contain w-12 h-12 lg:w-16 lg:h-16"
                 />
               </div>
-              <h3 className="text-xl lg:text-[28px] font-bold text-[#171A21] mb-2 group-hover:text-primary transition-colors">
+              <h3 className="text-base lg:text-[28px] font-bold text-[#171A21] mb-2 group-hover:text-primary transition-colors">
                 {item.title}
               </h3>
-              <p className="text-sm md:text-xl font-medium text-[#667085] leading-relaxed">
+              <p className="text-xs md:text-xl font-medium text-[#667085] leading-relaxed">
                 {item.description}
               </p>
             </div>

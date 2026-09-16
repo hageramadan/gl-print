@@ -324,8 +324,8 @@ export const QuickInquiryForm = () => {
           </button>
         </div>
 
-        <div className="flex items-center justify-center gap-1 text-[#45464F] text-xs font-medium">
-          <MdLockOutline />
+        <div className="flex justify-center gap-1 text-[#45464F] text-xs font-medium">
+          <MdLockOutline className="text-xl lg:text-base"/>
           <p className="text-xs">
             {t.quote?.secureNote ||
               'Your information is secure and will only be used to process your quote.'}
