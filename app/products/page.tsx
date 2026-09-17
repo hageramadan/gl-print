@@ -65,7 +65,7 @@ function ProductsContent() {
     [language]
   );
 
-  // ✅ جلب المنتجات عند تغيير الصفحة أو الفلتر
+  // ✅ جلب المنتاجات عند تغيير الصفحة أو الفلتر
   useEffect(() => {
     const key = `${currentPage}-${selectedService}-${language}`;
     if (lastFetchedKey.current === key) return;

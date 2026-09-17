@@ -1,6 +1,7 @@
 export interface Industry {
   id: number;
   name: string;
+  slug: string; 
   description: string;
   image: string;
 }
@@ -13,6 +14,7 @@ export interface IndustryCategory {
 export interface IndustryDetails {
   id: number;
   name: string;
+  slug: string; 
   description: string;
   image: string;
   categories: IndustryCategory[];
@@ -81,11 +83,11 @@ export const getIndustries = async (
 };
 
 export const getIndustryDetails = async (
-  industryId: number,
+  slug: string,
   language: string = 'en'
 ): Promise<IndustryDetailsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/industries/${industryId}`,
+    `https://glprint-eg.com/api/industries/${slug}`,
     {
       method: 'GET',
       headers: {

@@ -16,7 +16,8 @@ import { FiChevronDown } from 'react-icons/fi';
 
 export default function IndustryDetailsPage() {
   const params = useParams();
-  const router = useRouter();
+  const industrySlug = params.id as string;
+
   const industryId = Number(params.id);
   const { language, t, dir } = useLanguage();
 
@@ -34,10 +35,10 @@ export default function IndustryDetailsPage() {
   const measureRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const fetchData = useCallback(async (id: number, lang: string) => {
+  const fetchData = useCallback(async (slug: string, lang: string) => {
     try {
       setLoading(true);
-      const response = await getIndustryDetails(id, lang);
+      const response = await getIndustryDetails(slug, lang);
       setIndustry(response.data.industry);
       setActiveCategory(null);
       setError(null);
@@ -48,8 +49,12 @@ export default function IndustryDetailsPage() {
       setLoading(false);
     }
   }, []);
-
-  // ✅ جلب المنتجات حسب industry و category
+ useEffect(() => {
+    if (industrySlug) {
+      fetchData(industrySlug, language);
+    }
+  }, [industrySlug, language, fetchData]);
+  // ✅ جلب المنتاجات حسب industry و category
   const fetchProducts = useCallback(
     async (id: number, categoryId: number | null, lang: string) => {
       try {
@@ -66,11 +71,15 @@ export default function IndustryDetailsPage() {
   );
 
   useEffect(() => {
-    if (industryId) {
-      fetchData(industryId, language);
-      fetchProducts(industryId, null, language);
+    if (industrySlug) {
+      fetchData(industrySlug, language);
     }
-  }, [industryId, language, fetchData, fetchProducts]);
+  }, [industrySlug, language, fetchData]);
+    useEffect(() => {
+    if (industry) {
+      fetchProducts(industry.id, null, language);
+    }
+  }, [industry, language, fetchProducts]);
 
   // ✅ كل الفئات (مع "الكل")
   const allCategories = industry
@@ -313,7 +322,7 @@ export default function IndustryDetailsPage() {
               )}
             </div>
 
-            {/* ===== المنتجات ===== */}
+            {/* ===== المنتاجات ===== */}
             {productsLoading ? (
               <div className="flex items-center justify-center py-12">
                 <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>

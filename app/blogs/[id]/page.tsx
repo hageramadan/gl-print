@@ -13,7 +13,7 @@ export default function BlogDetailsPage() {
   const params = useParams();
   const blogId = Number(params.id);
   const { language, t } = useLanguage();
-
+ const blogSlug = params.id as string;
   const [blog, setBlog] = useState<BlogDetails | null>(null);
   const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>([]);
   const [socialLinks, setSocialLinks] = useState<any>(null);
@@ -21,10 +21,10 @@ export default function BlogDetailsPage() {
   const [error, setError] = useState<string | null>(null);
 
   // ✅ جلب تفاصيل المدونة
-  const fetchBlogData = useCallback(async (id: number, lang: string) => {
+  const fetchBlogData = useCallback(async (slug: string, lang: string) => {
     try {
       setLoading(true);
-      const response = await getBlogDetails(id, lang);
+      const response = await getBlogDetails(slug, lang);
       setBlog(response.data.blog);
       setRelatedBlogs(response.data.related_blogs || []);
       setError(null);
@@ -46,12 +46,12 @@ export default function BlogDetailsPage() {
     }
   }, []);
 
-  useEffect(() => {
-    if (blogId) {
-      fetchBlogData(blogId, language);
+   useEffect(() => {
+    if (blogSlug) {
+      fetchBlogData(blogSlug, language);
       fetchSocialLinks(language);
     }
-  }, [blogId, language, fetchBlogData, fetchSocialLinks]);
+  }, [blogSlug, language, fetchBlogData, fetchSocialLinks]);
 
   if (loading) {
     return (

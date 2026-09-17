@@ -85,7 +85,23 @@
   },
   "search": {
     "placeholder": "Search for products, services...",
-    "button": "Search"
+    "button": "Search",
+    
+    "bannerTitle": "Search",
+    "bannerTitle2": "Results",
+    
+    
+    "all": "All",
+    "services": "Services",
+    "products": "Products",
+    "resultsFor": "Results for",
+    "show":"Showing",
+    "resultsFound": "results found",
+    "noResults": "No results found.",
+    "tryDifferent": "Try a different search term.",
+    "enterQuery": "Please enter a search query.",
+    "viewService": "View Service"
+  
   },
   "productDetails": {
     "requestQuote": "Request a Quote",
@@ -126,6 +142,7 @@
   },
   "products": {
     "products2": "Products",
+    "viewAll2": "View All Products",
     "title": "Our Products",
     "subtitle": "Premium printing products for every need",
     "viewDetails": "View Details",
@@ -261,6 +278,7 @@
     "notFound": "Contact Information Not Found"
   
   },
+  
   "faqs": {
     "pageTitle": "FAQs",
     "tag": "FAQs",

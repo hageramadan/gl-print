@@ -9,6 +9,7 @@ interface ProductCardProps {
   product: {
     id: number;
     name: string;
+    slug?: string;
     description: string;
     image: Array<{ url: string }>;
   };
@@ -43,9 +44,9 @@ export const ProductCard = ({ product, delay = 0 }: ProductCardProps) => {
   }, []);
 
   const imageUrl = product.image?.[0]?.url || '/images/products/placeholder.png';
-
+ const productUrl = `/products/${product.slug}`;
   return (
-    <Link href={`/products/${product.id}`} className="block group">
+    <Link href={productUrl} className="block group">
       <div
         ref={cardRef}
         className={`

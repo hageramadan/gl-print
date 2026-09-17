@@ -1,18 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { FiSearch } from 'react-icons/fi';
 
 export const HeroSearch = () => {
   const { t, dir } = useLanguage();
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchValue.trim()) {
-     
-      // window.location.href = `/search?q=${encodeURIComponent(searchValue)}`;
+    const trimmed = searchValue.trim();
+    if (trimmed) {
+      router.push(`/search?q=${encodeURIComponent(trimmed)}&type=all&page=1`);
     }
   };
 
@@ -27,7 +29,6 @@ export const HeroSearch = () => {
           <div className="absolute start-4 z-50 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
             <FiSearch className="text-lg z-50" />
           </div>
-
           <input
             type="text"
             value={searchValue}

@@ -10,6 +10,7 @@ import { BsCalendar4 } from 'react-icons/bs';
 interface BlogCardProps {
   blog: {
     id: number;
+    slug: string;
     title: string;
     description: string;
     image: string | null;
@@ -48,7 +49,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
       if (cardRef.current) observer.unobserve(cardRef.current);
     };
   }, []);
-
+ const blogUrl = `/blogs/${blog.slug}`;
   return (
     <div
       ref={cardRef}
@@ -64,7 +65,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
       }}
     >
       {/* ===== الصورة ===== */}
-      <Link href={`/blogs/${blog.id}`} className="block">
+      <Link href={blogUrl} className="block">
         <div className="relative w-full h-32 md:h-60 rounded-xl overflow-hidden bg-gray-100">
           <Image
             src={imageSrc}

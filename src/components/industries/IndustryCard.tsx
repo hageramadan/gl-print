@@ -8,6 +8,7 @@ import { useLanguage } from '@/src/hooks/useLanguage';
 interface IndustryCardProps {
   industry: {
     id: number;
+    slug: string;
     name: string;
     description: string;
     image: string;
@@ -38,7 +39,7 @@ export const IndustryCard = ({ industry, delay = 0 }: IndustryCardProps) => {
   }, []);
 
   return (
-    <Link href={`/industries/${industry.id}`} className="block group">
+    <Link href={`/industries/${industry.slug}`} className="block group">
       <div
         ref={cardRef}
         className={`

@@ -275,7 +275,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                             productsData.map((product) => (
                               <Link
                                 key={product.id}
-                                href={`/products/${product.id}`}
+                                href={`/products/${product.slug}`}
                                 className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
                               >
                                 {product.name}
@@ -296,7 +296,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                             industriesData.map((industry) => (
                               <Link
                                 key={industry.id}
-                                href={`/industries/${industry.id}`}
+                                href={`/industries/${industry.slug}`}
                                 className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
                               >
                                 {industry.name}
@@ -423,7 +423,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                         {service.products.map((product) => (
                                           <Link
                                             key={product.id}
-                                            href={`/products/${product.id}`}
+                                            href={`/products/${product.slug}`}
                                             className="block py-2 px-4 text-xs hover:bg-gray-100 rounded transition-colors hover:text-black"
                                             onClick={() => setIsOpen(false)}
                                           >
@@ -446,7 +446,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               productsData.map((product) => (
                                 <Link
                                   key={product.id}
-                                  href={`/products/${product.id}`}
+                                  href={`/products/${product.slug}`}
                                   className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
                                   onClick={() => setIsOpen(false)}
                                 >
@@ -464,7 +464,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               industriesData.map((industry) => (
                                 <Link
                                   key={industry.id}
-                                  href={`/industries/${industry.id}`}
+                                  href={`/industries/${industry.slug}`}
                                   className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
                                   onClick={() => setIsOpen(false)}
                                 >
@@ -503,7 +503,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
           {activeService.products.map((product) => (
             <Link
               key={product.id}
-              href={`/products/${product.id}`}
+              href={`/products/${product.slug}`}
               className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black text-sm whitespace-nowrap"
             >
               {product.name}

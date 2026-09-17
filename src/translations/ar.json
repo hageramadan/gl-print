@@ -83,7 +83,19 @@
   },
   "search": {
     "placeholder": "ابحث عن منتجات، خدمات...",
-    "button": "بحث"
+    "button": "بحث",
+        "bannerTitle": "نتائج ",
+        "bannerTitle2": " البحث",
+    "all": "الكل",
+    "services": "الخدمات",
+    "products": "المنتاجات",
+    "resultsFor": "نتائج البحث عن",
+    "resultsFound": "نتيجة",
+    "show":"عرض",
+    "noResults": "لا توجد نتائج.",
+    "tryDifferent": "جرب كلمة بحث أخرى.",
+    "enterQuery": "الرجاء إدخال كلمة بحث.",
+    "viewService": "عرض الخدمة"
   },
   "productDetails": {
     "requestQuote": "اطلب عرض سعر",
@@ -122,12 +134,13 @@
     "noProducts": "لا توجد منتجات."
   },
   "products": {
+    "viewAll2": "عرض كل المنتاجات",
     "products2": "المنتاجات",
     "title": "منتجاتنا",
     "subtitle": "منتجات طباعة متميزة لكل الاحتياجات",
     "viewDetails": "عرض التفاصيل",
     "tag": "منتجات مميزة",
-    "title2": "أحدث المنتجات",
+    "title2": "أحدث المنتاجات",
     "viewAll": "عرض الكل",
     "tag2": "كل المنتاجات",
     "all": "الكل",

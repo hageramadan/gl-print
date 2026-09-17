@@ -9,6 +9,7 @@ interface FeaturedProductsProps {
   data: Array<{
     id: number;
     service_id: number;
+    slug?:string;
     name: string;
     description: string;
     image: Array<{
@@ -32,7 +33,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
     title: product.name,
     description: product.description,
     image: product.image?.[0]?.url || "/images/products/placeholder.png",
-    link: `/products/${product.id}`,
+   link: `/products/${product.slug}`,
     category: "Product",
   }));
 
@@ -84,6 +85,7 @@ interface ProductCardProps {
   product: {
     id: number;
     title: string;
+
     description: string;
     image: string;
     link: string;

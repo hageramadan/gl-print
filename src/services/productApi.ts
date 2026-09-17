@@ -7,6 +7,7 @@ export interface ProductImage {
 
 export interface Product {
   id: number;
+  slug?: string;
   service_id: number;
   name: string;
   description: string;
@@ -25,11 +26,12 @@ export interface ProductDetailsResponse {
 }
 
 export const getProductDetails = async (
-  productId: number,
+
+   slug: string,  
   language: string = "en",
 ): Promise<ProductDetailsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/products/${productId}`,
+    `https://glprint-eg.com/api/products/${slug}`,
     {
       method: "GET",
       headers: {

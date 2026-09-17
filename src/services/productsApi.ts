@@ -1,6 +1,7 @@
 export interface Product {
   id: number;
   service_id: number;
+  slug: string;
   name: string;
   description: string;
   image: Array<{

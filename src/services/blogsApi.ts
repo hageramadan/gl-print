@@ -1,5 +1,6 @@
 export interface Blog {
   id: number;
+  slug: string;
   title: string;
   description: string;
   image: string;
@@ -9,6 +10,7 @@ export interface Blog {
 
 export interface BlogDetails {
   id: number;
+  slug: string;
   title: string;
   description: string;
   content: string;
@@ -82,11 +84,11 @@ export const getBlogs = async (
 };
 
 export const getBlogDetails = async (
-  blogId: number,
+  slug: string,
   language: string = 'en'
 ): Promise<BlogDetailsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/blogs/${blogId}`,
+    `https://glprint-eg.com/api/blogs/${slug}`,
     {
       method: 'GET',
       headers: {

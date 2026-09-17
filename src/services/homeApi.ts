@@ -35,6 +35,7 @@ export interface Service {
 
 export interface Product {
   id: number;
+  slug?: string;
   service_id: number;
   name: string;
   description: string;

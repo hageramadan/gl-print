@@ -7,7 +7,7 @@ import { useLanguage } from '@/src/hooks/useLanguage';
 import { FiX, FiSearch, FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { FaTiktok, FaInstagram } from 'react-icons/fa6';
-
+import { useRouter } from 'next/navigation';
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
@@ -29,6 +29,7 @@ export const Sidebar = ({ isOpen, onClose, contactInfo, socialLinks }: SidebarPr
   const { t, dir } = useLanguage();
   const [searchValue, setSearchValue] = useState('');
   const sidebarRef = useRef<HTMLDivElement>(null);
+ const router = useRouter();  
 
   // ✅ تثبيت الجانب بناءً على اللغة الأولية فقط
   const fixedSide = useRef<'left' | 'right'>('right');
@@ -78,10 +79,12 @@ export const Sidebar = ({ isOpen, onClose, contactInfo, socialLinks }: SidebarPr
     { icon: FaLinkedinIn, href: links.linkedin, label: 'LinkedIn' },
   ];
 
-  const handleSearch = (e: React.FormEvent) => {
+   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchValue.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchValue)}`;
+    const trimmed = searchValue.trim();
+    if (trimmed) {
+      onClose(); // إغلاق الـ Sidebar
+      router.push(`/search?q=${encodeURIComponent(trimmed)}&type=all&page=1`);
     }
   };
 

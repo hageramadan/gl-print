@@ -1,6 +1,8 @@
 export interface NavbarProduct {
   id: number;
-  name: string;
+ 
+  slug:string;
+   name: string;
 }
 
 export interface NavbarService {
@@ -11,6 +13,7 @@ export interface NavbarService {
 
 export interface NavbarIndustry {
   id: number;
+  slug:string;
   name: string;
   products: NavbarProduct[];
 }

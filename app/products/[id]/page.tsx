@@ -13,16 +13,16 @@ export default function ProductDetailsPage() {
   const params = useParams();
   const productId = Number(params.id);
   const { language, t } = useLanguage();
-  
+   const productSlug = params.id as string;
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = useCallback(async (id: number, lang: string) => {
+  const fetchData = useCallback(async (slug: string, lang: string) => {
     try {
       setLoading(true);
-      const response = await getProductDetails(id, lang);
+      const response = await getProductDetails(slug, lang);
       setProduct(response.data.product);
       setRelatedProducts(response.data.related_products);
       setError(null);
@@ -35,10 +35,10 @@ export default function ProductDetailsPage() {
   }, []);
 
   useEffect(() => {
-    if (productId) {
-      fetchData(productId, language);
+    if (productSlug) {
+      fetchData(productSlug, language);
     }
-  }, [productId, language, fetchData]);
+  }, [productSlug, language, fetchData]);
 
   if (loading) {
     return (
@@ -75,7 +75,7 @@ export default function ProductDetailsPage() {
       {/* ===== 2. تفاصيل المنتج ===== */}
       <ProductDetails product={product} />
 
-      {/* ===== 3. المنتجات ذات الصلة ===== */}
+      {/* ===== 3. المنتاجات ذات الصلة ===== */}
       <RelatedProducts products={relatedProducts} />
 
       {/* ===== 4. CTA ===== */}
