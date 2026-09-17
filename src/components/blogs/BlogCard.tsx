@@ -88,7 +88,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
         </div>
 
         {/* العنوان */}
-        <Link href={`/blogs/${blog.id}`}>
+        <Link href={`/blogs/${blog.slug}`}>
           <h3 className="text-xs md:text-lg font-semibold text-[#191C1F] mb-1 lg:mb-3 line-clamp-2 group-hover:text-primary transition-colors">
             {blog.title}
           </h3>
@@ -101,7 +101,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
 
         {/* اقرأ المزيد */}
         <Link
-          href={`/blogs/${blog.id}`}
+          href={`/blogs/${blog.slug}`}
           className="inline-flex items-center border px-2 lg:px-3 py-1 lg:py-2 w-fit rounded-lg capitalize gap-2 text-primary font-semibold text-[10px] md:text-base hover:text-secondary transition-colors group-hover:gap-3 duration-300"
         >
           {t.blogs?.readMore || 'Read more'}

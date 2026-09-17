@@ -11,7 +11,7 @@ import { getHomeData } from "@/src/services/homeApi";
 
 export default function BlogDetailsPage() {
   const params = useParams();
-  const blogId = Number(params.id);
+
   const { language, t } = useLanguage();
  const blogSlug = params.id as string;
   const [blog, setBlog] = useState<BlogDetails | null>(null);
