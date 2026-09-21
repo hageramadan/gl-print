@@ -8,6 +8,7 @@ import { HowWeWork } from "@/src/components/about/HowWeWork";
 import { PartnersSlider } from "@/src/components/about/PartnersSlider";
 import { getAboutData, AboutData } from "@/src/services/aboutApi";
 import { useLanguage } from "@/src/hooks/useLanguage";
+import { LoadingScreen } from "@/src/components/common/LoadingScreen";
 
 export default function AboutPage() {
   const { language, t } = useLanguage();
@@ -33,14 +34,8 @@ export default function AboutPage() {
   }, [language]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        </div>
-      </div>
-    );
-  }
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   if (error || !data) {
     return <></>;

@@ -6,6 +6,7 @@ import { BlogCard } from '@/src/components/blogs/BlogCard';
 import { Pagination } from '@/src/components/common/Pagination';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { getBlogs, Blog, Banner } from '@/src/services/blogsApi';
+import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 
 export default function BlogsPage() {
   const { language, t } = useLanguage();
@@ -46,13 +47,16 @@ export default function BlogsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (loading && blogs.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+  // if (loading && blogs.length === 0) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+  //       <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+  //     </div>
+  //   );
+  // }
+  if (loading) {
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   const bannerTitle = banner?.title || t.blogs?.pageTitle || 'Blogs';
   const bannerImage =

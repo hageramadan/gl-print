@@ -8,6 +8,7 @@ import { RelatedProducts } from '@/src/components/products/RelatedProducts';
 import { ProductCTA } from '@/src/components/products/ProductCTA';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { getProductDetails, Product } from '@/src/services/productApi';
+import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 
 export default function ProductDetailsPage() {
   const params = useParams();
@@ -41,21 +42,12 @@ export default function ProductDetailsPage() {
   }, [productSlug, language, fetchData]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   if (error || !product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Product Not Found</h2>
-          <p className="text-gray-600">{error}</p>
-        </div>
-      </div>
+     <></>
     );
   }
 
@@ -72,13 +64,13 @@ export default function ProductDetailsPage() {
         ]}
       />
 
-      {/* ===== 2. تفاصيل المنتج ===== */}
+      
       <ProductDetails product={product} />
 
-      {/* ===== 3. المنتاجات ذات الصلة ===== */}
+      
       <RelatedProducts products={relatedProducts} />
 
-      {/* ===== 4. CTA ===== */}
+    
       <ProductCTA />
     </main>
   );

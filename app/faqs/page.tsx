@@ -5,6 +5,7 @@ import { PageBanner } from '@/src/components/common/PageBanner';
 import { FAQItem } from '@/src/components/faqs/FAQItem';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { getFAQs, FAQ, Banner } from '@/src/services/faqsApi';
+import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 
 export default function FAQsPage() {
   const { language, t } = useLanguage();
@@ -32,13 +33,9 @@ export default function FAQsPage() {
     fetchData(language);
   }, [language, fetchData]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+ if (loading) {
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   if (error || faqs.length === 0) {
     return (

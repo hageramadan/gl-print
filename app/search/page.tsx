@@ -14,6 +14,7 @@ import {
   SearchType,
 } from "@/src/services/searchApi";
 import Link from "next/link";
+import { LoadingScreen } from "@/src/components/common/LoadingScreen";
 
 function SearchContent() {
   const { language, t, dir } = useLanguage();
@@ -90,16 +91,19 @@ function SearchContent() {
   }
 
   // ✅ إذا كان التحميل
+  // if (loading) {
+  //   return (
+  //     <main>
+  //       <SearchBanner initialQuery={query} />
+  //       <div className="min-h-[400px] flex items-center justify-center bg-white">
+  //         <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+  //       </div>
+  //     </main>
+  //   );
+  // }
   if (loading) {
-    return (
-      <main>
-        <SearchBanner initialQuery={query} />
-        <div className="min-h-[400px] flex items-center justify-center bg-white">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      </main>
-    );
-  }
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   const counts = data?.counts || { all: 0, services: 0, products: 0 };
   const services = data?.services?.items || [];

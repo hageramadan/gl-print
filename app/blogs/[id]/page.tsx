@@ -8,6 +8,7 @@ import { SocialShare } from "@/src/components/blogs/SocialShare";
 import { useLanguage } from "@/src/hooks/useLanguage";
 import { getBlogDetails, BlogDetails, Blog } from "@/src/services/blogsApi";
 import { getHomeData } from "@/src/services/homeApi";
+import { LoadingScreen } from "@/src/components/common/LoadingScreen";
 
 export default function BlogDetailsPage() {
   const params = useParams();
@@ -53,13 +54,16 @@ export default function BlogDetailsPage() {
     }
   }, [blogSlug, language, fetchBlogData, fetchSocialLinks]);
 
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+  //       <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+  //     </div>
+  //   );
+  // }
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   if (error || !blog) {
     return (

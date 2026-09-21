@@ -42,7 +42,7 @@ export default function Home() {
 
   // عرض شاشة التحميل
   if (loading) {
-    return <LoadingScreen isLoading={loading} />;
+    return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
   }
 
   if (error || !data) {

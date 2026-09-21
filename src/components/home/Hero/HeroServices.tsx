@@ -11,6 +11,7 @@ import { getServices, Service } from '@/src/services/servicesApi';
 
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import { LoadingScreen } from '../../common/LoadingScreen';
 
 export const HeroServices = () => {
   const { language } = useLanguage();
@@ -43,9 +44,12 @@ export const HeroServices = () => {
     fetchServices();
   }, [language]);
 
-  if (loading || services.length === 0) {
-    return null;
-  }
+  // if (loading || services.length === 0) {
+  //   return null;
+  // }
+  if (loading) {
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   return (
     <div className="absolute bottom-0 sm:-bottom-1 lg:bottom-1 start-0 end-0 z-20">

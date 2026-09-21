@@ -10,6 +10,7 @@ import {
   Industry,
   Banner,
 } from '@/src/services/industriesApi';
+import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 
 export default function IndustriesPage() {
   const { language, t } = useLanguage();
@@ -45,14 +46,16 @@ export default function IndustriesPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (loading && industries.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
+  // if (loading && industries.length === 0) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+  //       <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+  //     </div>
+  //   );
+  // }
+if (loading) {
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
   const bannerTitle = banner?.title || t.industriesPage?.title || 'Industries';
   const bannerImage =
     banner?.image_url || '/images/banner/services-banner.png';

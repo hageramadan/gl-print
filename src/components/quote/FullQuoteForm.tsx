@@ -12,6 +12,7 @@ import {
   QuoteEnums,
 } from "@/src/services/quotesApi";
 import toast from "react-hot-toast";
+import { LoadingScreen } from "../common/LoadingScreen";
 
 const REQUIRED_FIELDS = [
   "company_name",
@@ -374,7 +375,9 @@ const [showSuccessPopup, setShowSuccessPopup] = useState(false);
       </div>
     );
   }
-
+if (loading) {
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
   return (
    <>
     <form

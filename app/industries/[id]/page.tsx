@@ -13,6 +13,7 @@ import {
 import { getProducts, Product } from '@/src/services/productsApi';
 import { FaArrowRight } from 'react-icons/fa6';
 import { FiChevronDown } from 'react-icons/fi';
+import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 
 export default function IndustryDetailsPage() {
   const params = useParams();
@@ -181,13 +182,9 @@ export default function IndustryDetailsPage() {
     window.history.pushState({}, '', url.toString());
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+ if (loading) {
+  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+}
 
   if (error || !industry) {
     return (
