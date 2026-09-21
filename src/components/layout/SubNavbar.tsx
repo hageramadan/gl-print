@@ -14,6 +14,7 @@ import { SiTiktok } from "react-icons/si";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { getHomeData } from "@/src/services/homeApi";
 
 interface SocialLinks {
   whatsapp: string;
@@ -30,6 +31,10 @@ interface SubNavbarProps {
 export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
   const { t, language, toggleLanguage, dir } = useLanguage();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [contactInfo, setContactInfo] = useState<{
+    phone: string;
+    email: string;
+  } | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const defaultLinks = {
@@ -41,6 +46,24 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
   };
 
   const links = socialLinks || defaultLinks;
+
+  // ✅ جلب الإيميل والهاتف من API /home
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const response = await getHomeData(language);
+        if (response.footer) {
+          setContactInfo({
+            phone: response.footer.phone,
+            email: response.footer.email,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch contact info:", error);
+      }
+    };
+    fetchContactInfo();
+  }, [language]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -62,6 +85,9 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
     setIsDropdownOpen(false);
   };
 
+  const displayEmail = contactInfo?.email || "glprint@gmail.com";
+  const displayPhone = contactInfo?.phone || "+20 123 456 7890";
+
   return (
     <div
       className="bg-linear-to-l from-[#090E1B] to-primary text-white text-sm lg:text-base font-medium py-0.5 border-b border-primary-light relative z-50"
@@ -70,19 +96,22 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center">
           <div className="flex items-center gap-4 lg:gap-6 flex-wrap">
+            {/* ✅ الإيميل من API */}
             <a
-              href="mailto:glprint@gmail.com"
+              href={`mailto:${displayEmail}`}
               className="hidden lg:flex items-center gap-2 hover:text-white transition-colors"
             >
               <FiMail className="text-white w-5 h-5" />
-              <span>glprint@gmail.com</span>
+              <span>{displayEmail}</span>
             </a>
+
+            {/* ✅ الهاتف من API */}
             <a
-              href="tel:+201234567890"
+              href={`tel:${displayPhone}`}
               className="flex items-center gap-2 hover:text-white transition-colors"
             >
               <FiPhone className="text-white w-5 h-5" />
-              <span>+20 123 456 7890</span>
+              <span dir="ltr">{displayPhone}</span>
             </a>
           </div>
 

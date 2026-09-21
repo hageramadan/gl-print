@@ -57,6 +57,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
   const [subDropdownPosition, setSubDropdownPosition] = useState({ top: 0, left: 0 });
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const fetchNavbarData = async () => {
     try {
@@ -83,6 +84,27 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
       }
     };
   }, []);
+  useEffect(() => {
+  const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+    if (
+      isOpen &&
+      mobileMenuRef.current &&
+      !mobileMenuRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+      setMobileSubOpen(null);
+      setMobileSubSubOpen(null);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  document.addEventListener("touchstart", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+    document.removeEventListener("touchstart", handleClickOutside);
+  };
+}, [isOpen]);
 
   const navItems = [
     { key: "home", href: "/" },
@@ -164,6 +186,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
   return (
     <>
       <nav
+       ref={mobileMenuRef}
         className="bg-white text-[#3E3F42] shadow-lg sticky top-0 z-[999]"
         dir={dir}
       >

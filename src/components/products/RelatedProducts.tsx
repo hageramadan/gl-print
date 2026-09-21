@@ -88,14 +88,17 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
           <div
             ref={sliderRef}
             dir={dir}
+            style={{ touchAction: "pan-x" }}
             className="
-              flex gap-4 md:gap-6
-              overflow-x-auto scroll-smooth snap-x snap-mandatory
-              pb-4 lg:justify-center
-              [scrollbar-width:none] [-ms-overflow-style:none]
-              [&::-webkit-scrollbar]:hidden
-              w-[80%] lg:w-full mx-auto
-            "
+            flex gap-4 md:gap-6
+            overflow-x-auto overflow-y-hidden
+            scroll-smooth snap-x snap-mandatory
+            overscroll-x-contain
+            pb-4 lg:justify-center
+            [scrollbar-width:none] [-ms-overflow-style:none]
+            [&::-webkit-scrollbar]:hidden
+            w-[80%] lg:w-full mx-auto
+          "
           >
             {products.map((product, index) => (
               <div

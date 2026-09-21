@@ -110,7 +110,7 @@ export const SocialShare = ({ socialLinks }: SocialShareProps) => {
           rel="noopener noreferrer"
           aria-label={label}
           className={`
-            ${bg}
+            bg-[#44537B]
             w-10 h-10 rounded-full flex items-center justify-center
             text-white
             shadow-md
