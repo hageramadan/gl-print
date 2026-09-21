@@ -115,6 +115,7 @@ export const HeroServices = () => {
                     {service.description}
                   </p>
                   <Link
+                    aria-label={`go to services`}
                     href={`/products?service=${service.id}`}
                     className="
                       inline-flex items-center gap-1 
@@ -209,6 +210,7 @@ export const HeroServices = () => {
                         {service.description}
                       </p>
                       <Link
+                        aria-label={`go to services`}
                         href={`/products?service=${service.id}`}
                         className="
                           inline-flex items-center gap-1 

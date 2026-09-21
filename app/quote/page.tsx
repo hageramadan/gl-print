@@ -65,6 +65,7 @@ function QuoteContent() {
             <div className="lg:col-span-4">
               <div className="flex items-center gap-3 mb-5 lg:mb-10 border-b pb-5 border-[#E1E3E4]">
                 <button
+                aria-label={`go to ${t.quote}`}
                   onClick={() => setActiveTab('quick')}
                   className={`
                     px-6 py-3 cursor-pointer font-semibold text-primary transition-all duration-300
@@ -74,6 +75,7 @@ function QuoteContent() {
                   {t.quote?.quickInquiry || 'Quick Inquiry'}
                 </button>
                 <button
+                aria-label={`go to ${t.quote}`}
                   onClick={() => setActiveTab('full')}
                   className={`
                     px-6 py-3 cursor-pointer font-semibold transition-all duration-300

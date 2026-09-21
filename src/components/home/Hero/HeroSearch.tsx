@@ -41,6 +41,7 @@ export const HeroSearch = () => {
 
         <button
           type="submit"
+          aria-label={`search`}
           className="flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-primary-dark hover:shadow-xl shadow-lg shadow-primary/30 whitespace-nowrap flex-shrink-0"
         >
           <span className="inline">

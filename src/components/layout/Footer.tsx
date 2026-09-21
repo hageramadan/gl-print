@@ -95,7 +95,7 @@ export const Footer = ({ data }: FooterProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-10 lg:gap-12">
           {/* العمود الأول */}
           <div className="col-span-2">
-            <Link href="/" className="inline-block mb-4">
+            <Link href="/" className="inline-block mb-4" aria-label="go to home">
               <Image
                 src="/images/footer/footer-logo.png"
                 alt="GL Print"
@@ -128,6 +128,7 @@ export const Footer = ({ data }: FooterProps) => {
             <ul className="space-y-3">
               <li>
                 <Link
+                 aria-label="go to aboute"
                   href="/about"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -136,6 +137,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
+                 aria-label="go to services"
                   href="/services"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -144,6 +146,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
+                 aria-label="go to products"
                   href="/products"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -152,6 +155,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
+                 aria-label="go to industries"
                   href="/industries"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -169,6 +173,7 @@ export const Footer = ({ data }: FooterProps) => {
             <ul className="space-y-3">
               <li>
                 <Link
+                 aria-label="go to quote"
                   href="/quote"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -177,6 +182,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
+                 aria-label="go to faqs"
                   href="/faqs"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -185,6 +191,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
+                 aria-label="go to whatsapp"
                   href={socialLinks.whatsapp}
                   target="_blank"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
@@ -194,6 +201,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
+                 aria-label="go to contact"
                   href="/contact"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -224,6 +232,7 @@ export const Footer = ({ data }: FooterProps) => {
               />
               <button
                 type="submit"
+                aria-label={`sent`}
                 disabled={submitting}
                 className="absolute end-1 cursor-pointer top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed text-white p-2 rounded-full transition-all duration-300 hover:scale-105"
               >
@@ -239,6 +248,7 @@ export const Footer = ({ data }: FooterProps) => {
             <div className="flex items-center gap-3 py-4 lg:py-6">
               {socialLinks.tik_tok && (
                 <Link
+                 aria-label={`go to ${socialLinks.tik_tok}`}
                   href={socialLinks.tik_tok}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -249,6 +259,7 @@ export const Footer = ({ data }: FooterProps) => {
               )}
               {socialLinks.whatsapp && (
                 <Link
+                aria-label={`go to ${socialLinks.whatsapp}`}
                   href={socialLinks.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -259,6 +270,7 @@ export const Footer = ({ data }: FooterProps) => {
               )}
               {socialLinks.instagram && (
                 <Link
+                aria-label={`go to ${socialLinks.instagram}`}
                   href={socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -269,6 +281,7 @@ export const Footer = ({ data }: FooterProps) => {
               )}
               {socialLinks.linkedin && (
                 <Link
+                aria-label={`go to ${socialLinks.linkedin}`}
                   href={socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -279,6 +292,7 @@ export const Footer = ({ data }: FooterProps) => {
               )}
               {socialLinks.facebook && (
                 <Link
+                aria-label={`go to ${socialLinks.facebook}`}
                   href={socialLinks.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -293,6 +307,7 @@ export const Footer = ({ data }: FooterProps) => {
             <div className="flex items-center gap-3">
               {data.phone && (
                 <Link
+                aria-label={`go to ${data.phone}`}
                   href={`tel:${data.phone}`}
                   className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
                 >
@@ -307,6 +322,7 @@ export const Footer = ({ data }: FooterProps) => {
               )}
               {data.email && (
                 <Link
+                aria-label={`go to ${data.email}`}
                   href={`mailto:${data.email}`}
                   className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
                 >

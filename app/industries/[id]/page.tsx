@@ -242,6 +242,7 @@ export default function IndustryDetailsPage() {
               >
                 {allCategories.map((category, idx) => (
                   <button
+                  aria-label={`go to ${category.name}`}
                     key={idx}
                     data-measure
                     className="px-4 sm:px-5 py-3 rounded-xl text-sm sm:text-base font-semibold border-2 border-[#E6E8ED] whitespace-nowrap"
@@ -254,6 +255,7 @@ export default function IndustryDetailsPage() {
               {/* ✅ الفئات المرئية */}
               {visibleCategories.map((category) => (
                 <button
+                aria-label={`go to ${category.name}`}
                   key={category.id ?? 'all'}
                   onClick={() => handleCategoryChange(category.id)}
                   className={`
@@ -274,6 +276,7 @@ export default function IndustryDetailsPage() {
               {hasHiddenCategories && (
                 <div className="relative" ref={dropdownRef}>
                   <button
+                  aria-label={`go to more categories`}
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className={`
                       flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold
@@ -299,6 +302,7 @@ export default function IndustryDetailsPage() {
                     <div className="absolute top-full -start-[1rem] lg:start-0 mt-2 bg-white rounded-xl shadow-2xl min-w-[150px] max-h-[300px] overflow-y-auto z-30 border border-gray-100 py-1">
                       {hiddenCategories.map((category) => (
                         <button
+                        aria-label={`go to ${category.name}`}
                           key={category.id ?? 'all'}
                           onClick={() => handleCategoryChange(category.id)}
                           className={`
@@ -331,6 +335,7 @@ export default function IndustryDetailsPage() {
                     key={product.id}
                     href={`/quote?product=${product.id}`}
                     className="block group"
+                     aria-label='go get a quote'
                   >
                     <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                       <div className="relative w-full h-45 md:h-64 lg:h-72">

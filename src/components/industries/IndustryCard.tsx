@@ -39,7 +39,7 @@ export const IndustryCard = ({ industry, delay = 0 }: IndustryCardProps) => {
   }, []);
 
   return (
-    <Link href={`/industries/${industry.slug}`} className="block group">
+    <Link href={`/industries/${industry.slug}`} className="block group"   aria-label={`go to ${industry.slug}`}>
       <div
         ref={cardRef}
         className={`

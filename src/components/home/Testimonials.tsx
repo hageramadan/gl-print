@@ -45,13 +45,13 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
 
         <div className="relative">
           <div className="absolute -left-4 lg:-left-16 top-1/2 -translate-y-1/2 z-20 block">
-            <button className="swiper-button-prev-custom w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-primary group border border-gray-200">
+            <button aria-label={`go to pre`} className="swiper-button-prev-custom w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-primary group border border-gray-200">
               <FiChevronLeft className="text-2xl text-primary group-hover:text-white transition-colors" />
             </button>
           </div>
 
           <div className="absolute -right-4 lg:-right-16 top-1/2 -translate-y-1/2 z-20 block">
-            <button className="swiper-button-next-custom w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-primary group border border-gray-200">
+            <button aria-label={`go to next`} className="swiper-button-next-custom w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-primary group border border-gray-200">
               <FiChevronRight className="text-2xl text-primary group-hover:text-white transition-colors" />
             </button>
           </div>

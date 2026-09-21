@@ -68,6 +68,7 @@ export const PageBanner = ({
                   <span className="text-white font-medium line-clamp-1">{crumb.label}</span>
                 ) : (
                   <Link
+                  aria-label={`go to ${crumb.href}`}
                     href={crumb.href}
                     className="hover:text-white transition-colors duration-300 text-sm lg:text-base"
                   >

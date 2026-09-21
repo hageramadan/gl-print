@@ -26,6 +26,7 @@ export const FAQItem = ({ faq }: FAQItemProps) => {
       `}
     >
       <button
+      aria-label={`go to faq`}
         onClick={() => setIsOpen(!isOpen)}
         className={`
           w-full flex items-center justify-between gap-4 px-4 py-3 md:px-5 md:py-3 text-start cursor-pointer

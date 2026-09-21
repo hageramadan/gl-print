@@ -46,6 +46,7 @@ export default function NotFound() {
             {/* ===== الأزرار ===== */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link
+              aria-label='go to home'
                 href="/"
                 className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary-dark text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
@@ -54,6 +55,7 @@ export default function NotFound() {
               </Link>
               
               <Link
+               aria-label='go to services'
                 href="/services"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
@@ -65,11 +67,11 @@ export default function NotFound() {
             {/* ===== روابط مساعدة ===== */}
             <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-sm text-gray-500">
               <span>Quick Links:</span>
-              <Link href="/about" className="hover:text-secondary transition-colors">About</Link>
+              <Link   aria-label='go to about' href="/about" className="hover:text-secondary transition-colors">About</Link>
               <span className="text-gray-300">|</span>
-              <Link href="/contact" className="hover:text-secondary transition-colors">Contact</Link>
+              <Link   aria-label='go to contact' href="/contact" className="hover:text-secondary transition-colors">Contact</Link>
               <span className="text-gray-300">|</span>
-              <Link href="/blog" className="hover:text-secondary transition-colors">Blog</Link>
+              <Link   aria-label='go to blogs' href="/blog" className="hover:text-secondary transition-colors">Blog</Link>
             </div>
           </div>
         </div>

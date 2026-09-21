@@ -169,7 +169,7 @@ function SearchContent() {
                      <h3 className="text-xl md:text-2xl font-bold text-[#171A21] mb-6">
                     {t.search?.services || "Services"}
                   </h3>
-                  <Link href="/services" className="text-secondary font-bold ">{t.services2.viewAll}</Link>
+                  <Link  aria-label='go to services' href="/services" className="text-secondary font-bold ">{t.services2.viewAll}</Link>
                  </div>
                   <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
                     {services.map((service) => (
@@ -186,7 +186,7 @@ function SearchContent() {
                      <h3 className="text-xl md:text-2xl font-bold text-[#171A21] mb-6">
                     {t.search?.products || "Products"}
                   </h3>
-                  <Link href="/products" className="text-secondary font-bold ">{t.products.viewAll2}</Link>
+                  <Link  aria-label='go to products' href="/products" className="text-secondary font-bold ">{t.products.viewAll2}</Link>
                  </div>
                   <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
                     {products.map((product, index) => (

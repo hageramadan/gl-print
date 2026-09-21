@@ -30,6 +30,7 @@ export const ProductCTA = () => {
 
           {/* ===== الزر ===== */}
           <Link
+          aria-label={`go to quote`}
             href="/quote"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl whitespace-nowrap"
           >

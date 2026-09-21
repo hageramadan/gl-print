@@ -24,28 +24,65 @@ const almarai = Almarai({
   variable: "--font-almarai",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Gl-Print - Printing Excellence",
-    template: "%s | PrintCo",
-  },
-  description:
-    "We bring your ideas to life with high-quality printing solutions",
-  keywords: [
-    "printing",
-    "digital printing",
-    "offset printing",
-    "printing company",
-  ],
-  authors: [{ name: "PrintCo" }],
-  icons: {
-    icon: "/logo1.png",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+// ✅ جلب الـ Metadata من API
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const homeData = await getHomeData("en");
+    const seo = homeData.seo;
+
+    return {
+      title: seo?.meta_title || "GL Print - Printing Excellence",
+      description: seo?.meta_description || "",
+      keywords: seo?.focus_words || [],
+      authors: [{ name: "GL Print" }],
+      metadataBase: seo?.canonical_url
+        ? new URL(seo.canonical_url)
+        : undefined,
+      alternates: {
+        canonical: seo?.canonical_url || undefined,
+      },
+      openGraph: {
+        title: seo?.meta_title || "GL Print - Printing Excellence",
+        description: seo?.meta_description || "",
+        url: seo?.canonical_url || undefined,
+        siteName: "GL Print",
+        type: "website",
+        locale: "en_US",
+        images: seo?.image_alt
+          ? [{ url: seo.image_alt, alt: seo.h1_tag || "GL Print" }]
+          : undefined,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seo?.meta_title || "GL Print - Printing Excellence",
+        description: seo?.meta_description || "",
+      },
+      icons: {
+        icon: "/logo1.png",
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+    };
+  } catch (error) {
+    console.error("Failed to fetch metadata:", error);
+
+    // ✅ Fallback
+    return {
+      title: "GL Print - Printing Excellence",
+      description:
+        "We bring your ideas to life with high-quality printing solutions",
+      icons: {
+        icon: "/logo1.png",
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+    };
+  }
+}
 
 export default async function RootLayout({
   children,
@@ -74,21 +111,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${almarai.variable} antialiased`}
       >
-        <Toaster
-          position="top-center"
-          // toastOptions={{
-          //   style: {
-          //     background: "#1F3161",
-          //     color: "#fff",
-          //   },
-          //   success: {
-          //     style: { background: "#1F3161" },
-          //   },
-          //   error: {
-          //     style: { background: "#C62127" },
-          //   },
-          // }}
-        />
+        <Toaster position="top-center" />
         <LanguageProvider>
           <div className="flex flex-col min-h-screen">
             <Header
@@ -97,7 +120,6 @@ export default async function RootLayout({
             />
             <main className="grow">{children}</main>
             <Footer data={footerData} />
-            {/* ===== زر واتساب الثابت ===== */}
             <WhatsAppButton
               phoneNumber="201234567890"
               message="Hello! I would like to inquire about your printing services."

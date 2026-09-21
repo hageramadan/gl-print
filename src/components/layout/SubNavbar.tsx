@@ -117,6 +117,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
 
           <div className="flex items-center gap-1 lg:gap-1 flex-wrap">
             <Link
+            aria-label={`go to faqs`}
               href="/faqs"
               className="flex items-center gap-2 hover:text-white transition-colors"
             >
@@ -126,6 +127,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
 
             <div className="relative cursor-pointer" ref={dropdownRef}>
               <button
+              aria-label={`select language`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center gap-2 px-1 lg:px-1.5 py-1 rounded transition-colors text-white"
               >
@@ -138,6 +140,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
               {isDropdownOpen && (
                 <div className="absolute top-full end-0 mt-2 bg-white text-gray-800 rounded-lg shadow-2xl min-w-40 overflow-hidden z-50 border border-gray-200">
                   <button
+                  aria-label={`select english `}
                     onClick={() => handleLanguageSelect("en")}
                     className={`
                       w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center justify-between
@@ -149,6 +152,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                   </button>
                   <div className="border-t border-gray-100"></div>
                   <button
+                  aria-label={`select arabic language`}
                     onClick={() => handleLanguageSelect("ar")}
                     className={`
                       w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center justify-between
@@ -167,6 +171,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
             <div className="hidden lg:flex items-center gap-3 my-2 lg:my-3">
               <Link
                 href={links.tik_tok}
+                aria-label={`go to ${links.tik_tok}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 hover:scale-110"
@@ -174,6 +179,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                 <SiTiktok className="text-white w-4 h-4" />
               </Link>
               <Link
+              aria-label={`go to ${links.whatsapp}`}
                 href={links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -182,6 +188,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                 <IoLogoWhatsapp className="text-white w-4 h-4" />
               </Link>
               <Link
+              aria-label={`go to ${links.instagram}`}
                 href={links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -191,6 +198,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
               </Link>
               <Link
                 href={links.linkedin}
+                aria-label={`go to ${links.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 hover:scale-110"
@@ -199,6 +207,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
               </Link>
               <Link
                 href={links.facebook}
+                aria-label={`go to ${links.facebook}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 hover:scale-110"

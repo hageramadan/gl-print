@@ -19,6 +19,7 @@ export const SearchServiceCard = ({ service }: SearchServiceCardProps) => {
 
   return (
     <Link
+    aria-label={`go to services`}
       href={`/products?service=${service.id}`}
       className="group bg-white rounded-2xl p-5 md:p-6 border border-[#E6E8ED] hover:border-primary/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col"
     >

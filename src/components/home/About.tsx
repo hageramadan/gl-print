@@ -234,6 +234,7 @@ export const About = ({ data }: AboutProps) => {
 
               {/* ===== زر Get a Quote ===== */}
               <Link
+              aria-label={`go to ${data.button.action_type}`}
                 href={data?.button?.action_type === 'request_quote' ? '/quote' : '/quote'}
                 className={`
                   w-fit text-sm md:text-[14.5px] font-bold flex items-center gap-2 

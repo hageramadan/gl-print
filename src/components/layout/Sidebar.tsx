@@ -118,7 +118,7 @@ export const Sidebar = ({ isOpen, onClose, contactInfo, socialLinks }: SidebarPr
         }}
       >
         <div className="flex items-center justify-between p-6">
-          <Link href="/" onClick={onClose}>
+          <Link href="/" onClick={onClose} aria-label={`go to home`}>
             <Image
               src="/logo1.png"
               alt="Logo"

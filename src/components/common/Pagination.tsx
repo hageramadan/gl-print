@@ -51,6 +51,7 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
     <div className="flex items-center justify-center gap-2 mt-8">
       {/* ===== زر السابق ===== */}
       <button
+      aria-label={`go to pre`}
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={`
@@ -81,6 +82,7 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
           
           return (
             <button
+            aria-label={`go to page`}
               key={page}
               onClick={() => onPageChange(page as number)}
               className={`
@@ -100,6 +102,7 @@ export const Pagination = ({ currentPage, lastPage, onPageChange }: PaginationPr
 
       {/* ===== زر التالي ===== */}
       <button
+      aria-label={`go to next`}
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === lastPage}
         className={`

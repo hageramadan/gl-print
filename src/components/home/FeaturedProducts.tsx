@@ -56,6 +56,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
             </h2>
           </div>
           <Link
+           aria-label={`go to products`}
             href="/products"
             className="inline-flex text-lg items-center gap-2 text-secondary/90 font-bold hover:text-secondary transition-colors mt-3 sm:mt-0 group"
           >
@@ -95,7 +96,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Link href={product.link} className="block group">
+    <Link href={product.link} className="block group"  aria-label={`go to ${product.link}`}>
       <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full">
         <div className="relative w-full h-48 sm:h-56 md:h-62.5 lg:h-70 xl:h-100">
           <Image

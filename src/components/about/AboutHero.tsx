@@ -67,6 +67,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                 {data?.description || 'GL Print (Cairo, Egypt) offers full-service design, printing, and outdoor advertising solutions, using advanced technologies to deliver high-quality prints that help businesses stand out and succeed.'}
               </p>
             <Link
+             aria-label='go to quote'
               href={data.button.action_type === 'request_quote' ? '/quote' : '/'}
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary-dark text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >

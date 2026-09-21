@@ -94,8 +94,20 @@ export interface FooterData {
     tik_tok: string;
   };
 }
+export interface SEO {
+  slug: string;
+  canonical_url: string;
+  meta_title: string;
+  meta_description: string;
+  h1_tag: string;
+  image_alt: string;
+  focus_words: string[];
+  h2_tags: string[];
+  h3_tags: string[];
+}
 
 export interface HomeData {
+   seo?: SEO; 
   hero_section: HeroSection;
   counters: Counter[];
   about_section: AboutSection;

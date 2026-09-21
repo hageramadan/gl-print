@@ -192,7 +192,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16 lg:h-20">
-            <Link href="/">
+            <Link href="/" aria-label={`go to home`}>
               <Image
                 src="/logo2.png"
                 alt="Logo"
@@ -217,6 +217,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                   >
                     <Link
                       href={item.href}
+                      aria-label={`go to ${item.href}`}
                       className={`
                         font-medium transition-colors relative flex items-center gap-1 py-2
                         ${isActive ? "text-black" : "hover:text-secondary"}
@@ -265,6 +266,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                   onMouseLeave={handleSubMouseLeave}
                                 >
                                   <Link
+                                  aria-label={`go to /products?service ${service.id}`}
                                     href={`/products?service=${service.id}`}
                                     className={`
                                       flex items-center justify-between px-4 py-2.5 transition-colors
@@ -299,6 +301,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               <Link
                                 key={product.id}
                                 href={`/products/${product.slug}`}
+                                 aria-label={`go to ${product.slug}`}
                                 className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
                               >
                                 {product.name}
@@ -320,6 +323,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               <Link
                                 key={industry.id}
                                 href={`/industries/${industry.slug}`}
+                                aria-label={`go to ${industry.slug}`}
                                 className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
                               >
                                 {industry.name}
@@ -344,6 +348,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
 
               <Link
                 href="/quote"
+                aria-label={`go to quote`}
                 className="hidden lg:block bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-6 py-2 text-white rounded-xl transition-all duration-300 font-medium hover:-translate-y-1 hover:shadow-xl"
               >
                 {t.nav.quote || "Get a Quote"}
@@ -377,6 +382,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                       >
                         <Link
                           href={item.href}
+                          aria-label={`go to ${item.href}`}
                           className="flex-1"
                           onClick={() => setIsOpen(false)}
                         >
@@ -390,6 +396,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               toggleMobileSub(item.key);
                             }}
                             className="p-1 hover:bg-gray-200 rounded transition-colors"
+                            aria-label={` down arrow`}
                           >
                             <FiChevronDown
                               className={`text-sm transition-transform duration-300 ${isSubOpen ? "rotate-180" : ""}`}
@@ -419,6 +426,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                     <div className="flex items-center justify-between py-2 px-4">
                                       <Link
                                         href={`/products?service=${service.id}`}
+                                        aria-label={`go to ${service.id}`}
                                         className="flex-1 text-sm hover:text-black transition-colors"
                                         onClick={() => setIsOpen(false)}
                                       >
@@ -426,6 +434,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                       </Link>
                                       {hasProducts && (
                                         <button
+                                        aria-label={`show services`}
                                           onClick={(e) => {
                                             e.stopPropagation();
                                             toggleMobileSubSub(
@@ -447,6 +456,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                           <Link
                                             key={product.id}
                                             href={`/products/${product.slug}`}
+                                            aria-label={`go to ${product.slug}`}
                                             className="block py-2 px-4 text-xs hover:bg-gray-100 rounded transition-colors hover:text-black"
                                             onClick={() => setIsOpen(false)}
                                           >
@@ -470,6 +480,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                 <Link
                                   key={product.id}
                                   href={`/products/${product.slug}`}
+                                  aria-label={`go to ${product.slug}`}
                                   className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
                                   onClick={() => setIsOpen(false)}
                                 >
@@ -488,6 +499,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                 <Link
                                   key={industry.id}
                                   href={`/industries/${industry.slug}`}
+                                  aria-label={`go to ${industry.slug}`}
                                   className="block py-2 px-4 text-sm hover:bg-gray-100 rounded transition-colors hover:text-black"
                                   onClick={() => setIsOpen(false)}
                                 >
@@ -502,6 +514,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                 })}
                 <Link
                   href="/quote"
+                  aria-label={`go to quote`}
                   className="bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-4 py-2 rounded-xl transition-all duration-300 font-medium text-center mt-2 text-white hover:-translate-y-1 hover:shadow-xl"
                   onClick={() => setIsOpen(false)}
                 >
@@ -527,6 +540,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
             <Link
               key={product.id}
               href={`/products/${product.slug}`}
+              aria-label={`go to ${product.slug}`}
               className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black text-sm whitespace-nowrap"
             >
               {product.name}

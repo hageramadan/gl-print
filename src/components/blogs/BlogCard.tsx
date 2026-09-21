@@ -65,7 +65,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
       }}
     >
       {/* ===== الصورة ===== */}
-      <Link href={blogUrl} className="block">
+      <Link  aria-label={`go to ${blog.slug}`} href={blogUrl} className="block">
         <div className="relative w-full h-32 md:h-60 rounded-xl overflow-hidden bg-gray-100">
           <Image
             src={imageSrc}
@@ -88,7 +88,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
         </div>
 
         {/* العنوان */}
-        <Link href={`/blogs/${blog.slug}`}>
+        <Link href={`/blogs/${blog.slug}`} aria-label={`go to ${blog.slug}`} >
           <h3 className="text-xs md:text-lg font-semibold text-[#191C1F] mb-1 lg:mb-3 line-clamp-2 group-hover:text-primary transition-colors">
             {blog.title}
           </h3>
@@ -101,6 +101,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
 
         {/* اقرأ المزيد */}
         <Link
+        aria-label={`go to ${blog.slug}`}
           href={`/blogs/${blog.slug}`}
           className="inline-flex items-center border px-2 lg:px-3 py-1 lg:py-2 w-fit rounded-lg capitalize gap-2 text-primary font-semibold text-[10px] md:text-base hover:text-secondary transition-colors group-hover:gap-3 duration-300"
         >

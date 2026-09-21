@@ -117,7 +117,7 @@ export const Services = ({ data }: ServicesProps) => {
         >
           {servicesData.map((service) => (
             <SwiperSlide key={service.id}>
-              <Link href={`/products?service=${service.id}`} className="block group">
+              <Link href={`/products?service=${service.id}`} className="block group"  aria-label={`go to service`}>
                 <div className="relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                   {/* ===== الصورة ===== */}
                   <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]">
@@ -160,6 +160,7 @@ export const Services = ({ data }: ServicesProps) => {
         {/* ===== زر View All Services ===== */}
         <div className="text-center mt-8 md:mt-10">
           <Link
+           aria-label={`go to services`}
             href="/services"
             className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-8 md:px-10 py-3 md:py-4 rounded-2xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >

@@ -202,6 +202,7 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
           const isActive = pathname === item.href;
           return (
             <Link
+            aria-label={`go to ${item.href}`}
               key={item.key}
               href={item.href}
               className={`

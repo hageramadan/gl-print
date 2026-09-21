@@ -104,11 +104,12 @@ export const SocialShare = ({ socialLinks }: SocialShareProps) => {
     <div className="flex items-center flex-wrap gap-2">
       {activeSocials.map(({ key, Icon, href, label, bg }) => (
         <Link
+        
           key={key}
           href={href as string}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={label}
+         aria-label={`go to ${label}`}
           className={`
             bg-[#44537B]
             w-10 h-10 rounded-full flex items-center justify-center

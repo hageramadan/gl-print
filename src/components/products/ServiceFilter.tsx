@@ -125,6 +125,7 @@ export const ServiceFilter = ({
             <button
               key={idx}
               data-measure
+              aria-label={`go to ${service.title}`}
               className="px-4 py-2 rounded-xl text-sm sm:text-base lg:text-[18px] font-medium border border-[#D2D6DF] whitespace-nowrap"
             >
               {service.title}
@@ -137,6 +138,7 @@ export const ServiceFilter = ({
           <button
             key={service.id ?? "all"}
             onClick={() => handleServiceSelect(service.id)}
+            aria-label={`go to ${service.title}`}
             className={`
               px-3 sm:px-4 py-2 rounded-xl text-sm cursor-pointer font-medium transition-all duration-300 border border-[#D2D6DF] whitespace-nowrap
               ${
@@ -154,6 +156,7 @@ export const ServiceFilter = ({
         {hasHiddenServices && (
           <div className="relative" ref={dropdownRef}>
             <button
+            aria-label={`show more`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className={`
                 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 border border-[#D2D6DF] whitespace-nowrap

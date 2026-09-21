@@ -88,6 +88,7 @@ export const ServiceCard = ({
 
       {/* ===== رابط Learn More ===== */}
       <Link
+      aria-label={`go to ${link}`}
         href={link}
         className="
           inline-flex items-center gap-2 

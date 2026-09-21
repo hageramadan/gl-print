@@ -71,6 +71,7 @@ export const Select = ({
           }
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         `}
+        aria-label={`go to ${selectedOption?.label}`}
       >
         <span
           className={`text-sm md:text-base truncate ${
@@ -98,6 +99,7 @@ export const Select = ({
               const isSelected = option.value === value;
               return (
                 <button
+                aria-label={`go to ${option.label}`}
                   key={option.value}
                   type="button"
                   onClick={() => handleSelect(option.value)}
