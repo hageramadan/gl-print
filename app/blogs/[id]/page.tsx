@@ -14,7 +14,7 @@ export default function BlogDetailsPage() {
   const params = useParams();
 
   const { language, t } = useLanguage();
- const blogSlug = params.id as string;
+  const blogSlug = params.id as string;
   const [blog, setBlog] = useState<BlogDetails | null>(null);
   const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>([]);
   const [socialLinks, setSocialLinks] = useState<any>(null);
@@ -47,7 +47,7 @@ export default function BlogDetailsPage() {
     }
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     if (blogSlug) {
       fetchBlogData(blogSlug, language);
       fetchSocialLinks(language);
@@ -62,8 +62,8 @@ export default function BlogDetailsPage() {
   //   );
   // }
   if (loading) {
-  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
-}
+    return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+  }
 
   if (error || !blog) {
     return (
@@ -94,18 +94,13 @@ export default function BlogDetailsPage() {
       <section className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div>
-              <div className="mb-3 lg:mb-8">
-             
+            <div className="mb-3 lg:mb-8">
               <SocialShare socialLinks={socialLinks} />
             </div>
-            <h1 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6">
+            {/* <h1 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6">
               {blog.title}
-            </h1>
-
-            
-          
-
-            <div
+            </h1> */}
+            {/* <div
               className="prose prose-lg max-w-none text-[#667085] leading-relaxed
                 prose-headings:text-primary prose-headings:font-bold
                 prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
@@ -114,8 +109,20 @@ export default function BlogDetailsPage() {
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
                 prose-ul:my-4 prose-li:my-1"
-              dangerouslySetInnerHTML={{ __html: blog.content }}
-            />
+              dangerouslySetInnerHTML={{ __html: blog.title }}
+            /> */}
+
+            <div
+              className="blog-content prose prose-lg max-w-none text-[#667085] leading-relaxed
+              prose-headings:text-primary prose-headings:font-bold
+              prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+              prose-p:mb-4 prose-p:leading-relaxed
+              prose-strong:text-primary
+              prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+              prose-ul:my-4 prose-li:my-1"
+                        dangerouslySetInnerHTML={{ __html: blog.content }}
+                      />
           </div>
         </div>
       </section>

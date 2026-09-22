@@ -8,6 +8,7 @@ html.lang-ar * {
   font-family: var(--font-almarai), var(--font-montserrat), sans-serif !important;
 }
 
+
 /* ===== الخط للغة الإنجليزية ===== */
 html.lang-en body,
 html.lang-en * {
@@ -600,4 +601,37 @@ html[dir="rtl"] .text-right {
 /* ===== تأثير hover للبطاقات ===== */
 .hover\:shadow-3xl:hover {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+/* ===== تنسيق الصور في محتوى المدونة ===== */
+.blog-content img {
+  width: 48%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin: 0.5rem 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* ✅ الصور جنب بعض */
+.blog-content p:has(img) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  align-items: flex-start;
+}
+
+/* ✅ في الموبايل: صورة واحدة في كل صف */
+@media (max-width: 640px) {
+  .blog-content img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+  }
+
+  .blog-content p:has(img) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }

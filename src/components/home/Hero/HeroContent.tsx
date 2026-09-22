@@ -59,19 +59,45 @@ export const HeroContent = ({ data }: HeroContentProps) => {
         <h2 className="text-[10px] sm:text-[12.5px] font-bold mb-2 flex items-center gap-2">
           <div className="h-0.5 w-4 sm:w-5 bg-secondary"></div>
           <span className="text-secondary">{data.tagline || 'GL'}</span>
-          <span className="text-primary">PRINT</span>
+          {/* <span className="text-primary">PRINT</span> */}
         </h2>
-        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px] w-full lg:max-w-xl font-extrabold  text-[#090E1B]">
+        {/* <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px] w-full lg:max-w-xl font-extrabold  text-[#090E1B]">
           {titleLines[0]}
           <br />
           <span className="text-secondary">{titleLines[1] || ''}</span>
-        </h1>
+        </h1> */}
+         <div
+              className="prose prose-lg max-w-none text-black leading-relaxed
+                prose-headings:text-primary prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+                prose-p:font-bold prose-p:text-4xl 
+                prose-strong:text-primary
+                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+                prose-ul:my-4 prose-li:my-1"
+              dangerouslySetInnerHTML={{ __html:data.title }}
+            />
+
+        
       </div>
 
       {/* ===== الوصف ===== */}
-      <p className="text-sm sm:text-base md:text-lg text-[#3E3F42] mb-6 sm:mb-8 max-w-xl font-medium">
+      {/* <p className="text-sm sm:text-base md:text-lg text-[#3E3F42] mb-6 sm:mb-8 max-w-xl font-medium">
         {data.description}
-      </p>
+      </p> */}
+        <div
+              className="prose prose-lg max-w-none text-[#3E3F42] leading-relaxed
+                prose-headings:text-primary prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+                 prose-p:text-lg
+                 prose-p:mb-4
+                 prose-p:font-medium 
+                prose-strong:text-primary
+                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+                prose-ul:my-4 prose-li:my-1"
+              dangerouslySetInnerHTML={{ __html:data.description }}
+            />
 
       {/* ===== الأزرار ===== */}
       <div className="flex gap-1 sm:gap-4 mb-3 md:mb-8">
@@ -85,7 +111,7 @@ export const HeroContent = ({ data }: HeroContentProps) => {
         </Link>
         <Link
           aria-label={`go to ${data.primary_button.action_type}`}
-          href={data.secondary_button.action_type === 'view_services' ? '/services' : '/'}
+          href={data.secondary_button.action_type === 'view_services' ? '/products' : '/'}
           className="text-[10px] sm:text-[14.5px] font-bold flex items-center gap-1 sm:gap-2 bg-primary text-white px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-white/30"
         >
           <span>{data.secondary_button.text}</span>
