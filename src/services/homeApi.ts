@@ -28,6 +28,7 @@ export interface AboutSection {
 
 export interface Service {
   id: number;
+  slug:string;
   title: string;
   description: string;
   icon: string;

@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 interface ServicesProps {
   data: Array<{
     id: number;
+    slug:string;
     title: string;
     description: string;
     icon: string;
@@ -36,32 +37,7 @@ export const Services = ({ data }: ServicesProps) => {
   const ArrowIcon = isArabic ? FiArrowLeft : FiArrowRight;
 
   // استخدام البيانات من API أو بيانات افتراضية إذا لم تكن موجودة
-  const servicesData = data && data.length > 0 ? data : [
-    {
-      id: 1,
-      title: "Printing Services",
-      description: "High-quality printing solutions tailored to your business needs.",
-      icon: "/images/services/service1.jpg",
-    },
-    {
-      id: 2,
-      title: "Graphic Design Services",
-      description: "Creative designs tailored to your brand and communication needs.",
-      icon: "/images/services/service2.png",
-    },
-    {
-      id: 3,
-      title: "Packaging Solutions",
-      description: "Custom boxes, bags, and product packaging engineered for your brand.",
-      icon: "/images/services/service3.jpg",
-    },
-    {
-      id: 4,
-      title: "Digital Printing",
-      description: "Fast and high-quality digital printing for all your needs.",
-      icon: "/images/services/service1.jpg",
-    },
-  ];
+  const servicesData = data 
 
   return (
     <section className="py-5 md:py-10 lg:py-20 overflow-hidden">
@@ -117,7 +93,7 @@ export const Services = ({ data }: ServicesProps) => {
         >
           {servicesData.map((service) => (
             <SwiperSlide key={service.id}>
-              <Link href={`/products?service=${service.id}`} className="block group"  aria-label={`go to service`}>
+              <Link href={`/services/${service.slug}`} className="block group"  aria-label={`go to service`}>
                 <div className="relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                   {/* ===== الصورة ===== */}
                   <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]">

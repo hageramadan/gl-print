@@ -74,7 +74,7 @@ export const ProductCard = ({ product, delay = 0 }: ProductCardProps) => {
               {product.name}
             </h3>
 
-            <div className="bg-secondary rounded-full p-2 sm:p-3 hover:scale-110 transition-transform duration-300 shadow-lg shadow-secondary/30 flex-shrink-0 ms-2">
+            <div className="bg-primary rounded-full p-2 sm:p-3 hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/30 flex-shrink-0 ms-2">
               <FiPlus className="text-white text-lg sm:text-2xl" />
             </div>
           </div>

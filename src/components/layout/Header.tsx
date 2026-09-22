@@ -2,14 +2,7 @@
 
 import { SubNavbar } from "./SubNavbar";
 import { Navbar } from "./Navbar";
-
-interface SocialLinks {
-  whatsapp: string;
-  facebook: string;
-  linkedin: string;
-  instagram: string;
-  tik_tok: string;
-}
+import { SocialLinks } from "@/src/services/contactApi";
 
 interface ContactInfo {
   phone: string;

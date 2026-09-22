@@ -8,6 +8,7 @@ export interface NavbarProduct {
 export interface NavbarService {
   id: number;
   title: string;
+  slug:string;
   products: NavbarProduct[];
 }
 

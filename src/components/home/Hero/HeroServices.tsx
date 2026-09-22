@@ -116,7 +116,7 @@ export const HeroServices = () => {
                   </p>
                   <Link
                     aria-label={`go to services`}
-                    href={`/products?service=${service.id}`}
+                    href={`/services/${service.slug}`}
                     className="
                       inline-flex items-center gap-1 
                       text-primary font-medium 
@@ -211,7 +211,7 @@ export const HeroServices = () => {
                       </p>
                       <Link
                         aria-label={`go to services`}
-                        href={`/products?service=${service.id}`}
+                        href={`/services/${service.slug}`}
                         className="
                           inline-flex items-center gap-1 
                           text-primary font-semibold text-xs

@@ -3,12 +3,9 @@
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
 import {
-  FaWhatsapp,
   FaFacebookF,
   FaLinkedinIn,
   FaInstagram,
-  FaTiktok,
-  FaTwitter,
   FaPinterestP,
 } from 'react-icons/fa';
 import { IconType } from 'react-icons';
@@ -49,12 +46,9 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
   };
 
   const links = {
-    whatsapp: socialLinks?.whatsapp,
     facebook: socialLinks?.facebook,
     linkedin: socialLinks?.linkedin,
     instagram: socialLinks?.instagram,
-    tik_tok: socialLinks?.tik_tok,
-    twitter: socialLinks?.twitter,
     pinterest: socialLinks?.pinterest,
   };
 
@@ -84,18 +78,34 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
     },
   ];
 
-  // ✅ كل السوشيال مع خلفية مميزة
+  // ✅ الترتيب المطلوب: Facebook → LinkedIn → Instagram → Pinterest
   const allSocials: SocialItem[] = [
-    { Icon: FaWhatsapp, href: links.whatsapp || '', label: 'WhatsApp', bg: 'bg-[#25D366]' },
-    { Icon: FaFacebookF, href: links.facebook || '', label: 'Facebook', bg: 'bg-[#1877F2]' },
-    { Icon: FaTwitter, href: links.twitter || '', label: 'Twitter', bg: 'bg-[#1DA1F2]' },
-    { Icon: FaLinkedinIn, href: links.linkedin || '', label: 'LinkedIn', bg: 'bg-[#0A66C2]' },
-    { Icon: FaInstagram, href: links.instagram || '', label: 'Instagram', bg: 'bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#4F5BD5]' },
-    { Icon: FaTiktok, href: links.tik_tok || '', label: 'TikTok', bg: 'bg-black' },
-    { Icon: FaPinterestP, href: links.pinterest || '', label: 'Pinterest', bg: 'bg-[#E60023]' },
+    {
+      Icon: FaFacebookF,
+      href: links.facebook || '',
+      label: 'Facebook',
+      bg: 'bg-[#1877F2]',
+    },
+    {
+      Icon: FaLinkedinIn,
+      href: links.linkedin || '',
+      label: 'LinkedIn',
+      bg: 'bg-[#0A66C2]',
+    },
+    {
+      Icon: FaInstagram,
+      href: links.instagram || '',
+      label: 'Instagram',
+      bg: 'bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#4F5BD5]',
+    },
+    {
+      Icon: FaPinterestP,
+      href: links.pinterest || '',
+      label: 'Pinterest',
+      bg: 'bg-[#E60023]',
+    },
   ];
 
-  // ✅ عرض السوشيال التي لها لينك فقط
   const socialMediaLinks = allSocials.filter(
     (s) => s.href && s.href.trim() !== ''
   );
@@ -141,7 +151,7 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
         ))}
       </div>
 
-      {/* ===== أيقونات السوشيال ميديا ===== */}
+      {/* ✅ السوشيال ميديا بالترتيب المطلوب */}
       {socialMediaLinks.length > 0 && (
         <div className="mt-8 pt-6">
           <div className="flex items-center justify-center gap-3 flex-wrap">

@@ -11,7 +11,7 @@ import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 export default function ServicesPage() {
   const { language, t } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
-    const [banner, setBanner] = useState<Banner | null>(null);
+  const [banner, setBanner] = useState<Banner | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -20,13 +20,14 @@ export default function ServicesPage() {
   const fetchServices = useCallback(async (page: number, lang: string) => {
     try {
       setLoading(true);
-      console.log('🔄 Fetching services with language:', lang, 'page:', page);
       const response = await getServices(page, lang);
       setServices(response.data.services);
-       setBanner(response.data.banner);
-      setCurrentPage(response.data.pagination.current_page);
-      setLastPage(response.data.pagination.last_page);
-      setTotal(response.data.pagination.total);
+      if (response.data.banner) setBanner(response.data.banner);
+      if (response.data.pagination) {
+        setCurrentPage(response.data.pagination.current_page);
+        setLastPage(response.data.pagination.last_page);
+        setTotal(response.data.pagination.total);
+      }
     } catch (error) {
       console.error('Failed to fetch services:', error);
     } finally {
@@ -43,16 +44,17 @@ export default function ServicesPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
- if (loading) {
-  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
-}
- const bannerTitle = banner?.title || t.servicesPage?.title || 'Services';
-  const bannerImage = banner?.image_url || '/images/banner/services-banner.png';
+  if (loading) {
+    return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+  }
+
+  const bannerTitle = banner?.title || t.servicesPage?.title || 'Services';
+  const bannerImage =
+    banner?.image_url || '/images/banner/services-banner.png';
 
   return (
-    
     <main>
-       <PageBanner 
+      <PageBanner
         title={bannerTitle}
         backgroundImage={bannerImage}
         breadcrumbs={[
@@ -64,12 +66,11 @@ export default function ServicesPage() {
       <section className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="mb-10 md:mb-14">
-            <div className="flex items-center  gap-3 mb-3">
+            <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-0.5 bg-secondary"></div>
               <span className="text-xs md:text-sm lg:text-base text-secondary uppercase tracking-wider font-bold">
                 {t.servicesPage?.tag || 'Our Services'}
               </span>
-              
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21]">
               {t.servicesPage?.subtitle || 'Everything Your Brand'}
@@ -78,25 +79,25 @@ export default function ServicesPage() {
                 {t.servicesPage?.subtitle2 || 'Needs In One Place.'}
               </span>
             </h2>
-            
           </div>
 
           {services.length > 0 ? (
             <>
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
                 {services.map((service, index) => (
-                  <ServiceCard 
+                  <ServiceCard
                     key={service.id}
                     icon={service.icon}
                     title={service.title}
                     description={service.description}
-                    link={`/products?service=${service.id}`}
+                    // ✅ استخدام slug في الرابط
+                    link={`/services/${service.slug}`}
                     delay={index * 0.1}
                   />
                 ))}
               </div>
 
-              <Pagination 
+              <Pagination
                 currentPage={currentPage}
                 lastPage={lastPage}
                 onPageChange={handlePageChange}

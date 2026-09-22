@@ -12,6 +12,7 @@ export interface SocialLinks {
   tik_tok?: string;
   twitter?: string;
   pinterest?: string;
+  
 }
 
 export interface ContactData {

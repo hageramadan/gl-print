@@ -20,14 +20,7 @@ import {
 } from "@/src/services/navbarApi";
 import { Sidebar } from "./Sidebar";
 
-interface SocialLinks {
-  whatsapp: string;
-  facebook: string;
-  linkedin: string;
-  instagram: string;
-  tik_tok: string;
-}
-
+import { SocialLinks } from "@/src/services/contactApi";
 interface ContactInfo {
   phone: string;
   email: string;
@@ -266,8 +259,8 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                   onMouseLeave={handleSubMouseLeave}
                                 >
                                   <Link
-                                  aria-label={`go to /products?service ${service.id}`}
-                                    href={`/products?service=${service.id}`}
+                                  aria-label={`go to ${service.slug}`}
+                                    href={`/services/${service.slug}`}
                                     className={`
                                       flex items-center justify-between px-4 py-2.5 transition-colors
                                       ${isSubOpen ? "bg-primary/5 text-primary" : "text-gray-700 hover:bg-gray-50 hover:text-black"}
@@ -425,8 +418,8 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                   <div key={service.id}>
                                     <div className="flex items-center justify-between py-2 px-4">
                                       <Link
-                                        href={`/products?service=${service.id}`}
-                                        aria-label={`go to ${service.id}`}
+                                        href={`/services/${service.slug}`}
+                                        aria-label={`go to ${service.slug}`}
                                         className="flex-1 text-sm hover:text-black transition-colors"
                                         onClick={() => setIsOpen(false)}
                                       >

@@ -8,6 +8,7 @@ import { useLanguage } from '@/src/hooks/useLanguage';
 interface SearchServiceCardProps {
   service: {
     id: number;
+    slug:string;
     title: string;
     description: string;
     icon: string;
@@ -20,7 +21,7 @@ export const SearchServiceCard = ({ service }: SearchServiceCardProps) => {
   return (
     <Link
     aria-label={`go to services`}
-      href={`/products?service=${service.id}`}
+      href={`/services/${service.slug}`}
       className="group bg-white rounded-2xl p-5 md:p-6 border border-[#E6E8ED] hover:border-primary/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col"
     >
       <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#ECF6FF] flex items-center justify-center mb-4">

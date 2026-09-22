@@ -14,12 +14,12 @@ interface ServiceCardProps {
   delay?: number;
 }
 
-export const ServiceCard = ({ 
-  icon, 
-  title, 
-  description, 
-  link, 
-  delay = 0 
+export const ServiceCard = ({
+  icon,
+  title,
+  description,
+  link,
+  delay = 0,
 }: ServiceCardProps) => {
   const { t, dir } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
@@ -60,12 +60,11 @@ export const ServiceCard = ({
         max-h-71 h-full
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
       `}
-      style={{ 
+      style={{
         transitionProperty: 'all',
         transitionDuration: '0.3s',
       }}
     >
-      {/* ===== الأيقونة ===== */}
       <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300">
         <Image
           src={icon}
@@ -76,19 +75,16 @@ export const ServiceCard = ({
         />
       </div>
 
-      {/* ===== العنوان ===== */}
       <h3 className="text-base md:text-lg font-bold text-[#070D14] mb-2 group-hover:text-white transition-colors">
         {title}
       </h3>
 
-      {/* ===== الوصف ===== */}
       <p className="text-xs md:text-base text-[#667085] font-medium group-hover:text-white leading-relaxed mb-2 lg:mb-4 flex-1 line-clamp-3">
         {description}
       </p>
 
-      {/* ===== رابط Learn More ===== */}
       <Link
-      aria-label={`go to ${link}`}
+        aria-label={`go to ${link}`}
         href={link}
         className="
           inline-flex items-center gap-2 
@@ -99,7 +95,7 @@ export const ServiceCard = ({
         "
       >
         <span>{t.services?.learnMore || 'Learn More'}</span>
-        <FiArrowRight 
+        <FiArrowRight
           className={`text-sm transition-transform duration-300 group-hover:translate-x-1 ${
             dir === 'rtl' ? 'rotate-180' : ''
           }`}

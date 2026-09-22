@@ -35,64 +35,36 @@ interface SocialItem {
 }
 
 export const SocialShare = ({ socialLinks }: SocialShareProps) => {
-  const socials: SocialItem[] = [
-    {
-      key: 'whatsapp',
-      Icon: FaWhatsapp,
-      href: socialLinks?.whatsapp,
-      label: 'WhatsApp',
-      bg: 'bg-[#25D366]',
-    },
-    {
-      key: 'facebook',
-      Icon: FaFacebookF,
-      href: socialLinks?.facebook,
-      label: 'Facebook',
-      bg: 'bg-[#1877F2]',
-    },
-    {
-      key: 'twitter',
-      Icon: FaTwitter,
-      href: socialLinks?.twitter,
-      label: 'Twitter',
-      bg: 'bg-[#1DA1F2]',
-    },
-    {
-      key: 'linkedin',
-      Icon: FaLinkedinIn,
-      href: socialLinks?.linkedin,
-      label: 'LinkedIn',
-      bg: 'bg-[#0A66C2]',
-    },
-    {
-      key: 'pinterest',
-      Icon: FaPinterestP,
-      href: socialLinks?.pinterest,
-      label: 'Pinterest',
-      bg: 'bg-[#E60023]',
-    },
-    {
-      key: 'instagram',
-      Icon: FaInstagram,
-      href: socialLinks?.instagram,
-      label: 'Instagram',
-      bg: 'bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#4F5BD5]',
-    },
-    {
-      key: 'tik_tok',
-      Icon: FaTiktok,
-      href: socialLinks?.tik_tok,
-      label: 'TikTok',
-      bg: 'bg-black',
-    },
-    {
-      key: 'website',
-      Icon: FaGlobe,
-      href: socialLinks?.website,
-      label: 'Website',
-      bg: 'bg-gray-700',
-    },
-  ];
+ const socials: SocialItem[] = [
+  {
+    key: 'facebook',
+    Icon: FaFacebookF,
+    href: socialLinks?.facebook,
+    label: 'Facebook',
+    bg: 'bg-[#1877F2]',
+  },
+  {
+    key: 'linkedin',
+    Icon: FaLinkedinIn,
+    href: socialLinks?.linkedin,
+    label: 'LinkedIn',
+    bg: 'bg-[#0A66C2]',
+  },
+  {
+    key: 'instagram',
+    Icon: FaInstagram,
+    href: socialLinks?.instagram,
+    label: 'Instagram',
+    bg: 'bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#4F5BD5]',
+  },
+  {
+    key: 'pinterest',
+    Icon: FaPinterestP,
+    href: socialLinks?.pinterest,
+    label: 'Pinterest',
+    bg: 'bg-[#E60023]',
+  },
+];
 
   const activeSocials = socials.filter(
     (s) => s.href && s.href.trim() !== '' && s.href !== '#'

@@ -8,7 +8,7 @@ import { FiInstagram } from "react-icons/fi";
 import { BiSend } from "react-icons/bi";
 import { SiTiktok } from "react-icons/si";
 import { IoLogoWhatsapp } from "react-icons/io";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { subscribeEmail } from "@/src/services/emailApi";
 import toast from "react-hot-toast";
@@ -24,6 +24,7 @@ interface FooterData {
     linkedin: string;
     instagram: string;
     tik_tok: string;
+     pinterest?: string;
   };
 }
 
@@ -52,7 +53,9 @@ export const Footer = ({ data }: FooterProps) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmedEmail)) {
       toast.error(
-        isArabic ? "الرجاء إدخال بريد إلكتروني صحيح" : "Please enter a valid email"
+        isArabic
+          ? "الرجاء إدخال بريد إلكتروني صحيح"
+          : "Please enter a valid email",
       );
       return;
     }
@@ -63,7 +66,7 @@ export const Footer = ({ data }: FooterProps) => {
       if (response.result) {
         toast.success(
           response.message ||
-            (isArabic ? "تم الاشتراك بنجاح!" : "Subscribed successfully!")
+            (isArabic ? "تم الاشتراك بنجاح!" : "Subscribed successfully!"),
         );
         setEmail("");
       }
@@ -72,7 +75,7 @@ export const Footer = ({ data }: FooterProps) => {
         error.message ||
           (isArabic
             ? "فشل الاشتراك. حاول مرة أخرى."
-            : "Failed to subscribe. Please try again.")
+            : "Failed to subscribe. Please try again."),
       );
     } finally {
       setSubmitting(false);
@@ -95,7 +98,11 @@ export const Footer = ({ data }: FooterProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-10 lg:gap-12">
           {/* العمود الأول */}
           <div className="col-span-2">
-            <Link href="/" className="inline-block mb-4" aria-label="go to home">
+            <Link
+              href="/"
+              className="inline-block mb-4"
+              aria-label="go to home"
+            >
               <Image
                 src="/images/footer/footer-logo.png"
                 alt="GL Print"
@@ -128,7 +135,7 @@ export const Footer = ({ data }: FooterProps) => {
             <ul className="space-y-3">
               <li>
                 <Link
-                 aria-label="go to aboute"
+                  aria-label="go to aboute"
                   href="/about"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -137,7 +144,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
-                 aria-label="go to services"
+                  aria-label="go to services"
                   href="/services"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -146,7 +153,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
-                 aria-label="go to products"
+                  aria-label="go to products"
                   href="/products"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -155,7 +162,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
-                 aria-label="go to industries"
+                  aria-label="go to industries"
                   href="/industries"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -173,7 +180,7 @@ export const Footer = ({ data }: FooterProps) => {
             <ul className="space-y-3">
               <li>
                 <Link
-                 aria-label="go to quote"
+                  aria-label="go to quote"
                   href="/quote"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -182,7 +189,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
-                 aria-label="go to faqs"
+                  aria-label="go to faqs"
                   href="/faqs"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -191,7 +198,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
-                 aria-label="go to whatsapp"
+                  aria-label="go to whatsapp"
                   href={socialLinks.whatsapp}
                   target="_blank"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
@@ -201,7 +208,7 @@ export const Footer = ({ data }: FooterProps) => {
               </li>
               <li>
                 <Link
-                 aria-label="go to contact"
+                  aria-label="go to contact"
                   href="/contact"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
@@ -244,61 +251,50 @@ export const Footer = ({ data }: FooterProps) => {
               </button>
             </form>
 
-            {/* ✅ السوشيال من API */}
+            {/* ✅ السوشيال بالترتيب: Facebook → LinkedIn → Instagram → Pinterest */}
             <div className="flex items-center gap-3 py-4 lg:py-6">
-              {socialLinks.tik_tok && (
+              {socialLinks.facebook && (
                 <Link
-                 aria-label={`go to ${socialLinks.tik_tok}`}
-                  href={socialLinks.tik_tok}
+                  href={socialLinks.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Facebook"
                   className="transition-all duration-300 hover:scale-110"
                 >
-                  <SiTiktok className="text-white w-4 h-4" />
-                </Link>
-              )}
-              {socialLinks.whatsapp && (
-                <Link
-                aria-label={`go to ${socialLinks.whatsapp}`}
-                  href={socialLinks.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all duration-300 hover:scale-110"
-                >
-                  <IoLogoWhatsapp className="text-white w-4 h-4" />
-                </Link>
-              )}
-              {socialLinks.instagram && (
-                <Link
-                aria-label={`go to ${socialLinks.instagram}`}
-                  href={socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all duration-300 hover:scale-110"
-                >
-                  <FiInstagram className="text-white w-4 h-4" />
+                  <FaFacebook className="text-white w-4 h-4" />
                 </Link>
               )}
               {socialLinks.linkedin && (
                 <Link
-                aria-label={`go to ${socialLinks.linkedin}`}
                   href={socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn"
                   className="transition-all duration-300 hover:scale-110"
                 >
                   <FaLinkedinIn className="text-white w-4 h-4" />
                 </Link>
               )}
-              {socialLinks.facebook && (
+              {socialLinks.instagram && (
                 <Link
-                aria-label={`go to ${socialLinks.facebook}`}
-                  href={socialLinks.facebook}
+                  href={socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Instagram"
                   className="transition-all duration-300 hover:scale-110"
                 >
-                  <FaFacebook className="text-white w-4 h-4" />
+                  <FiInstagram className="text-white w-4 h-4" />
+                </Link>
+              )}
+              {socialLinks.pinterest && (
+                <Link
+                  href={socialLinks.pinterest}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Pinterest"
+                  className="transition-all duration-300 hover:scale-110"
+                >
+                  <FaPinterestP className="text-white w-4 h-4" />
                 </Link>
               )}
             </div>
@@ -307,7 +303,7 @@ export const Footer = ({ data }: FooterProps) => {
             <div className="flex items-center gap-3">
               {data.phone && (
                 <Link
-                aria-label={`go to ${data.phone}`}
+                  aria-label={`go to ${data.phone}`}
                   href={`tel:${data.phone}`}
                   className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
                 >
@@ -322,7 +318,7 @@ export const Footer = ({ data }: FooterProps) => {
               )}
               {data.email && (
                 <Link
-                aria-label={`go to ${data.email}`}
+                  aria-label={`go to ${data.email}`}
                   href={`mailto:${data.email}`}
                   className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
                 >

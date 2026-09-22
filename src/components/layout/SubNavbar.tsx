@@ -12,17 +12,11 @@ import {
 } from "react-icons/fi";
 import { SiTiktok } from "react-icons/si";
 import { IoLogoWhatsapp } from "react-icons/io";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaPinterest, FaPinterestP } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { getHomeData } from "@/src/services/homeApi";
+import { SocialLinks } from "@/src/services/contactApi";
 
-interface SocialLinks {
-  whatsapp: string;
-  facebook: string;
-  linkedin: string;
-  instagram: string;
-  tik_tok: string;
-}
 
 interface SubNavbarProps {
   socialLinks?: SocialLinks | null;
@@ -37,15 +31,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
   } | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const defaultLinks = {
-    whatsapp: "https://wa.me/201234567890",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
-    instagram: "https://instagram.com",
-    tik_tok: "https://tiktok.com",
-  };
-
-  const links = socialLinks || defaultLinks;
+  const links = socialLinks;
 
   // ✅ جلب الإيميل والهاتف من API /home
   useEffect(() => {
@@ -117,7 +103,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
 
           <div className="flex items-center gap-1 lg:gap-1 flex-wrap">
             <Link
-            aria-label={`go to faqs`}
+              aria-label={`go to faqs`}
               href="/faqs"
               className="flex items-center gap-2 hover:text-white transition-colors"
             >
@@ -127,7 +113,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
 
             <div className="relative cursor-pointer" ref={dropdownRef}>
               <button
-              aria-label={`select language`}
+                aria-label={`select language`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center gap-2 px-1 lg:px-1.5 py-1 rounded transition-colors text-white"
               >
@@ -140,7 +126,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
               {isDropdownOpen && (
                 <div className="absolute top-full end-0 mt-2 bg-white text-gray-800 rounded-lg shadow-2xl min-w-40 overflow-hidden z-50 border border-gray-200">
                   <button
-                  aria-label={`select english `}
+                    aria-label={`select english `}
                     onClick={() => handleLanguageSelect("en")}
                     className={`
                       w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center justify-between
@@ -148,11 +134,13 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                     `}
                   >
                     <span>English</span>
-                    {language === "en" && <FiCheck className="text-secondary" />}
+                    {language === "en" && (
+                      <FiCheck className="text-secondary" />
+                    )}
                   </button>
                   <div className="border-t border-gray-100"></div>
                   <button
-                  aria-label={`select arabic language`}
+                    aria-label={`select arabic language`}
                     onClick={() => handleLanguageSelect("ar")}
                     className={`
                       w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center justify-between
@@ -160,7 +148,9 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                     `}
                   >
                     <span>العربية</span>
-                    {language === "ar" && <FiCheck className="text-secondary" />}
+                    {language === "ar" && (
+                      <FiCheck className="text-secondary" />
+                    )}
                   </button>
                 </div>
               )}
@@ -169,50 +159,42 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
             <div className="hidden lg:block h-6 w-px bg-gray-600 mx-2"></div>
 
             <div className="hidden lg:flex items-center gap-3 my-2 lg:my-3">
+              {/* ✅ الترتيب: Facebook → LinkedIn → Instagram → Pinterest */}
               <Link
-                href={links.tik_tok}
-                aria-label={`go to ${links.tik_tok}`}
+                href={links?.facebook || ""}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Facebook"
                 className="transition-all duration-300 hover:scale-110"
               >
-                <SiTiktok className="text-white w-4 h-4" />
+                <FaFacebook className="text-white w-4 h-4" />
               </Link>
               <Link
-              aria-label={`go to ${links.whatsapp}`}
-                href={links.whatsapp}
+                href={links?.linkedin || ""}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-all duration-300 hover:scale-110"
-              >
-                <IoLogoWhatsapp className="text-white w-4 h-4" />
-              </Link>
-              <Link
-              aria-label={`go to ${links.instagram}`}
-                href={links.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-all duration-300 hover:scale-110"
-              >
-                <FiInstagram className="text-white w-4 h-4" />
-              </Link>
-              <Link
-                href={links.linkedin}
-                aria-label={`go to ${links.linkedin}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                aria-label="LinkedIn"
                 className="transition-all duration-300 hover:scale-110"
               >
                 <FaLinkedinIn className="text-white w-4 h-4" />
               </Link>
               <Link
-                href={links.facebook}
-                aria-label={`go to ${links.facebook}`}
+                href={links?.instagram || ""}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Instagram"
                 className="transition-all duration-300 hover:scale-110"
               >
-                <FaFacebook className="text-white w-4 h-4" />
+                <FiInstagram className="text-white w-4 h-4" />
+              </Link>
+              <Link
+                href={links?.pinterest || ""}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Pinterest"
+                className="transition-all duration-300 hover:scale-110"
+              >
+                <FaPinterestP className="text-white w-4 h-4" />
               </Link>
             </div>
           </div>

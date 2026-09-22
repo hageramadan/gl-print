@@ -38,6 +38,13 @@
     "partners": "Our Partners",
     "trustedBy": "Trusted by leading companies"
   },
+   "serviceDetails": {
+    "tag": "Service",
+    "cta": "Get a Quote",
+    "notFound": "Service Not Found",
+    "productsTag": "Products",
+    "productsTitle": "Related Products"
+  },
   "services": {
     "title": "Our Services",
     "subtitle": "Comprehensive printing solutions tailored to your needs",

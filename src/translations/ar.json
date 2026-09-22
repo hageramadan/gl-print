@@ -133,6 +133,13 @@
     "getQuote": "اطلب عرض سعر",
     "noProducts": "لا توجد منتجات."
   },
+   "serviceDetails": {
+    "tag": "خدمة",
+    "cta": "اطلب عرض سعر",
+    "notFound": "الخدمة غير موجودة",
+    "productsTag": "المنتجات",
+    "productsTitle": "منتجات ذات صلة"
+  },
   "products": {
     "viewAll2": "عرض كل المنتاجات",
     "products2": "المنتاجات",

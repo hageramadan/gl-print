@@ -61,7 +61,7 @@ export const HeroContent = ({ data }: HeroContentProps) => {
           <span className="text-secondary">{data.tagline || 'GL'}</span>
           <span className="text-primary">PRINT</span>
         </h2>
-        <h1 className="text-2xl sm:text-xl md:text-4xl lg:text-[50px] xl:text-[60px] w-full lg:max-w-xl font-extrabold leading-tight text-[#090E1B]">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px] w-full lg:max-w-xl font-extrabold  text-[#090E1B]">
           {titleLines[0]}
           <br />
           <span className="text-secondary">{titleLines[1] || ''}</span>
