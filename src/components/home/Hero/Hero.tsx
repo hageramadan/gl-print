@@ -114,7 +114,7 @@ export const Hero = ({ data }: HeroProps) => {
         </div>
 
         {/* Search */}
-        <div className="absolute top-[5.5%] end-[10%] z-30 pointer-events-auto w-[85%] max-w-[600px] lg:max-w-[700px]">
+        <div className="absolute top-[5.5%] end-[8%] xl:end-[10%] z-30 pointer-events-auto w-[85%] max-w-[600px] lg:min-w-[400px] xl:max-w-[700px]">
           <HeroSearch />
         </div>
       </div>

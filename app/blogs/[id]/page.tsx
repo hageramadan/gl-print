@@ -98,7 +98,7 @@ export default function BlogDetailsPage() {
              
               <SocialShare socialLinks={socialLinks} />
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-6">
+            <h1 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6">
               {blog.title}
             </h1>
 
@@ -106,7 +106,7 @@ export default function BlogDetailsPage() {
           
 
             <div
-              className="prose prose-lg max-w-none text-[#667085] leading-relaxed
+              className="prose prose-lg max-w-4xl text-[#667085] leading-relaxed
                 prose-headings:text-primary prose-headings:font-bold
                 prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
                 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
