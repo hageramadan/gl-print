@@ -121,7 +121,7 @@ export default async function RootLayout({
             <main className="grow">{children}</main>
             <Footer data={footerData} />
             <WhatsAppButton
-              // phoneNumber="201234567890"
+             
               message="Hello! I would like to inquire about your printing services."
             />
           </div>
