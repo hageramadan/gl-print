@@ -27,9 +27,9 @@ export const About = ({ data }: AboutProps) => {
 
   // استخدام الصور من الـ API أو الصور الافتراضية
   const images = data?.home_images || [
-    '/images/about/ab1.png',
-    '/images/about/ab2.png',
-    '/images/about/ab3.png',
+    "/images/about/ab1.png",
+    "/images/about/ab2.png",
+    "/images/about/ab3.png",
   ];
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const About = ({ data }: AboutProps) => {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     if (sectionRef.current) {
@@ -56,23 +56,21 @@ export const About = ({ data }: AboutProps) => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-2 pb-5 md:py-16 lg:py-24 bg-white overflow-hidden"
     >
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-          
           {/* ===== الجالري (الجهة اليسرى) ===== */}
           <div className="w-full lg:w-1/2 relative">
             <div className="relative w-full aspect-[4/3] max-w-[500px] mx-auto  lg:mx-0  overflow-hidden md:overflow-visible">
-              
               {/* ===== الصورة الكبيرة (الخلفية) ===== */}
               <div
                 className={`
                   absolute rounded-xl overflow-hidden shadow-2xl
                   transition-all duration-1000 ease-out
-                  ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'}
+                  ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}
                 `}
                 style={{
                   width: "clamp(200px, 70%, 346px)",
@@ -97,7 +95,7 @@ export const About = ({ data }: AboutProps) => {
                 className={`
                   absolute rounded-lg overflow-hidden shadow-xl z-20
                   transition-all duration-1000 ease-out
-                  ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-12 scale-95'}
+                  ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-12 scale-95"}
                 `}
                 style={{
                   width: "clamp(120px, 40%, 200px)",
@@ -121,7 +119,7 @@ export const About = ({ data }: AboutProps) => {
                 className={`
                   absolute rounded-lg overflow-hidden shadow-xl z-30
                   transition-all duration-1000 ease-out
-                  ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'}
+                  ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}
                 `}
                 style={{
                   width: "clamp(130px, 45%, 224px)",
@@ -145,7 +143,7 @@ export const About = ({ data }: AboutProps) => {
                 className={`
                   absolute -z-10 rounded-full bg-secondary/10
                   transition-all duration-1000 ease-out
-                  ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                  ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-0"}
                 `}
                 style={{
                   width: "clamp(60px, 20%, 120px)",
@@ -159,7 +157,7 @@ export const About = ({ data }: AboutProps) => {
                 className={`
                   absolute -z-10 rounded-full bg-primary/5
                   transition-all duration-1000 ease-out
-                  ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                  ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-0"}
                 `}
                 style={{
                   width: "clamp(40px, 15%, 80px)",
@@ -175,7 +173,7 @@ export const About = ({ data }: AboutProps) => {
                 className={`
                   absolute -z-5 border-2 border-secondary/20 rounded-2xl
                   transition-all duration-1000 ease-out
-                  ${isVisible ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-90 rotate-6'}
+                  ${isVisible ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-90 rotate-6"}
                 `}
                 style={{
                   width: "clamp(220px, 75%, 380px)",
@@ -196,20 +194,20 @@ export const About = ({ data }: AboutProps) => {
               <div
                 className={`
                   mb-6 transition-all duration-700 ease-out
-                  ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}
+                  ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}
                 `}
                 style={{ transitionDelay: "0.2s" }}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-0.5 bg-secondary"></div>
                   <span className="text-xs md:text-sm lg:text-base text-secondary uppercase tracking-wider font-bold">
-                    {data?.tagline || 'About GL Print'}
+                    {data?.tagline || "About GL Print"}
                   </span>
                 </div>
               </div>
 
               {/* ===== الوصف - النص الكبير ===== */}
-              <p
+              {/* <p
                 className={`
                   text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
                   transition-all duration-700 ease-out
@@ -218,10 +216,24 @@ export const About = ({ data }: AboutProps) => {
                 style={{ transitionDelay: "0.4s" }}
               >
                 {data?.title || 'GL Print delivers precision, consistency, and professional craftsmanship.'}
-              </p>
+              </p> */}
+              <div
+                className="prose prose-lg max-w-none 
+                prose-headings:text-primary prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+              
+                
+                 text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
+                 
+                prose-strong:text-primary
+                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+                prose-ul:my-4 prose-li:my-1"
+                dangerouslySetInnerHTML={{ __html: data.title }}
+              />
 
               {/* ===== الوصف - النص الطويل ===== */}
-              <p
+              {/* <p
                 className={`
                   text-sm md:text-base lg:text-lg text-[#667085] font-medium md:font-semibold leading-relaxed mb-8
                   transition-all duration-700 ease-out
@@ -230,24 +242,44 @@ export const About = ({ data }: AboutProps) => {
                 style={{ transitionDelay: "0.6s" }}
               >
                 {data?.description || 'GL Print (Cairo, Egypt) offers full-service design, printing, and outdoor advertising solutions, using advanced technologies to deliver high-quality prints that help businesses stand out and succeed.'}
-              </p>
+              </p> */}
+              <div
+                className="prose prose-lg max-w-none text-[#667085] 
+                prose-headings:text-primary prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+                text-sm sm:text-base md:text-lg
+                mb-3 sm:mb-6
+                 
+                 font-medium md:font-semibold leading-relaxed 
+                prose-strong:text-primary
+                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+                prose-ul:my-4 prose-li:my-1"
+                dangerouslySetInnerHTML={{ __html: data.description }}
+              />
 
               {/* ===== زر Get a Quote ===== */}
               <Link
-              aria-label={`go to ${data.button.action_type}`}
-                href={data?.button?.action_type === 'request_quote' ? '/quote' : '/quote'}
+                aria-label={`go to ${data.button.action_type}`}
+                href={
+                  data?.button?.action_type === "request_quote"
+                    ? "/quote"
+                    : "/quote"
+                }
                 className={`
                   w-fit text-sm md:text-[14.5px] font-bold flex items-center gap-2 
                   bg-secondary hover:bg-secondary-dark text-white 
                   px-8 md:px-10 lg:px-12 py-3 md:py-3.5 lg:py-4 
                   rounded-2xl shadow-lg shadow-red-200 
                   transition-all duration-500 hover:-translate-y-1 hover:shadow-xl
-                  ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+                  ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
                 `}
                 style={{ transitionDelay: "0.8s" }}
               >
-                <span>{data?.button?.text || 'Get a Quote'}</span>
-                <FaArrowRight className={`ms-1 md:ms-2 text-white text-xs md:text-sm ${dir==='rtl'?'rotate-180':''}`} />
+                <span>{data?.button?.text || "Get a Quote"}</span>
+                <FaArrowRight
+                  className={`ms-1 md:ms-2 text-white text-xs md:text-sm ${dir === "rtl" ? "rotate-180" : ""}`}
+                />
               </Link>
             </div>
           </div>

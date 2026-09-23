@@ -67,11 +67,13 @@ export const HeroContent = ({ data }: HeroContentProps) => {
           <span className="text-secondary">{titleLines[1] || ''}</span>
         </h1> */}
          <div
-              className="prose prose-lg max-w-none text-black leading-relaxed
+              className="prose prose-lg max-w-none text-black 
                 prose-headings:text-primary prose-headings:font-bold
                 prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
                 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
-                prose-p:font-bold prose-p:text-4xl 
+                prose-p:font-extrabold 
+                w-full lg:max-w-xl
+                text-lg sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px]
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
                 prose-ul:my-4 prose-li:my-1"
@@ -86,12 +88,13 @@ export const HeroContent = ({ data }: HeroContentProps) => {
         {data.description}
       </p> */}
         <div
-              className="prose prose-lg max-w-none text-[#3E3F42] leading-relaxed
+              className="prose prose-lg max-w-none text-[#3E3F42] lg:leading-relaxed
                 prose-headings:text-primary prose-headings:font-bold
                 prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
                 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
-                 prose-p:text-lg
-                 prose-p:mb-4
+                text-sm sm:text-base md:text-lg
+                mb-2 sm:mb-4
+                 
                  prose-p:font-medium 
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
@@ -135,7 +138,7 @@ export const HeroContent = ({ data }: HeroContentProps) => {
       </div>
 
       {/* ===== HeroCard ===== */}
-      <div className='absolute -end-2 sm:-end-4 md:-end-6 lg:-end-8 xl:-end-20 -bottom-16 md:-bottom-2 lg:-bottom-12'>
+      <div className='absolute -end-2 sm:-end-4 md:-end-6 lg:-end-8 xl:-end-20 -bottom-10 md:-bottom-2 lg:-bottom-12'>
         <HeroCard />
       </div>
     </div>

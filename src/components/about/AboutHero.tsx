@@ -46,7 +46,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                     {data?.tagline || 'About GL Print'}
                   </span>
                 </div>
-             <p
+             {/* <p
                 className={`
                   text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
                   transition-all duration-700 ease-out
@@ -55,8 +55,22 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                 style={{ transitionDelay: "0.4s" }}
               >
                 {data?.title || 'GL Print delivers precision, consistency, and professional craftsmanship.'}
-              </p>
-            <p
+              </p> */}
+              <div
+                className="prose prose-lg max-w-none 
+                prose-headings:text-primary prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+              
+                
+                 text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
+                 
+                prose-strong:text-primary
+                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+                prose-ul:my-4 prose-li:my-1"
+                dangerouslySetInnerHTML={{ __html: data.title }}
+              />
+            {/* <p
                 className={`
                   text-sm md:text-base lg:text-lg text-[#667085] font-medium md:font-semibold leading-relaxed mb-8
                   transition-all duration-700 ease-out
@@ -65,7 +79,22 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                 style={{ transitionDelay: "0.6s" }}
               >
                 {data?.description || 'GL Print (Cairo, Egypt) offers full-service design, printing, and outdoor advertising solutions, using advanced technologies to deliver high-quality prints that help businesses stand out and succeed.'}
-              </p>
+              </p> */}
+               <div
+                className="prose prose-lg max-w-none text-[#667085] 
+                prose-headings:text-primary prose-headings:font-bold
+                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+                text-sm sm:text-base md:text-lg
+                mb-3 sm:mb-6
+                 
+                 font-medium md:font-semibold leading-relaxed 
+                prose-strong:text-primary
+                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+                prose-ul:my-4 prose-li:my-1"
+                dangerouslySetInnerHTML={{ __html: data.description }}
+              />
+
             <Link
              aria-label='go to quote'
               href={data.button.action_type === 'request_quote' ? '/quote' : '/'}
