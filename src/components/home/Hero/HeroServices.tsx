@@ -105,7 +105,7 @@ export const HeroServices = () => {
                   >
                     {service.title}
                   </h3>
-                  <p
+                  {/* <p
                     className="
                       text-[10px] sm:text-xs md:text-sm lg:text-base 
                       text-[#585858] mb-1 sm:mb-2 
@@ -113,7 +113,13 @@ export const HeroServices = () => {
                     "
                   >
                     {service.description}
-                  </p>
+                  </p> */}
+                   <div
+                className="    text-[10px] sm:text-xs md:text-sm lg:text-base 
+                      text-[#585858] mb-1 sm:mb-2 
+                      line-clamp-2"
+                dangerouslySetInnerHTML={{ __html: service.description }}
+              />
                   <Link
                     aria-label={`go to services`}
                     href={`/services/${service.slug}`}

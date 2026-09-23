@@ -19,6 +19,9 @@ body {
   font-family: var(--font-montserrat), sans-serif;
   transition: font-family 0.3s ease;
 }
+.blog-content a {
+  text-decoration: none !important;
+}
 @theme {
   /* الألوان الرئيسية */
   --color-primary: #1F3161;
@@ -256,7 +259,47 @@ html[dir="rtl"] .text-right {
 /* ============================================
    الهيدر
    ============================================ */
+.blog-content a,
+.blog-content a:link,
+.blog-content a:visited,
+.blog-content a:hover,
+.blog-content a:focus,
+.blog-content a:active {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  color: #667085;
+  transition: color 0.3s ease;
+}
+.blog-content.prose a,
+.blog-content.prose a:link,
+.blog-content.prose a:visited,
+.blog-content.prose a:hover,
+.blog-content.prose a:focus,
+.blog-content.prose a:active {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-style: none !important;
+  text-decoration-thickness: 0 !important;
 
+  border: 0 !important;
+  border-bottom: 0 !important;
+
+  box-shadow: none !important;
+  background-image: none !important;
+
+  color: #667085 !important;
+}
+
+.blog-content.prose a,
+.blog-content.prose a * {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
 @layer components {
   .header {
     @apply bg-primary text-white shadow-lg sticky top-0 z-50;
@@ -602,6 +645,16 @@ html[dir="rtl"] .text-right {
 .hover\:shadow-3xl:hover {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
+/* ✅ إزالة الخط السفلي من الروابط في محتوى المدونة */
+.blog-content a,
+.blog-content a:hover,
+.blog-content a:focus,
+.blog-content a:visited {
+  text-decoration: none !important;
+}
+
+/* ✅ إضافة تأثير hover بديل (اختياري) */
+
 /* ===== تنسيق الصور في محتوى المدونة ===== */
 .blog-content img {
   width: 48%;
@@ -634,4 +687,20 @@ html[dir="rtl"] .text-right {
     flex-direction: column;
     gap: 0.5rem;
   }
+}
+.blog-content a {
+  text-decoration: none !important;
+}
+.blog-content a,
+.blog-content a:link,
+.blog-content a:visited,
+.blog-content a:hover,
+.blog-content a:focus,
+.blog-content a:active {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+
+  transition: color 0.3s ease;
 }

@@ -67,9 +67,13 @@ export default function ServiceDetailsPage() {
                 {service.title}
               </h1>
 
-              <p className="text-base md:text-lg text-[#45464F] font-medium leading-relaxed">
+              {/* <p className="text-base md:text-lg text-[#45464F] font-medium leading-relaxed">
                 {service.description}
-              </p>
+              </p> */}
+                <div
+                className="text-base md:text-lg text-[#45464F] font-medium leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: service.description }}
+              />
             </div>
           </div>
         </div>

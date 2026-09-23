@@ -112,17 +112,51 @@ export default function BlogDetailsPage() {
               dangerouslySetInnerHTML={{ __html: blog.title }}
             /> */}
 
-            <div
+            {/* <div
               className="blog-content prose prose-lg max-w-none text-[#667085] leading-relaxed
               prose-headings:text-primary prose-headings:font-bold
               prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
               prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
               prose-p:mb-4 prose-p:leading-relaxed
               prose-strong:text-primary
-              prose-a:text-secondary prose-a:no-underline hover:prose-a:no-underline
+              prose-a:text-[#667085] prose-a:no-underline 
+              no-underline
               prose-ul:my-4 prose-li:my-1"
                         dangerouslySetInnerHTML={{ __html: blog.content }}
-                      />
+                      /> */}
+            <div
+              className="
+                    blog-content
+                    prose prose-lg max-w-none
+                    text-[#667085]
+                    leading-relaxed
+
+                    prose-headings:text-primary
+                    prose-headings:font-bold
+
+                    prose-h2:text-2xl
+                    prose-h2:md:text-3xl
+                    prose-h2:mt-8
+                    prose-h2:mb-4
+
+                    prose-h3:text-xl
+                    prose-h3:md:text-2xl
+                    prose-h3:mt-6
+                    prose-h3:mb-3
+
+                    prose-p:mb-4
+                    prose-p:leading-relaxed
+
+                    prose-strong:text-primary
+
+                    prose-a:text-[#667085]
+                    prose-a:no-underline
+
+                    prose-ul:my-4
+                    prose-li:my-1
+  "
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />
           </div>
         </div>
       </section>
