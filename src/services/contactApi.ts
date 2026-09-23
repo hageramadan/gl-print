@@ -19,6 +19,7 @@ export interface ContactData {
   id: number;
   phone: string;
   email: string;
+   whatsapp?: string;
   address: string;
   working_hours: string;
   location: {

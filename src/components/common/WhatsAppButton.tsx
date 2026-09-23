@@ -22,10 +22,12 @@ export const WhatsAppButton = ({
     const fetchWhatsAppNumber = async () => {
       try {
         const response = await getHomeData(language);
-        const socialLinks = response.footer?.social_links;
+        const url = response.footer?.whatsapp;
 
-        if (socialLinks?.whatsapp) {
-          setWhatsappUrl(socialLinks.whatsapp);
+        
+
+        if (url) {
+          setWhatsappUrl(url);
         }
       } catch (error) {
         console.error('Failed to fetch WhatsApp number:', error);

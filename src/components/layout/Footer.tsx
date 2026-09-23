@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 interface FooterData {
   phone: string;
   email: string;
+  whatsapp?: string;  
   address: string;
   working_hours: string;
   social_links: {
@@ -199,7 +200,7 @@ export const Footer = ({ data }: FooterProps) => {
               <li>
                 <Link
                   aria-label="go to whatsapp"
-                  href={socialLinks.whatsapp}
+                  href={data.whatsapp || '/'}
                   target="_blank"
                   className="text-[#B3B3B3] font-bold hover:text-white transition-colors"
                 >
