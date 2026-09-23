@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState, useRef } from 'react';
-import { useLanguage } from '@/src/hooks/useLanguage';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { FaArrowRight } from 'react-icons/fa6';
-import { LuRuler, LuFileText, LuPrinter, LuPackage } from 'react-icons/lu';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, EffectFade } from 'swiper/modules';
-import type { Swiper as SwiperType } from 'swiper';
+import Image from "next/image";
+import { useState, useRef } from "react";
+import { useLanguage } from "@/src/hooks/useLanguage";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaArrowRight } from "react-icons/fa6";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, EffectFade } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import { ProductAttribute } from "@/src/services/productApi";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/effect-fade";
 
 interface ProductDetailsProps {
   product: {
@@ -20,6 +20,7 @@ interface ProductDetailsProps {
     name: string;
     description: string;
     image: Array<{ id: number; url: string }>;
+    product_attributes?: ProductAttribute[]; // ✅ جديد
   };
 }
 
@@ -32,32 +33,24 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
   const images = product.image || [];
   const hasMultipleImages = images.length > 2;
 
-  // المواصفات الثابتة مع الأيقونات
-  const specifications = [
-    { id: 1, icon: LuRuler, label: t.productDetails?.specs?.size || 'Size', value: 'A5 , A6 , A4' },
-    { id: 2, icon: LuFileText, label: t.productDetails?.specs?.paper || 'Paper', value: '150... 170.... more' },
-    { id: 3, icon: LuPrinter, label: t.productDetails?.specs?.printing || 'Printing', value: 'Single or Double sided' },
-    { id: 4, icon: LuPackage, label: t.productDetails?.specs?.quantity || 'Quantity', value: 'Low to high....' },
-  ];
+  // ✅ استخدام product_attributes من API
+  const specifications = product.product_attributes || [];
 
   // ✅ الانتقال لصورة معينة + تمرير الصور المصغرة
   const goToImage = (index: number) => {
     const total = images.length;
     if (total === 0) return;
 
-    // loop
     let newIndex = index;
     if (newIndex < 0) newIndex = total - 1;
     if (newIndex >= total) newIndex = 0;
 
     setSelectedImage(newIndex);
 
-    // تغيير الصورة الرئيسية
     if (swiperRef.current) {
       swiperRef.current.slideTo(newIndex);
     }
 
-    // تمرير الصور المصغرة عشان الصورة المختارة تبان
     if (thumbnailsRef.current) {
       const thumb = thumbnailsRef.current.children[newIndex] as HTMLElement;
       if (thumb) {
@@ -68,35 +61,33 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 
         container.scrollTo({
           left: thumbLeft - containerWidth / 2 + thumbWidth / 2,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       }
     }
   };
 
-  // ✅ السهم السابق
   const handlePrev = () => goToImage(selectedImage - 1);
-
-  // ✅ السهم التالي
   const handleNext = () => goToImage(selectedImage + 1);
 
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-white" dir={dir}>
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
-
           {/* ===== الصور ===== */}
           <div className="w-full lg:w-1/2">
-            <div className="relative w-full  max-h-[702px] aspect-square rounded-2xl overflow-hidden shadow-2xl">
-
-              {/* ===== سلايدر الصور الرئيسي ===== */}
+            <div className="relative w-full max-h-[702px] aspect-square rounded-2xl overflow-hidden shadow-2xl">
               {images.length > 0 && (
                 <Swiper
                   modules={[Navigation, EffectFade]}
                   effect="fade"
                   fadeEffect={{ crossFade: true }}
-                  onSwiper={(swiper) => { swiperRef.current = swiper; }}
-                  onSlideChange={(swiper) => setSelectedImage(swiper.activeIndex)}
+                  onSwiper={(swiper) => {
+                    swiperRef.current = swiper;
+                  }}
+                  onSlideChange={(swiper) =>
+                    setSelectedImage(swiper.activeIndex)
+                  }
                   loop={false}
                   allowTouchMove={true}
                   className="w-full h-full"
@@ -104,7 +95,12 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                   {images.map((img) => (
                     <SwiperSlide key={img.id}>
                       <div className="relative w-full h-full">
-                        <Image src={img.url} alt={product.name} fill className="object-cover" />
+                        <Image
+                          src={img.url}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                     </SwiperSlide>
                   ))}
@@ -117,8 +113,6 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
               {images.length > 1 && (
                 <div className="absolute bottom-4 start-0 end-0 z-20 px-4">
                   <div className="flex items-center justify-center gap-3">
-
-                    {/* ===== سهم السابق ===== */}
                     {hasMultipleImages && (
                       <button
                         type="button"
@@ -132,22 +126,23 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                           z-30 cursor-pointer
                         "
                         aria-label="Previous image"
-                        
                       >
-                        <FiChevronLeft className={`text-primary text-xl md:text-2xl ${dir==='rtl'?'rotate-180':''}`} />
+                        <FiChevronLeft
+                          className={`text-primary text-xl md:text-2xl ${
+                            dir === "rtl" ? "rotate-180" : ""
+                          }`}
+                        />
                       </button>
                     )}
 
-                    {/* ===== الصور المصغرة ===== */}
                     <div
                       ref={thumbnailsRef}
                       className="flex items-center gap-5 lg:gap-[32px] overflow-x-auto scroll-smooth scrollbar-hide"
                       style={{
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                       
-                        padding: '8px 4px',
-                        maxWidth: '100%',
+                        scrollbarWidth: "none",
+                        msOverflowStyle: "none",
+                        padding: "8px 4px",
+                        maxWidth: "100%",
                       }}
                     >
                       {images.map((img, index) => (
@@ -157,11 +152,10 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                           onClick={() => goToImage(index)}
                           className="shrink-0 w-20 h-20 lg:w-37.5 lg:h-37.5 transition-all duration-300 hover:scale-105 cursor-pointer"
                           style={{
-                          
-                            borderRadius: '12px',
-                            boxShadow: '#00000040 0px 4px 12px',
-                            overflow: 'hidden',
-                            position: 'relative',
+                            borderRadius: "12px",
+                            boxShadow: "#00000040 0px 4px 12px",
+                            overflow: "hidden",
+                            position: "relative",
                           }}
                         >
                           <Image
@@ -180,7 +174,6 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                       ))}
                     </div>
 
-                    {/* ===== سهم التالي ===== */}
                     {hasMultipleImages && (
                       <button
                         type="button"
@@ -195,7 +188,11 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                         "
                         aria-label="Next image"
                       >
-                        <FiChevronRight className={`text-primary text-xl md:text-2xl ${dir==='rtl'?'rotate-180':''}`} />
+                        <FiChevronRight
+                          className={`text-primary text-xl md:text-2xl ${
+                            dir === "rtl" ? "rotate-180" : ""
+                          }`}
+                        />
                       </button>
                     )}
                   </div>
@@ -209,35 +206,55 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-4">
               {product.name}
             </h1>
-            <p className="text-base md:text-lg text-[#667085] font-semibold leading-relaxed mb-8">
-              {product.description}
-            </p>
 
+            {/* ✅ الوصف يدعم HTML */}
+            <div
+              className="text-base md:text-lg text-[#667085] font-semibold leading-relaxed mb-8"
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            />
+
+            {/* ✅ المواصفات من API */}
             <div className="grid grid-cols-1 gap-4 mb-8">
-              {specifications.map((spec) => {
-                const Icon = spec.icon;
-                return (
-                  <div key={spec.id} className="p-4 border-b border-[#E6E8ED] hover:border-primary/30 transition-all duration-300">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-14 h-14 rounded-lg bg-[#F6F7F9] flex items-center justify-center shrink-0">
-                        <Icon className="text-primary text-2xl" />
-                      </div>
-                      <div>
-                        <span className="font-bold text-primary text-sm md:text-[20px]">{spec.label}</span>
-                        <p className="text-sm lg:text-[18px] font-medium text-[#667085]">{spec.value}</p>
-                      </div>
+              {specifications.map((spec) => (
+                <div
+                  key={spec.id}
+                  className="p-4 border-b border-[#E6E8ED] hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-14 h-14 rounded-lg bg-[#F6F7F9] flex items-center justify-center shrink-0">
+                      {spec.image ? (
+                        <Image
+                          src={spec.image}
+                          alt={spec.name}
+                          width={120}
+                          height={120}
+                          className="object-contain w-14 h-14"
+                        />
+                      ) : (
+                        <div className="w-6 h-6 bg-primary/20 rounded" />
+                      )}
+                    </div>
+                    <div>
+                      <span className="font-bold text-primary text-sm md:text-[20px]">
+                        {spec.name}
+                      </span>
+                      <p className="text-sm lg:text-[18px] font-medium text-[#667085]">
+                        {spec.description}
+                      </p>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
 
             <a
               href="/quote"
               className="inline-flex w-full mx-auto justify-center items-center gap-2 bg-secondary hover:bg-secondary-dark text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
-              <span>{t.productDetails?.requestQuote || 'Request a Quote'}</span>
-              <FaArrowRight className={dir === 'rtl' ? 'rotate-180' : ''} />
+              <span>
+                {t.productDetails?.requestQuote || "Request a Quote"}
+              </span>
+              <FaArrowRight className={dir === "rtl" ? "rotate-180" : ""} />
             </a>
           </div>
         </div>

@@ -119,7 +119,7 @@ export default function BlogDetailsPage() {
               prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
               prose-p:mb-4 prose-p:leading-relaxed
               prose-strong:text-primary
-              prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
+              prose-a:text-secondary prose-a:no-underline hover:prose-a:no-underline
               prose-ul:my-4 prose-li:my-1"
                         dangerouslySetInnerHTML={{ __html: blog.content }}
                       />

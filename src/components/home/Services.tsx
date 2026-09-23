@@ -114,9 +114,13 @@ export const Services = ({ data }: ServicesProps) => {
                       </h3>
 
                       {/* ===== الوصف (يظهر عند hover مع حركة) ===== */}
-                      <p className="text-white/0 text-sm md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0">
+                      {/* <p className="text-white/0 text-sm md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0">
                         {service.description}
-                      </p>
+                      </p> */}
+                       <div
+              className="text-white/0 text-sm md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0"
+                        dangerouslySetInnerHTML={{ __html:service.description }}
+                      />
 
                       {/* ===== Learn More مع حدود (يظهر عند hover) ===== */}
                       <div className="inline-flex items-center gap-2 text-white w-fit font-medium border-2 border-white/80 px-2 py-2 rounded-2xl group-hover:rounded-full transition-all duration-500 group-hover:px-4 group-hover:border-white">

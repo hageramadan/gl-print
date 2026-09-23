@@ -79,9 +79,25 @@ export const ServiceCard = ({
         {title}
       </h3>
 
-      <p className="text-xs md:text-base text-[#667085] font-medium group-hover:text-white leading-relaxed mb-2 lg:mb-4 flex-1 line-clamp-3">
+      {/* <p className="text-xs md:text-base text-[#667085] font-medium group-hover:text-white leading-relaxed mb-2 lg:mb-4 flex-1 line-clamp-3">
         {description}
-      </p>
+      </p> */}
+      
+       <div
+              className="blog-content prose prose-lg max-w-none text-[#667085] leading-relaxed
+              prose-headings:text-primary prose-headings:font-bold
+              prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
+              prose-p:mb-4 prose-p:leading-relaxed
+              prose-strong:text-primary
+              group-hover:text-white
+              text-xs md:text-base
+              font-medium
+              prose-a:text-secondary prose-a:no-underline hover:prose-a:no-underline
+              prose-ul:my-4 prose-li:my-1"
+                        dangerouslySetInnerHTML={{ __html: description }}
+                      />
+        
 
       <Link
         aria-label={`go to ${link}`}

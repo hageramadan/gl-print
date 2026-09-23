@@ -38,7 +38,9 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
+  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(
+    null,
+  );
   const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
   const [mobileSubSubOpen, setMobileSubSubOpen] = useState<string | null>(null);
 
@@ -47,7 +49,10 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
   const [productsData, setProductsData] = useState<NavbarProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [subDropdownPosition, setSubDropdownPosition] = useState({ top: 0, left: 0 });
+  const [subDropdownPosition, setSubDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+  });
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -78,32 +83,33 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
     };
   }, []);
   useEffect(() => {
-  const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-    if (
-      isOpen &&
-      mobileMenuRef.current &&
-      !mobileMenuRef.current.contains(event.target as Node)
-    ) {
-      setIsOpen(false);
-      setMobileSubOpen(null);
-      setMobileSubSubOpen(null);
-    }
-  };
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        isOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        setMobileSubOpen(null);
+        setMobileSubSubOpen(null);
+      }
+    };
 
-  document.addEventListener("mousedown", handleClickOutside);
-  document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-    document.removeEventListener("touchstart", handleClickOutside);
-  };
-}, [isOpen]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const navItems = [
     { key: "home", href: "/" },
     { key: "about", href: "/about" },
-    { key: "services", href: "/services", hasSub: true },
     { key: "products", href: "/products", hasSub: true },
+    { key: "services", href: "/services", hasSub: true },
+
     { key: "industries", href: "/industries", hasSub: true },
     { key: "blogs", href: "/blogs" },
     { key: "contact", href: "/contact" },
@@ -128,33 +134,41 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
     }, 200);
   };
 
-  const handleSubMouseEnter = useCallback((serviceId: number, e: React.MouseEvent) => {
+  const handleSubMouseEnter = useCallback(
+    (serviceId: number, e: React.MouseEvent) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      setActiveSubDropdown(`service-${serviceId}`);
+
+      const target = e.currentTarget as HTMLElement;
+      const rect = target.getBoundingClientRect();
+
+      if (dir === "rtl") {
+        setSubDropdownPosition({
+          top: rect.top,
+          left: rect.left - 230,
+        });
+      } else {
+        setSubDropdownPosition({
+          top: rect.top,
+          left: rect.right + 2,
+        });
+      }
+    },
+    [dir],
+  );
+  const handleSubMouseMove = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    setActiveSubDropdown(`service-${serviceId}`);
-
-    const target = e.currentTarget as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    
-    if (dir === "rtl") {
-      setSubDropdownPosition({
-        top: rect.top,
-        left: rect.left - 230,
-      });
-    } else {
-      setSubDropdownPosition({
-        top: rect.top,
-        left: rect.right + 2,
-      });
-    }
-  }, [dir]);
-
+  };
   const handleSubMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveSubDropdown(null);
-    }, 200);
+    }, 300);
   };
 
   const handleDropdownMouseEnter = () => {
@@ -179,7 +193,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
   return (
     <>
       <nav
-       ref={mobileMenuRef}
+        ref={mobileMenuRef}
         className="bg-white text-[#3E3F42] shadow-lg sticky top-0 z-[999]"
         dir={dir}
       >
@@ -229,7 +243,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                       <div
                         className="absolute top-full start-0 mt-1 bg-white rounded-lg shadow-2xl min-w-[250px] max-h-[450px] overflow-y-auto z-[9999] border border-gray-100 py-1"
                         onMouseEnter={handleDropdownMouseEnter}
-                        onMouseLeave={handleMouseLeave}
+                        // onMouseLeave={handleMouseLeave}
                       >
                         {item.key === "services" &&
                           (isLoading && servicesData.length === 0 ? (
@@ -256,10 +270,10 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                       handleSubMouseEnter(service.id, e);
                                     }
                                   }}
-                                  onMouseLeave={handleSubMouseLeave}
+                                  // onMouseLeave={handleSubMouseLeave}
                                 >
                                   <Link
-                                  aria-label={`go to ${service.slug}`}
+                                    aria-label={`go to ${service.slug}`}
                                     href={`/services/${service.slug}`}
                                     className={`
                                       flex items-center justify-between px-4 py-2.5 transition-colors
@@ -294,7 +308,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               <Link
                                 key={product.id}
                                 href={`/products/${product.slug}`}
-                                 aria-label={`go to ${product.slug}`}
+                                aria-label={`go to ${product.slug}`}
                                 className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
                               >
                                 {product.name}
@@ -427,7 +441,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                       </Link>
                                       {hasProducts && (
                                         <button
-                                        aria-label={`show services`}
+                                          aria-label={`show services`}
                                           onClick={(e) => {
                                             e.stopPropagation();
                                             toggleMobileSubSub(
@@ -519,28 +533,33 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
         </div>
       </nav>
 
-      {activeService && activeService.products && activeService.products.length > 0 && (
-        <div
-          className="fixed bg-white rounded-lg shadow-2xl min-w-[230px] max-h-[400px] overflow-y-auto z-[99999] border border-gray-100 py-1"
-          style={{
-            top: `${subDropdownPosition.top}px`,
-            left: `${subDropdownPosition.left}px`,
-          }}
-          onMouseEnter={handleDropdownMouseEnter}
-          onMouseLeave={handleSubMouseLeave}
-        >
-          {activeService.products.map((product) => (
-            <Link
-              key={product.id}
-              href={`/products/${product.slug}`}
-              aria-label={`go to ${product.slug}`}
-              className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black text-sm whitespace-nowrap"
-            >
-              {product.name}
-            </Link>
-          ))}
-        </div>
-      )}
+      {/* ✅ إضافة شرط activeDropdown === "services" */}
+      {activeDropdown === "services" &&
+        activeService &&
+        activeService.products &&
+        activeService.products.length > 0 && (
+          <div
+            className="fixed bg-white rounded-lg shadow-2xl min-w-[230px] max-h-[400px] overflow-y-auto z-[99999] border border-gray-100 py-1"
+            style={{
+              top: `${subDropdownPosition.top}px`,
+              left: `${subDropdownPosition.left}px`,
+            }}
+            onMouseEnter={handleDropdownMouseEnter}
+            onMouseMove={handleSubMouseMove}
+            onMouseLeave={handleSubMouseLeave}
+          >
+            {activeService.products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/products/${product.slug}`}
+                aria-label={`go to ${product.slug}`}
+                className="block px-4 py-2.5 hover:bg-gray-50 transition-colors text-gray-700 hover:text-black text-sm whitespace-nowrap"
+              >
+                {product.name}
+              </Link>
+            ))}
+          </div>
+        )}
 
       <Sidebar
         isOpen={isSidebarOpen}
