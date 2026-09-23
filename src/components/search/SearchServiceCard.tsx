@@ -38,9 +38,13 @@ export const SearchServiceCard = ({ service }: SearchServiceCardProps) => {
         {service.title}
       </h3>
 
-      <p className="text-sm text-[#585858] mb-4 line-clamp-2 flex-1">
+      {/* <p className="text-sm text-[#585858] mb-4 line-clamp-2 flex-1">
         {service.description}
-      </p>
+      </p> */}
+        <div
+                className="text-sm text-[#585858] mb-4 line-clamp-2 flex-1"
+                dangerouslySetInnerHTML={{ __html: service.description }}
+              />
 
       <div className="inline-flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all duration-300">
         <span>{t.services?.learnMore || 'learnMore'}</span>
