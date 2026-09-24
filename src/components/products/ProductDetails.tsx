@@ -107,7 +107,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                 </Swiper>
               )}
 
-              <div className="absolute inset-0 bg-black/20 pointer-events-none z-10"></div>
+              {/* <div className="absolute inset-0 bg-black/20 pointer-events-none z-10"></div> */}
 
               {/* ===== الصور المصغرة + الأسهم ===== */}
               {images.length > 1 && (
