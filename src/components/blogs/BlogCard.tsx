@@ -103,7 +103,7 @@ export const BlogCard = ({ blog, delay = 0 }: BlogCardProps) => {
         <Link
         aria-label={`go to ${blog.slug}`}
           href={`/blogs/${blog.slug}`}
-          className="inline-flex items-center border px-2 lg:px-3 py-1 lg:py-2 w-fit rounded-lg capitalize gap-2 text-primary font-semibold text-[10px] md:text-base hover:text-secondary transition-colors group-hover:gap-3 duration-300"
+          className="inline-flex items-center border px-2 lg:px-3 py-1 lg:py-2 w-fit rounded-lg capitalize gap-2  text-primary   font-semibold text-[10px] md:text-base hover:text-secondary transition-colors group-hover:gap-3 duration-300"
         >
           {t.blogs?.readMore || 'Read more'}
           <FiArrowRight

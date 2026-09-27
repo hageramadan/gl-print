@@ -256,7 +256,7 @@ export const QuickInquiryForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
           {/* Contact Name */}
           <div>
-            <label className="block text-sm font-medium text-[#171A21] mb-2">
+            <label className="block text-sm font-medium  text-primary  mb-2">
               {t.quote?.contactName || 'Contact Name'}{' '}
               <span className="text-red-500">*</span>
             </label>
@@ -274,7 +274,7 @@ export const QuickInquiryForm = () => {
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-[#171A21] mb-2">
+            <label className="block text-sm font-medium  text-primary  mb-2">
               {t.quote?.emailAddress || 'Email Address'}{' '}
               <span className="text-red-500">*</span>
             </label>
@@ -293,7 +293,7 @@ export const QuickInquiryForm = () => {
 
         {/* Message */}
         <div>
-          <label className="block text-sm font-medium text-[#171A21] mb-2">
+          <label className="block text-sm font-medium  text-primary  mb-2">
             {t.quote?.yourMessage || 'Your Message'}{' '}
             <span className="text-red-500">*</span>
           </label>

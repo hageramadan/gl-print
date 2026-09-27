@@ -183,7 +183,7 @@ export const ServiceFilter = ({
                       w-full text-start px-4 py-2.5 text-sm transition-colors 
                       ${
                         selectedService === service.id
-                          ? "bg-primary/5 text-primary font-semibold"
+                          ? "bg-primary/5  text-primary   font-semibold"
                           : "text-gray-700 hover:bg-gray-50"
                       }
                     `}

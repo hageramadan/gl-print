@@ -95,7 +95,7 @@ export const HeroServices = () => {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3
+                  <h1
                     className="
                       text-xs sm:text-sm md:text-base lg:text-lg 
                       font-bold text-[#070D14] mb-0.5 sm:mb-1 
@@ -104,7 +104,7 @@ export const HeroServices = () => {
                     "
                   >
                     {service.title}
-                  </h3>
+                  </h1>
                   {/* <p
                     className="
                       text-[10px] sm:text-xs md:text-sm lg:text-base 
@@ -125,13 +125,14 @@ export const HeroServices = () => {
                     href={`/services/${service.slug}`}
                     className="
                       inline-flex items-center gap-1 
-                      text-primary font-medium 
+                       text-primary   font-medium 
                       text-[10px] sm:text-xs md:text-sm lg:text-base
                       hover:text-primary-dark transition-colors
                       group-hover:gap-2 transition-all duration-300
                     "
                   >
                     {learnMoreText}
+                    
                     <ArrowIcon
                       className="
                         text-[10px] sm:text-xs md:text-sm 
@@ -196,7 +197,7 @@ export const HeroServices = () => {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3
+                      <h1
                         className="
                           text-sm 
                           font-bold text-[#070D14] mb-1 
@@ -205,7 +206,7 @@ export const HeroServices = () => {
                         "
                       >
                         {service.title}
-                      </h3>
+                      </h1>
                       {/* <p
                         className="
                           text-xs 
@@ -226,7 +227,7 @@ export const HeroServices = () => {
                         href={`/services/${service.slug}`}
                         className="
                           inline-flex items-center gap-1 
-                          text-primary font-semibold text-xs
+                           text-primary   font-semibold text-xs
                           hover:text-primary-dark transition-colors
                           group-hover:gap-2 transition-all duration-300
                         "

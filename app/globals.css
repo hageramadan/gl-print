@@ -201,11 +201,11 @@ html[dir="rtl"] .text-right {
   }
   
   .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+    @apply border-2 border-primary  text-primary   hover:bg-primary hover:text-white transition-colors duration-300 px-6 py-3 rounded-md font-medium;
   }
   
   .btn-white {
-    @apply bg-white text-primary hover:bg-gray-100 transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+    @apply bg-white  text-primary   hover:bg-gray-100 transition-colors duration-300 px-6 py-3 rounded-md font-medium;
   }
   
   /* === البطاقات === */
@@ -231,16 +231,16 @@ html[dir="rtl"] .text-right {
   }
   
   .section-light {
-    @apply bg-white text-primary py-16 md:py-20;
+    @apply bg-white  text-primary   py-16 md:py-20;
   }
   
   .section-gray {
-    @apply bg-gray-50 text-primary py-16 md:py-20;
+    @apply bg-gray-50  text-primary   py-16 md:py-20;
   }
   
   /* === عناوين الأقسام === */
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-primary mb-4;
+    @apply text-3xl md:text-4xl font-bold  text-primary   mb-4;
   }
   
   .section-title-white {

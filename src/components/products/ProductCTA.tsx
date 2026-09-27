@@ -19,7 +19,7 @@ export const ProductCTA = () => {
               <IoDocumentTextOutline className="text-white text-3xl md:text-4xl" />
             </div>
             <div>
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#171A21] mb-2">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold  text-primary  mb-2">
                 {t.productDetails?.ctaTitle || 'Need a Custom Quote?'}
               </h2>
               <p className="text-sm md:text-[24px] font-medium text-[#667085] max-w-xl">

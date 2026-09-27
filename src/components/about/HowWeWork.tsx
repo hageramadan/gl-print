@@ -30,7 +30,7 @@ export const HowWeWork = ({ data }: HowWeWorkProps) => {
               {t.about?.howWeWork || 'How do we work?'}
             </span>
           </div>
-          <h2 className="text-xl font-extrabold md:text-2xl lg:text-[32px] text-primary">
+          <h2 className="text-xl font-extrabold md:text-2xl lg:text-[32px]  text-primary  ">
             {t.about?.implementationStages || 'Implementation Stages From concept to final product'}
           </h2>
         </div>
@@ -141,7 +141,7 @@ const WorkStep = ({ step }: WorkStepProps) => {
               />
             </div>
           </div>
-          <h3 className="text-sm lg:text-lg font-bold text-[#171A21] mb-2 group-hover:text-primary transition-colors">
+          <h3 className="text-sm lg:text-lg font-bold  text-primary  mb-2 group-hover:text-primary transition-colors">
             {step.title}
           </h3>
         </div>

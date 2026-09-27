@@ -56,6 +56,7 @@ export default function ProductDetailsPage() {
       {/* ===== 1. البانر ===== */}
       <PageBanner 
         title={product.name}
+        showSearch={true}
         backgroundImage={product.banner_image || '/images/banner/products-banner.png'}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },

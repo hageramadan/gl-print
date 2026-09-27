@@ -83,7 +83,7 @@ export const Select = ({
         <FiChevronDown
           className={`
             text-gray-400 shrink-0 transition-transform duration-300
-            ${isOpen ? 'rotate-180 text-primary' : ''}
+            ${isOpen ? 'rotate-180  text-primary  ' : ''}
           `}
         />
       </button>
@@ -109,7 +109,7 @@ export const Select = ({
                     transition-colors
                     ${
                       isSelected
-                        ? 'bg-primary/5 text-primary font-semibold'
+                        ? 'bg-primary/5  text-primary   font-semibold'
                         : 'text-gray-700 hover:bg-gray-50'
                     }
                   `}

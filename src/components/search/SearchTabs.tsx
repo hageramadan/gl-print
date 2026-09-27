@@ -34,7 +34,7 @@ export const SearchTabs = ({ activeTab, counts, onTabChange }: SearchTabsProps) 
             ${
               activeTab === tab.key
                 ? ' text-secondary border-b border-secondary font-bold'
-                : ' text-primary font-semibold'
+                : '  text-primary   font-semibold'
             }
           `}
         >
@@ -45,7 +45,7 @@ export const SearchTabs = ({ activeTab, counts, onTabChange }: SearchTabsProps) 
               ${
                 activeTab === tab.key
                   ? ' text-secondary font-bold'
-                  : ' text-primary font-semibold'
+                  : '  text-primary   font-semibold'
               }
             `}
           >

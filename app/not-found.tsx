@@ -11,7 +11,7 @@ export default function NotFound() {
           <div className="w-full lg:w-1/2 flex justify-center">
             <div className="relative">
               {/* رقم 404 */}
-              <div className="text-8xl md:text-9xl lg:text-[150px] font-extrabold text-primary/10 select-none">
+              <div className="text-8xl md:text-9xl lg:text-[150px] font-extrabold  text-primary  /10 select-none">
                 404
               </div>
               
@@ -38,7 +38,7 @@ export default function NotFound() {
 
           {/* ===== المحتوى ===== */}
           <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold  text-primary   mb-4">
               Page Not Found
             </h1>
             

@@ -54,7 +54,7 @@ export const FAQItem = ({ faq }: FAQItemProps) => {
             ${
               isOpen
                 ? 'text-white  rotate-180'
-                : ' text-primary'
+                : '  text-primary  '
             }
           `}
         >

@@ -61,7 +61,7 @@ export const About = ({ data }: AboutProps) => {
       className="py-2 pb-5 md:py-16 lg:py-24 bg-white overflow-hidden"
     >
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
           {/* ===== الجالري (الجهة اليسرى) ===== */}
           <div className="w-full lg:w-1/2 relative">
             <div className="relative w-full aspect-[4/3] max-w-[500px] mx-auto  lg:mx-0  overflow-hidden md:overflow-visible">
@@ -209,7 +209,7 @@ export const About = ({ data }: AboutProps) => {
               {/* ===== الوصف - النص الكبير ===== */}
               {/* <p
                 className={`
-                  text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
+                  text-xl md:text-2xl lg:text-[32px]  text-primary   font-extrabold mb-4 leading-relaxed
                   transition-all duration-700 ease-out
                   ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}
                 `}
@@ -224,7 +224,7 @@ export const About = ({ data }: AboutProps) => {
                 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
               
                 
-                 text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
+                 text-xl md:text-2xl lg:text-[32px]  text-primary   font-extrabold mb-4 leading-relaxed
                  
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
@@ -243,7 +243,7 @@ export const About = ({ data }: AboutProps) => {
               >
                 {data?.description || 'GL Print (Cairo, Egypt) offers full-service design, printing, and outdoor advertising solutions, using advanced technologies to deliver high-quality prints that help businesses stand out and succeed.'}
               </p> */}
-              <div
+              {/* <div
                 className="prose prose-lg max-w-none text-[#667085] 
                 prose-headings:text-primary prose-headings:font-bold
                 prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
@@ -256,8 +256,35 @@ export const About = ({ data }: AboutProps) => {
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
                 prose-ul:my-4 prose-li:my-1"
                 dangerouslySetInnerHTML={{ __html: data.description }}
-              />
+              /> */}
+               <div className=" blog-content
+                    prose prose-lg max-w-none
+                    text-[#667085]
+                  font-medium md:font-semibold  leading-relaxed
 
+                    prose-headings:text-primary
+                    prose-headings:font-bold
+
+                    prose-h2:text-2xl
+                    prose-h2:md:text-3xl
+                    prose-h2:mt-8
+                    prose-h2:mb-4
+
+                    prose-h3:text-xl
+                    prose-h3:md:text-2xl
+                    prose-h3:mt-6
+                    prose-h3:mb-3
+
+                    prose-p:mb-4
+                    prose-p:leading-relaxed
+
+                    prose-strong:text-primary
+
+                    prose-a:text-[#667085]
+                    prose-a:no-underline
+
+                    prose-ul:my-4
+                    prose-li:my-1" dangerouslySetInnerHTML={{ __html: data.description }}/>
               {/* ===== زر Get a Quote ===== */}
               <Link
                 aria-label={`go to ${data.button.action_type}`}

@@ -55,7 +55,7 @@ export default function IndustryDetailsPage() {
       fetchData(industrySlug, language);
     }
   }, [industrySlug, language, fetchData]);
-  // ✅ جلب المنتاجات حسب industry و category
+  // ✅ جلب المنتجات حسب industry و category
   const fetchProducts = useCallback(
     async (id: number, categoryId: number | null, lang: string) => {
       try {
@@ -203,6 +203,7 @@ export default function IndustryDetailsPage() {
     <main>
       <PageBanner
         title={industry.name}
+        showSearch={true}
         backgroundImage={industry.image}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -224,7 +225,7 @@ export default function IndustryDetailsPage() {
                   {t.industriesPage?.tag || 'Industries We Serve'}
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] max-w-xl">
+              <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary   max-w-xl">
                 {t.industriesPage?.subtitle || 'Serving Diverse Industries'}
               </h2>
             </div>
@@ -309,7 +310,7 @@ export default function IndustryDetailsPage() {
                             w-full text-start px-4 py-2.5 text-sm transition-colors  cursor-pointer
                             ${
                               activeCategory === category.id
-                                ? 'bg-primary/5 text-primary font-semibold'
+                                ? 'bg-primary/5  text-primary   font-semibold'
                                 : 'text-gray-700 hover:bg-gray-50'
                             }
                           `}
@@ -323,7 +324,7 @@ export default function IndustryDetailsPage() {
               )}
             </div>
 
-            {/* ===== المنتاجات ===== */}
+            {/* ===== المنتجات ===== */}
             {productsLoading ? (
               <div className="flex items-center justify-center py-12">
                 <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>

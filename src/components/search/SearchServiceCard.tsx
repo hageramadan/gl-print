@@ -46,7 +46,7 @@ export const SearchServiceCard = ({ service }: SearchServiceCardProps) => {
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
 
-      <div className="inline-flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all duration-300">
+      <div className="inline-flex items-center gap-2  text-primary   font-medium text-sm group-hover:gap-3 transition-all duration-300">
         <span>{t.services?.learnMore || 'learnMore'}</span>
         <FiArrowRight className={dir === 'rtl' ? 'rotate-180' : ''} />
       </div>

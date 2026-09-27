@@ -75,7 +75,7 @@ export const SuccessPopup = ({
         </div>
 
         {/* ✅ العنوان */}
-        <h2 className="text-2xl md:text-xl font-extrabold text-[#171A21] mb-3">
+        <h2 className="text-2xl md:text-xl font-extrabold  text-primary  mb-3">
           {isArabic ? "تم إرسال طلبك بنجاح" : "Request Sent Successfully"}
         </h2>
 
@@ -115,7 +115,7 @@ export const SuccessPopup = ({
             className="flex-1 inline-flex items-center justify-center gap-2 px-1 py-2.5 rounded-xl bg-primary text-white hover:bg-primary-dark border-2 border-primary font-bold text-sm md:text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer"
           >
             <span className="text-xs line-clamp-1">
-              {isArabic ? "استكشف خدماتنا" : "Explore Our Services"}
+              {isArabic ? "استكشف الخدمات" : "Explore Our Services"}
             </span>
             <svg
               className="w-4 h-4 rtl:rotate-180"

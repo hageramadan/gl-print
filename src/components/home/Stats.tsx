@@ -107,10 +107,10 @@ export const Stats = ({ data }: StatsProps) => {
                   group
                 "
               >
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold  text-primary   mb-2">
                   {counts[index] || 0}{suffix}
                 </div>
-                <p className="text-sm md:text-[24px] font-semibold text-primary transition-colors">
+                <p className="text-sm md:text-[24px] font-semibold  text-primary   transition-colors">
                   {stat.name}
                 </p>
               </div>

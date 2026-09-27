@@ -59,6 +59,7 @@ export default function FAQsPage() {
       {/* ===== البانر ===== */}
       <PageBanner
         title={bannerTitle}
+        showSearch={true}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -72,7 +73,7 @@ export default function FAQsPage() {
           {/* ===== العنوان ===== */}
           <div className=" mb-12 md:mb-16">
           
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary   mb-4">
               {t.faqs?.title || 'Do you have a question?'}
             </h2>
             <p className="text-base md:text-lg text-[#667085]  lg:max-w-lg">

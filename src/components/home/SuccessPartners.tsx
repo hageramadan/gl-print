@@ -31,7 +31,7 @@ export const SuccessPartners = ({ data }: SuccessPartnersProps) => {
               {t.partners?.tag || 'Our Success Partners'}
             </span>
           </div>
-          <h3 className="text-lg md:text-xl lg:text-[46px] w-full lg:max-w-2xl text-[#171A21] font-extrabold">
+          <h3 className="text-lg md:text-xl lg:text-[46px] w-full lg:max-w-2xl  text-primary  font-extrabold">
             {t.partners?.subtitle || 'Companies and projects that have trusted us.'}
           </h3>
         </div>

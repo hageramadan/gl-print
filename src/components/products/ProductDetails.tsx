@@ -76,7 +76,8 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
           {/* ===== الصور ===== */}
           <div className="w-full lg:w-1/2">
-            <div className="relative w-full max-h-[702px] aspect-square rounded-2xl overflow-hidden shadow-2xl">
+          {/* max-h-[702px]  shadow-2xl*/}
+            <div className="relative w-full max-h-165.5 py-4 aspect-square rounded-2xl overflow-hidden shadow-lg ">
               {images.length > 0 && (
                 <Swiper
                   modules={[Navigation, EffectFade]}
@@ -99,7 +100,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                           src={img.url}
                           alt={product.name}
                           fill
-                          className="object-cover"
+                          className="object-contain "
                         />
                       </div>
                     </SwiperSlide>
@@ -203,7 +204,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 
           {/* ===== التفاصيل ===== */}
           <div className="w-full lg:w-1/2">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold  text-primary   mb-4">
               {product.name}
             </h1>
 
@@ -235,7 +236,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                       )}
                     </div>
                     <div>
-                      <span className="font-bold text-primary text-sm md:text-[20px]">
+                      <span className="font-bold  text-primary   text-sm md:text-[20px]">
                         {spec.name}
                       </span>
                       <p className="text-sm lg:text-[18px] font-medium text-[#667085]">

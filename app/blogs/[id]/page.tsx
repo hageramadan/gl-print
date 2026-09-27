@@ -82,6 +82,7 @@ export default function BlogDetailsPage() {
     <main>
       <PageBanner
         title={blog.title}
+        showSearch={true}
         backgroundImage={blog.image}
         breadcrumbs={[
           { label: t.banner?.home || "Home", href: "/" },
@@ -97,7 +98,7 @@ export default function BlogDetailsPage() {
             <div className="mb-3 lg:mb-8">
               <SocialShare socialLinks={socialLinks} />
             </div>
-            {/* <h1 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6">
+            {/* <h1 className="text-3xl md:text-3xl lg:text-4xl font-extrabold  text-primary   mb-6">
               {blog.title}
             </h1> */}
             {/* <div
@@ -166,7 +167,7 @@ export default function BlogDetailsPage() {
         <section className="py-5 lg:pt-2 lg:pb-10">
           <div className="container mx-auto px-4">
             <div className="mb-6 md:mb-10">
-              <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21]">
+              <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary  ">
                 {t.blogs?.relatedTitle || "Related Blogs"}
               </h2>
             </div>

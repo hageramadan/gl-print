@@ -66,6 +66,7 @@ export default function BlogsPage() {
     <main>
       <PageBanner
         title={bannerTitle}
+        showSearch={true}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -84,7 +85,7 @@ export default function BlogsPage() {
               </span>
               <div className="w-10 h-0.5 bg-secondary"></div>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary   mb-4">
               {t.blogs?.title || 'Latest Articles'}
             </h2>
             <p className="text-base md:text-lg text-[#667085] max-w-2xl mx-auto">

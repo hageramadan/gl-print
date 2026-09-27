@@ -41,6 +41,7 @@ function QuoteContent() {
       {/* ===== البانر ===== */}
       <PageBanner
         title={t.quote?.pageTitle || 'Get a Quote'}
+        showSearch={true}
         backgroundImage="/images/banner/banner-quote.png"
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -68,7 +69,7 @@ function QuoteContent() {
                 aria-label={`go to ${t.quote}`}
                   onClick={() => setActiveTab('quick')}
                   className={`
-                    px-6 py-3 cursor-pointer font-semibold text-primary transition-all duration-300
+                    px-6 py-3 cursor-pointer font-semibold  text-primary   transition-all duration-300
                     ${activeTab === 'quick' ? 'border-b border-primary' : ''}
                   `}
                 >

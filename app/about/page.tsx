@@ -34,8 +34,8 @@ export default function AboutPage() {
   }, [language]);
 
   if (loading) {
-  return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
-}
+    return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+  }
 
   if (error || !data) {
     return <></>;
@@ -45,6 +45,8 @@ export default function AboutPage() {
     <main>
       <PageBanner
         title={t.about?.pageTitle || "About Us"}
+        showSearch={true} // ✅ إظهار البحث
+        // initialQuery={query}
         backgroundImage={
           data.about.page_banner_image || "/images/banner/services-banner.png"
         }

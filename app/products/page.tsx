@@ -66,7 +66,7 @@ function ProductsContent() {
     [language]
   );
 
-  // ✅ جلب المنتاجات عند تغيير الصفحة أو الفلتر
+  // ✅ جلب المنتجات عند تغيير الصفحة أو الفلتر
   useEffect(() => {
     const key = `${currentPage}-${selectedService}-${language}`;
     if (lastFetchedKey.current === key) return;
@@ -128,6 +128,7 @@ function ProductsContent() {
     <main>
       <PageBanner
         title={bannerTitle}
+        showSearch={true}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -144,7 +145,7 @@ function ProductsContent() {
                 {t.products?.tag2 || 'Our Products'}
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21]">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary  ">
               {t.products?.title || 'Featured Products'}
             </h2>
           </div>

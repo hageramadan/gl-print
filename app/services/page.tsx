@@ -56,6 +56,7 @@ export default function ServicesPage() {
     <main>
       <PageBanner
         title={bannerTitle}
+        showSearch={true}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -72,10 +73,10 @@ export default function ServicesPage() {
                 {t.servicesPage?.tag || 'Our Services'}
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21]">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary  ">
               {t.servicesPage?.subtitle || 'Everything Your Brand'}
               <br />
-              <span className="text-[#171A21]">
+              <span className="  text-primary  ">
                 {t.servicesPage?.subtitle2 || 'Needs In One Place.'}
               </span>
             </h2>
@@ -90,7 +91,7 @@ export default function ServicesPage() {
                     icon={service.icon}
                     title={service.title}
                     description={service.description}
-                    // ✅ استخدام slug في الرابط
+                   
                     link={`/services/${service.slug}`}
                     delay={index * 0.1}
                   />

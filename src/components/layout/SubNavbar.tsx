@@ -130,7 +130,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                     onClick={() => handleLanguageSelect("en")}
                     className={`
                       w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center justify-between
-                      ${language === "en" ? "bg-primary/5 text-primary font-semibold" : ""}
+                      ${language === "en" ? "bg-primary/5  text-primary   font-semibold" : ""}
                     `}
                   >
                     <span>English</span>
@@ -144,7 +144,7 @@ export const SubNavbar = ({ socialLinks }: SubNavbarProps) => {
                     onClick={() => handleLanguageSelect("ar")}
                     className={`
                       w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center justify-between
-                      ${language === "ar" ? "bg-primary/5 text-primary font-semibold" : ""}
+                      ${language === "ar" ? "bg-primary/5  text-primary   font-semibold" : ""}
                     `}
                   >
                     <span>العربية</span>

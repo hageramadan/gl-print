@@ -38,7 +38,7 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
               {t.testimonials?.tag || 'What Our Clients Say'}
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21]">
+          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary  ">
             {t.testimonials?.title || 'Real Success Stories'}
           </h2>
         </div>
@@ -46,13 +46,13 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
         <div className="relative">
           <div className="absolute -left-4 lg:-left-16 top-1/2 -translate-y-1/2 z-20 block">
             <button aria-label={`go to pre`} className="swiper-button-prev-custom w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-primary group border border-gray-200">
-              <FiChevronLeft className="text-2xl text-primary group-hover:text-white transition-colors" />
+              <FiChevronLeft className="text-2xl  text-primary   group-hover:text-white transition-colors" />
             </button>
           </div>
 
           <div className="absolute -right-4 lg:-right-16 top-1/2 -translate-y-1/2 z-20 block">
             <button aria-label={`go to next`} className="swiper-button-next-custom w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-primary group border border-gray-200">
-              <FiChevronRight className="text-2xl text-primary group-hover:text-white transition-colors" />
+              <FiChevronRight className="text-2xl  text-primary   group-hover:text-white transition-colors" />
             </button>
           </div>
 
@@ -114,7 +114,7 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
                       <h4 className="text-base md:text-[20px] font-semibold text-[#1A1A1A]">
                         {testimonial.client_name}
                       </h4>
-                      <p className="text-sm md:text-base text-[#717182]">
+                      <p className="text-sm md:text-base text-[#5A5A6E]">
                         {testimonial.date}
                       </p>
                     </div>
@@ -133,7 +133,7 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
                     ))}
                   </div>
 
-                  <p className="text-sm md:text-base text-[#717182] font-medium leading-relaxed line-clamp-3 flex-1">
+                  <p className="text-sm md:text-base text-[#5A5A6E] font-medium leading-relaxed line-clamp-3 flex-1">
                     {testimonial.comment}
                   </p>
                 </div>

@@ -93,7 +93,7 @@ export const ServiceCard = ({
               group-hover:text-white
               text-xs md:text-base
               font-medium
-              prose-a:text-secondary prose-a:no-underline hover:prose-a:no-underline
+               prose-a:no-underline hover:prose-a:no-underline
               prose-ul:my-4 prose-li:my-1"
                         dangerouslySetInnerHTML={{ __html: description }}
                       />
@@ -104,7 +104,7 @@ export const ServiceCard = ({
         href={link}
         className="
           inline-flex items-center gap-2 
-          text-primary font-semibold text-sm md:text-base
+           text-primary   font-semibold text-sm md:text-base
           transition-colors
           group-hover:gap-3 duration-300
           group-hover:text-white

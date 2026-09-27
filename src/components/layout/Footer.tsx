@@ -4,14 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useLanguage } from "@/src/hooks/useLanguage";
-import { FiInstagram } from "react-icons/fi";
+import { FiInstagram, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import { BiSend } from "react-icons/bi";
-import { SiTiktok } from "react-icons/si";
-import { IoLogoWhatsapp } from "react-icons/io";
 import { FaLinkedinIn, FaPinterestP } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { subscribeEmail } from "@/src/services/emailApi";
 import toast from "react-hot-toast";
+import { BsTelephone } from "react-icons/bs";
 
 interface FooterData {
   phone: string;
@@ -301,50 +300,58 @@ export const Footer = ({ data }: FooterProps) => {
             </div>
 
             {/* ✅ معلومات الاتصال من API */}
-            <div className="flex items-center gap-3">
-              {data.phone && (
-                <Link
-                  aria-label={`go to ${data.phone}`}
-                  href={`tel:${data.phone}`}
-                  className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
-                >
-                  <Image
-                    src="/images/footer/Phone.png"
-                    alt="Phone"
-                    width={200}
-                    height={200}
-                    className="w-10 h-10"
-                  />
-                </Link>
-              )}
-              {data.email && (
-                <Link
-                  aria-label={`go to ${data.email}`}
-                  href={`mailto:${data.email}`}
-                  className="flex items-center gap-3 text-[#B3B3B3] font-bold hover:text-white transition-colors text-sm"
-                >
-                  <Image
-                    src="/images/footer/Email.png"
-                    alt="Email"
-                    width={200}
-                    height={200}
-                    className="w-10 h-10"
-                  />
-                </Link>
-              )}
-              {data.address && (
-                <div className="flex items-center gap-3 text-[#B3B3B3] font-bold text-sm">
-                  <Image
-                    src="/images/footer/Location.png"
-                    alt="Location"
-                    width={200}
-                    height={200}
-                    className="w-10 h-10"
-                  />
-                  <span className="hidden lg:block">{data.address}</span>
-                </div>
-              )}
-            </div>
+            {/* ✅ معلومات الاتصال من API */}
+<div className="flex items-center gap-3">
+  {data.phone && (
+    <Link
+      aria-label={`Call ${data.phone}`}
+      href={`tel:${data.phone}`}
+      className="
+        w-10 h-10 rounded-full
+        bg-[#8F98B0] hover:bg-secondary
+        flex items-center justify-center
+        transition-all duration-300 hover:scale-110
+        group
+      "
+    >
+      <BsTelephone className="text-white text-lg group-hover:text-white transition-colors" />
+    </Link>
+  )}
+
+  {data.email && (
+    <Link
+      aria-label={`Email ${data.email}`}
+      href={`mailto:${data.email}`}
+      className="
+        w-10 h-10 rounded-full
+        bg-[#8F98B0] hover:bg-secondary
+        flex items-center justify-center
+        transition-all duration-300 hover:scale-110
+        group
+      "
+    >
+      <FiMail className="text-white text-lg group-hover:text-white transition-colors" />
+    </Link>
+  )}
+
+  {data.address && (
+    <a
+      aria-label="Open location on Google Maps"
+      href={`https://www.google.com/maps?q=${encodeURIComponent(data.address)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="
+        w-10 h-10 rounded-full
+        bg-[#8F98B0] hover:bg-secondary
+        flex items-center justify-center
+        transition-all duration-300 hover:scale-110
+        group
+      "
+    >
+      <FiMapPin className="text-white text-lg group-hover:text-white transition-colors" />
+    </a>
+  )}
+</div>
           </div>
         </div>
 

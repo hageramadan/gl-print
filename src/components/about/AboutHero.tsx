@@ -24,7 +24,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
              
           <div className="w-full lg:w-1/2">
             <div className="max-w-[653px] max-h-[436px] relative w-full aspect-4/3 rounded-xl overflow-hidden ">
@@ -48,7 +48,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                 </div>
              {/* <p
                 className={`
-                  text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
+                  text-xl md:text-2xl lg:text-[32px]  text-primary   font-extrabold mb-4 leading-relaxed
                   transition-all duration-700 ease-out
                  
                 `}
@@ -63,7 +63,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
               
                 
-                 text-xl md:text-2xl lg:text-[32px] text-primary font-extrabold mb-4 leading-relaxed
+                 text-xl md:text-2xl lg:text-[32px]  text-primary   font-extrabold mb-4 leading-relaxed
                  
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
@@ -81,17 +81,34 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
                 {data?.description || 'GL Print (Cairo, Egypt) offers full-service design, printing, and outdoor advertising solutions, using advanced technologies to deliver high-quality prints that help businesses stand out and succeed.'}
               </p> */}
                <div
-                className="prose prose-lg max-w-none text-[#667085] 
-                prose-headings:text-primary prose-headings:font-bold
-                prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
-                prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
-                text-sm sm:text-base md:text-lg
-                mb-3 sm:mb-6
-                 
-                 font-medium md:font-semibold leading-relaxed 
-                prose-strong:text-primary
-                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
-                prose-ul:my-4 prose-li:my-1"
+                className="blog-content
+                    prose prose-lg max-w-none
+                    text-[#667085]
+                  font-medium md:font-semibold  leading-relaxed
+
+                    prose-headings:text-primary
+                    prose-headings:font-bold
+
+                    prose-h2:text-2xl
+                    prose-h2:md:text-3xl
+                    prose-h2:mt-4
+                    prose-h2:mb-3
+
+                    prose-h3:text-xl
+                    prose-h3:md:text-2xl
+                    prose-h3:mt-6
+                    prose-h3:mb-3
+
+                    prose-p:mb-2
+                    prose-p:leading-relaxed
+
+                    prose-strong:text-primary
+
+                    prose-a:text-[#667085]
+                    prose-a:no-underline
+
+                    prose-ul:my-2
+                    prose-li:my-1"
                 dangerouslySetInnerHTML={{ __html: data.description }}
               />
 

@@ -31,7 +31,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
       <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
         {/* ===== العنوان ===== */}
         <div className="mb-4 md:mb-8 px-4 sm:px-2">
-          <h1 className="text-2xl md:text-3xl lg:text-[40px] text-[#171A21] tracking-wider font-extrabold">
+          <h1 className="text-2xl md:text-3xl lg:text-[40px]  text-primary  tracking-wider font-extrabold">
             {t.productDetails?.relatedTag || "Related Products"}
           </h1>
         </div>
@@ -49,7 +49,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
                 w-9 h-9 md:w-12 md:h-12
                 rounded-full bg-white shadow-lg border border-gray-100
                 flex items-center justify-center
-                text-[#171A21] hover:bg-primary hover:text-white hover:border-primary
+                 text-primary  hover:bg-primary hover:text-white hover:border-primary
                 transition-all duration-300
               "
             >
@@ -72,7 +72,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
                 w-9 h-9 md:w-12 md:h-12
                 rounded-full bg-white shadow-lg border border-gray-100
                 flex items-center justify-center
-                text-[#171A21] hover:bg-primary hover:text-white hover:border-primary
+                 text-primary  hover:bg-primary hover:text-white hover:border-primary
                 transition-all duration-300
               "
             >

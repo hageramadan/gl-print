@@ -51,7 +51,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
                 {t.products?.tag || "Featured Products"}
               </span>
             </div>
-            <h2 className="text-2xl md:text-3xl lg:text-[32px] font-extrabold text-primary">
+            <h2 className="text-2xl md:text-3xl lg:text-[32px] font-extrabold  text-primary  ">
               {t.products?.title2 || "Latest Products"}
             </h2>
           </div>
@@ -106,7 +106,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
 
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500"></div>
+          {/* <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500"></div> */}
 
           <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/30 lg:from-primary/0 lg:via-primary/0 lg:to-primary/0 lg:group-hover:from-primary/90 lg:group-hover:via-primary/60 lg:group-hover:to-primary/30 transition-all duration-500"></div>
 

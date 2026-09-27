@@ -63,7 +63,7 @@ export const IndustryCard = ({ industry, delay = 0 }: IndustryCardProps) => {
         </div>
 
         {/* ===== الاسم لوحده تحت الصورة ===== */}
-        <h3 className="mt-4 text-lg md:text-2xl font-extrabold text-primary group-hover:text-primary transition-colors text-center">
+        <h3 className="mt-4 text-lg md:text-2xl font-extrabold  text-primary   group-hover:text-primary transition-colors text-center">
           {industry.name}
         </h3>
       </div>

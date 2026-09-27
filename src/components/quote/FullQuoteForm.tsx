@@ -353,7 +353,7 @@ const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     }
   };
 
-  const labelClass = "block text-sm font-medium text-[#171A21] mb-2";
+  const labelClass = "block text-sm font-medium  text-primary  mb-2";
 
   const baseInputClass =
     "w-full px-4 py-3 rounded-xl border bg-[#F9FAFB] text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all";
@@ -388,7 +388,7 @@ if (loading) {
     >
       {/* ===== Client Information ===== */}
       <div>
-        <h3 className="text-xl font-bold text-primary mb-5 border-b border-[#E1E3E4] pb-2">
+        <h3 className="text-xl font-bold  text-primary   mb-5 border-b border-[#E1E3E4] pb-2">
           {t.quote?.clientInfo || "Client Information"}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -493,7 +493,7 @@ if (loading) {
 
       {/* ===== Project Information ===== */}
       <div>
-        <h3 className="text-xl font-bold text-primary mb-5 border-b border-[#E1E3E4] pb-2">
+        <h3 className="text-xl font-bold  text-primary   mb-5 border-b border-[#E1E3E4] pb-2">
           {t.quote?.projectInfo || "Project Information"}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -574,7 +574,7 @@ if (loading) {
 
       {/* ===== Printing Details ===== */}
       <div>
-        <h3 className="text-xl font-bold text-primary mb-5 border-b border-[#E1E3E4] pb-2">
+        <h3 className="text-xl font-bold  text-primary   mb-5 border-b border-[#E1E3E4] pb-2">
           {t.quote?.printingDetails || "Printing Details"}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

@@ -64,6 +64,7 @@ if (loading) {
     <main>
       <PageBanner
         title={bannerTitle}
+        showSearch={true}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -81,7 +82,7 @@ if (loading) {
               </span>
               
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] max-w-xl">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary   max-w-xl">
               {t.industriesPage?.subtitle || 'Serving Diverse Industries'}
             </h2>
           </div>

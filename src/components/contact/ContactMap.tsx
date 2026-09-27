@@ -34,7 +34,7 @@ export const ContactMap = ({ lat, long, title, address }: ContactMapProps) => {
               <FiMapPin className="text-primary text-lg" />
             </div>
             <div className="flex-1">
-              <h3 className="text-sm md:text-base font-bold text-[#171A21] mb-1">
+              <h3 className="text-sm md:text-base font-bold  text-primary  mb-1">
                 {title || 'Our Location'}
               </h3>
               <p className="text-sm md:text-base text-[#667085] leading-relaxed">

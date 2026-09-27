@@ -160,7 +160,7 @@ function SearchContent() {
               {showServices && services.length > 0 && (
                 <div>
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl md:text-2xl font-bold text-[#171A21] mb-6">
+                    <h3 className="text-xl md:text-2xl font-bold  text-primary  mb-6">
                       {t.search?.services || 'Services'}
                     </h3>
                     <Link
@@ -195,7 +195,7 @@ function SearchContent() {
               {showProducts && products.length > 0 && (
                 <div>
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl md:text-2xl font-bold text-[#171A21] mb-6">
+                    <h3 className="text-xl md:text-2xl font-bold  text-primary   mb-6">
                       {t.search?.products || 'Products'}
                     </h3>
                     <Link

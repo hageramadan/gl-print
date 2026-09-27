@@ -54,6 +54,7 @@ export default function ContactPage() {
       {/* ===== البانر ===== */}
       <PageBanner
         title={bannerTitle}
+        showSearch={true}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: t.banner?.home || 'Home', href: '/' },
@@ -66,7 +67,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4">
           <div className=" mb-4">
            
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary   mb-4">
               {t.contact?.title2 || "Let's Get in Touch"}
             </h2>
             <p className="text-base md:text-lg text-[#45464F] max-w-2xl">

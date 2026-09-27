@@ -216,12 +216,12 @@ export const Sidebar = ({
               <FiPhone className="text-primary text-xl" />
             </div>
             <div>
-              <p className="text-[#090E1B] font-medium mb-1 text-sm lg:text-base">
+              <p className="  text-primary   font-medium mb-1 text-sm lg:text-base">
                 {t.sidebar?.callUs || 'Call us now'}
               </p>
               <a
                 href={`tel:${contact.phone}`}
-                className="text-base lg:text-lg font-bold text-[#090E1B] hover:text-secondary transition-colors"
+                className="text-base lg:text-lg font-bold   text-primary   hover:text-secondary transition-colors"
                 dir="ltr"
               >
                 {contact.phone}
@@ -234,12 +234,12 @@ export const Sidebar = ({
               <FiMail className="text-primary text-xl" />
             </div>
             <div>
-              <p className="text-[#090E1B] font-medium mb-1 text-sm lg:text-base">
+              <p className="  text-primary   font-medium mb-1 text-sm lg:text-base">
                 {t.sidebar?.emailAddress || 'Email Address'}
               </p>
               <a
                 href={`mailto:${contact.email}`}
-                className="text-base lg:text-lg font-bold text-[#090E1B] hover:text-secondary transition-colors break-all"
+                className="text-base lg:text-lg font-bold   text-primary   hover:text-secondary transition-colors break-all"
               >
                 {contact.email}
               </a>
@@ -251,7 +251,7 @@ export const Sidebar = ({
               <FiMapPin className="text-primary text-xl" />
             </div>
             <div>
-              <p className="text-[#090E1B] font-medium mb-1 text-sm lg:text-base">
+              <p className="  text-primary   font-medium mb-1 text-sm lg:text-base">
                 {t.sidebar?.officeAddress || 'Office Address'}
               </p>
               <p className="text-base font-bold text-gray-800">

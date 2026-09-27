@@ -49,10 +49,10 @@ export const Services = ({ data }: ServicesProps) => {
               {t.services2?.tag || "Our Services"}
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-[#171A21] mt-2">
+          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-extrabold  text-primary   mt-2">
             {t.services2?.title || "Everything Your Brand"}
             <br />
-            <span className="text-[#171A21]">
+            <span className="  text-primary  ">
               {t.services2?.subtitle || "Needs In One Place."}
             </span>
           </h2>
@@ -124,7 +124,7 @@ export const Services = ({ data }: ServicesProps) => {
 
                       {/* ===== Learn More مع حدود (يظهر عند hover) ===== */}
                       <div className="inline-flex items-center gap-2 text-white w-fit font-medium border-2 border-white/80 px-2 py-2 rounded-2xl group-hover:rounded-full transition-all duration-500 group-hover:px-4 group-hover:border-white">
-                        <span className="text-sm transition-all duration-500 lg:hidden group-hover:block">
+                        <span aria-label="show more services" className="text-sm transition-all duration-500 lg:hidden group-hover:block">
                           {learnMoreText}
                         </span>
                         <ArrowLongIcon className="text-xl transition-transform duration-300 group-hover:translate-x-1 mx-2" />

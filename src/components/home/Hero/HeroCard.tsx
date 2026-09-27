@@ -15,7 +15,7 @@ export const HeroCard = () => {
         ${
           isHovered
             ? "bg-secondary text-white scale-105 shadow-secondary/30"
-            : "bg-white/80 backdrop-blur-md text-[#090E1B]"
+            : "bg-white/80 backdrop-blur-md   text-primary  "
         }
       `}
       onMouseEnter={() => setIsHovered(true)}

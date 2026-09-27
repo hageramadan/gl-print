@@ -49,6 +49,7 @@ export default function ServiceDetailsPage() {
     <main>
       <PageBanner
         title={service.title}
+        showSearch={true}
         backgroundImage={
           service.cover_image || "/images/banner/services-banner.png"
         }
@@ -63,7 +64,7 @@ export default function ServiceDetailsPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             <div className="w-full lg:w-1/2">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-4 mt-2">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold  text-primary   mb-4 mt-2">
                 {service.title}
               </h1>
 

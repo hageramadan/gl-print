@@ -277,7 +277,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                     href={`/services/${service.slug}`}
                                     className={`
                                       flex items-center justify-between px-4 py-2.5 transition-colors
-                                      ${isSubOpen ? "bg-primary/5 text-primary" : "text-gray-700 hover:bg-gray-50 hover:text-black"}
+                                      ${isSubOpen ? "bg-primary/5  text-primary  " : "text-gray-700 hover:bg-gray-50 hover:text-black"}
                                     `}
                                   >
                                     <span>{service.title}</span>
