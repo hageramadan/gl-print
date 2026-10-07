@@ -109,7 +109,7 @@ export const Services = ({ data }: ServicesProps) => {
 
                     {/* ===== المحتوى ===== */}
                     <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8">
-                      <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-bold mb-2 group-hover:translate-x-2 transition-all duration-300">
+                      <h3 className="text-white ms-0 text-xl line-clamp-1 md:text-2xl lg:text-3xl font-bold mb-2 group-hover:translate-x-2 transition-all duration-300">
                         {service.title}
                       </h3>
 
@@ -118,7 +118,7 @@ export const Services = ({ data }: ServicesProps) => {
                         {service.description}
                       </p> */}
                        <div
-              className="text-white/0 text-sm md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0"
+              className="text-white/0 text-sm line-clamp-2 ms-2  md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0"
                         dangerouslySetInnerHTML={{ __html:service.description }}
                       />
 
