@@ -7,14 +7,37 @@ import { FullQuoteForm } from '@/src/components/quote/FullQuoteForm';
 import { ContactSidebar } from '@/src/components/quote/ContactSidebar';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { getHomeData } from '@/src/services/homeApi';
+import { LoadingScreen } from '@/src/components/common/LoadingScreen';
+
+async function getQuoteBanner(language: string) {
+  try {
+    const response = await fetch('https://glprint-eg.com/api/request-quotes/banner', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Accept-Language': language,
+      },
+    });
+    const data = await response.json();
+    if (data.result && data.data?.banner) {
+      return data.data.banner;
+    }
+    return null;
+  } catch (error) {
+    console.error('Failed to fetch quote banner:', error);
+    return null;
+  }
+}
 
 function QuoteContent() {
   const { t, dir, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'quick' | 'full'>('full');
   const [contactInfo, setContactInfo] = useState<any>(null);
   const [socialLinks, setSocialLinks] = useState<any>(null);
+  const [bannerData, setBannerData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  // ✅ جلب بيانات الاتصال والسوشيال من API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,18 +59,38 @@ function QuoteContent() {
     fetchData();
   }, [language]);
 
+  useEffect(() => {
+    const fetchBanner = async () => {
+      setLoading(true);
+      const banner = await getQuoteBanner(language);
+      if (banner) {
+        setBannerData(banner);
+      }
+      setLoading(false);
+    };
+    fetchBanner();
+  }, [language]);
+
+  if (loading) {
+    return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+  }
+
+  const bannerTitle = bannerData?.title || t.quote?.pageTitle || 'Get a Quote';
+  const bannerImage = bannerData?.image_url || '';
+
   return (
     <main>
-      {/* ===== البانر ===== */}
-      <PageBanner
-        title={t.quote?.pageTitle || 'Get a Quote'}
-        showSearch={true}
-        backgroundImage="/images/banner/banner-quote.png"
-        breadcrumbs={[
-          { label: t.banner?.home || 'Home', href: '/' },
-          { label: t.quote?.pageTitle || 'Get a Quote', href: '#' },
-        ]}
-      />
+      {bannerImage ? (
+        <PageBanner
+          title={bannerTitle}
+          showSearch={true}
+          backgroundImage={bannerImage}
+          breadcrumbs={[
+            { label: t.banner?.home || 'Home', href: '/' },
+            { label: bannerTitle, href: '#' },
+          ]}
+        />
+      ) : null}
 
       <section className="py-12 md:py-16 lg:py-20 bg-white" dir={dir}>
         <div className="container mx-auto px-4">
@@ -62,21 +105,20 @@ function QuoteContent() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 lg:gap-12">
-            {/* ===== الفورم ===== */}
             <div className="lg:col-span-4">
               <div className="flex items-center gap-3 mb-5 lg:mb-10 border-b pb-5 border-[#E1E3E4]">
                 <button
-                aria-label={`go to ${t.quote}`}
+                  aria-label={`go to ${t.quote}`}
                   onClick={() => setActiveTab('quick')}
                   className={`
-                    px-6 py-3 cursor-pointer font-semibold  text-primary   transition-all duration-300
+                    px-6 py-3 cursor-pointer font-semibold text-primary transition-all duration-300
                     ${activeTab === 'quick' ? 'border-b border-primary' : ''}
                   `}
                 >
                   {t.quote?.quickInquiry || 'Quick Inquiry'}
                 </button>
                 <button
-                aria-label={`go to ${t.quote}`}
+                  aria-label={`go to ${t.quote}`}
                   onClick={() => setActiveTab('full')}
                   className={`
                     px-6 py-3 cursor-pointer font-semibold transition-all duration-300
@@ -92,7 +134,6 @@ function QuoteContent() {
               </div>
             </div>
 
-            {/* ===== Sidebar ===== */}
             <div className="lg:col-span-2">
               <ContactSidebar
                 contactInfo={contactInfo || undefined}
@@ -110,9 +151,7 @@ export default function QuotePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-        </div>
+        <LoadingScreen isLoading={true} videoSrc="/videos/loading.mp4" />
       }
     >
       <QuoteContent />
