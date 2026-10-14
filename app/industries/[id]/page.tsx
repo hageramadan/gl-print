@@ -215,7 +215,7 @@ export default function IndustryDetailsPage() {
         ]}
       />
 
-      {industry.categories && industry.categories.length > 0 && (
+      
         <section className="py-12 md:py-16 lg:py-20" dir={dir}>
           <div className="container mx-auto px-4">
             <div className="mb-12 md:mb-16">
@@ -378,7 +378,7 @@ export default function IndustryDetailsPage() {
             )}
           </div>
         </section>
-      )}
+     
     </main>
   );
 }
