@@ -43,7 +43,7 @@ export const ProductCard = ({ product, delay = 0 }: ProductCardProps) => {
     };
   }, []);
 
-  const imageUrl = product.image?.[0]?.url || '/images/products/placeholder.png';
+  const imageUrl = product.image?.[0]?.url || '/images/placeholder/placeholder.png';
  const productUrl = `/products/${product.slug}`;
   return (
     <Link href={productUrl} className="block group" aria-label={`go to ${product.slug}`}>

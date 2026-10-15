@@ -32,7 +32,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
     id: product.id,
     title: product.name,
     description: product.description,
-    image: product.image?.[0]?.url || "/images/products/placeholder.png",
+    image: product.image?.[0]?.url || "/images/placeholder/placeholder.png",
    link: `/products/${product.slug}`,
     category: "Product",
   }));

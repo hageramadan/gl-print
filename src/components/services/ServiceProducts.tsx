@@ -46,7 +46,7 @@ export const ServiceProducts = ({ products }: ServiceProductsProps) => {
                   <Image
                     src={
                       product.image?.[0]?.url ||
-                      '/images/products/placeholder.png'
+                      '/images/placeholder/placeholder.png'
                     }
                     alt={product.name}
                     fill

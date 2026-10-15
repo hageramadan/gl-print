@@ -20,9 +20,20 @@ interface ProductDetailsProps {
     name: string;
     description: string;
     image: Array<{ id: number; url: string }>;
-    product_attributes?: ProductAttribute[]; // ✅ جديد
+    product_attributes?: ProductAttribute[];
   };
 }
+
+// ✅ الصورة الافتراضية
+const PLACEHOLDER_IMAGE = "/images/placeholder/placeholder.png";
+
+// ✅ دالة مساعدة للتحقق من الصورة
+const getImageSrc = (url?: string | null) => {
+  if (!url || url.trim() === "") {
+    return PLACEHOLDER_IMAGE;
+  }
+  return url;
+};
 
 export const ProductDetails = ({ product }: ProductDetailsProps) => {
   const { t, dir } = useLanguage();
@@ -33,12 +44,18 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
   const images = product.image || [];
   const hasMultipleImages = images.length > 2;
 
+  // ✅ في حال عدم وجود صور نهائياً، نعرض الصورة الافتراضية
+  const displayImages =
+    images.length > 0
+      ? images
+      : [{ id: 0, url: PLACEHOLDER_IMAGE }];
+
   // ✅ استخدام product_attributes من API
   const specifications = product.product_attributes || [];
 
   // ✅ الانتقال لصورة معينة + تمرير الصور المصغرة
   const goToImage = (index: number) => {
-    const total = images.length;
+    const total = displayImages.length;
     if (total === 0) return;
 
     let newIndex = index;
@@ -76,9 +93,8 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
           {/* ===== الصور ===== */}
           <div className="w-full lg:w-1/2">
-          {/* max-h-[702px]  shadow-2xl*/}
-            <div className="relative w-full max-h-165.5 py-4 aspect-square rounded-2xl overflow-hidden shadow-lg ">
-              {images.length > 0 && (
+            <div className="relative w-full max-h-165.5 py-4 aspect-square rounded-2xl overflow-hidden shadow-lg">
+              {displayImages.length > 0 && (
                 <Swiper
                   modules={[Navigation, EffectFade]}
                   effect="fade"
@@ -93,14 +109,14 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                   allowTouchMove={true}
                   className="w-full h-full"
                 >
-                  {images.map((img) => (
+                  {displayImages.map((img) => (
                     <SwiperSlide key={img.id}>
                       <div className="relative w-full h-full">
                         <Image
-                          src={img.url}
+                          src={getImageSrc(img.url)}
                           alt={product.name}
                           fill
-                          className="object-contain "
+                          className="object-contain"
                         />
                       </div>
                     </SwiperSlide>
@@ -108,10 +124,8 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                 </Swiper>
               )}
 
-              {/* <div className="absolute inset-0 bg-black/20 pointer-events-none z-10"></div> */}
-
               {/* ===== الصور المصغرة + الأسهم ===== */}
-              {images.length > 1 && (
+              {displayImages.length > 1 && (
                 <div className="absolute bottom-4 start-0 end-0 z-20 px-4">
                   <div className="flex items-center justify-center gap-3">
                     {hasMultipleImages && (
@@ -146,7 +160,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                         maxWidth: "100%",
                       }}
                     >
-                      {images.map((img, index) => (
+                      {displayImages.map((img, index) => (
                         <button
                           key={img.id}
                           type="button"
@@ -160,7 +174,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                           }}
                         >
                           <Image
-                            src={img.url}
+                            src={getImageSrc(img.url)}
                             alt={`${product.name} ${index + 1}`}
                             fill
                             className="object-cover"
@@ -204,7 +218,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 
           {/* ===== التفاصيل ===== */}
           <div className="w-full lg:w-1/2">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold  text-primary   mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-4">
               {product.name}
             </h1>
 
@@ -225,7 +239,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                     <div className="w-14 h-14 rounded-lg bg-[#F6F7F9] flex items-center justify-center shrink-0">
                       {spec.image ? (
                         <Image
-                          src={spec.image}
+                          src={getImageSrc(spec.image)}
                           alt={spec.name}
                           width={120}
                           height={120}
@@ -236,7 +250,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
                       )}
                     </div>
                     <div>
-                      <span className="font-bold  text-primary   text-sm md:text-[20px]">
+                      <span className="font-bold text-primary text-sm md:text-[20px]">
                         {spec.name}
                       </span>
                       <p className="text-sm lg:text-[18px] font-medium text-[#667085]">
