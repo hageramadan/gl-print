@@ -83,7 +83,7 @@ export const ServiceCard = ({
         {description}
       </p> */}
       
-       <div
+       {/* <div
               className="blog-content prose prose-lg max-w-none text-[#667085] leading-relaxed
               prose-headings:text-primary prose-headings:font-bold
               prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-8 prose-h2:mb-4
@@ -96,7 +96,7 @@ export const ServiceCard = ({
                prose-a:no-underline hover:prose-a:no-underline
               prose-ul:my-4 prose-li:my-1"
                         dangerouslySetInnerHTML={{ __html: description }}
-                      />
+                      /> */}
         
 
       <Link

@@ -108,7 +108,7 @@ export const PageBanner = ({
         {/* ===== العنوان + البحث في المنتصف ===== */}
         <div className="flex-1 flex flex-col justify-center">
           {showSearch ? (
-            <div className="relative z-10 container mx-auto  h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
+            <div className="relative z-10 container mx-auto  h-full flex flex-col lg:flex-row items-start justify-center lg:justify-between mt-10">
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center lg:text-start mb-6">
                 {title}
               </h1>
