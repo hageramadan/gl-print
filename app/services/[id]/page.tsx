@@ -72,7 +72,7 @@ export default function ServiceDetailsPage() {
                 {service.description}
               </p> */}
                 <div
-                className="blog-content2 text-base md:text-lg text-[#45464F] font-medium leading-relaxed"
+                className="blog-content prose-a:no-underline text-base md:text-lg text-[#45464F] font-medium leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
             </div>

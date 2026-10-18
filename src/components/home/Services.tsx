@@ -118,7 +118,7 @@ export const Services = ({ data }: ServicesProps) => {
                         {service.description}
                       </p> */}
                        {/* <div
-              className="text-white/0 text-sm line-clamp-2 ms-2  md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0"
+              className="text-white/0 prose-a:no-underline text-sm line-clamp-2 ms-2  md:text-base mb-4 max-w-xs transition-all duration-500 group-hover:text-white/90 group-hover:opacity-100 opacity-0 -translate-x-4 group-hover:translate-x-0"
                         dangerouslySetInnerHTML={{ __html:service.description }}
                       /> */}
 

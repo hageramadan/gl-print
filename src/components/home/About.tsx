@@ -225,7 +225,7 @@ export const About = ({ data }: AboutProps) => {
               
                 
                  text-xl md:text-2xl lg:text-[32px]  text-primary   font-extrabold mb-4 leading-relaxed
-                 
+                 blog-content
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
                 prose-ul:my-4 prose-li:my-1"
@@ -261,7 +261,7 @@ export const About = ({ data }: AboutProps) => {
                     prose prose-lg max-w-none
                     text-[#667085]
                   font-medium md:font-semibold  leading-relaxed
-
+                  
                     prose-headings:text-primary
                     prose-headings:font-bold
 

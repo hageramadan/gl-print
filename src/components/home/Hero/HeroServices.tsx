@@ -115,8 +115,8 @@ export const HeroServices = () => {
                     {service.description}
                   </p> */}
                    <div
-                className="    text-[10px] sm:text-xs md:text-sm lg:text-base 
-                      text-[#585858] mb-1 sm:mb-2 
+                className=" blog-content   text-[10px] sm:text-xs md:text-sm lg:text-base 
+                      text-[#585858] mb-1 sm:mb-2  prose-a:no-underline
                       line-clamp-2"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
@@ -217,9 +217,9 @@ export const HeroServices = () => {
                         {service.description}
                       </p> */}
                       <div
-                className="text-xs 
+                className="blog-content text-xs 
                           text-[#585858] mb-2 
-                          line-clamp-2"
+                          line-clamp-2 prose-a:no-underline"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
                       <Link

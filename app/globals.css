@@ -269,9 +269,9 @@ html[dir="rtl"] .text-right {
   text-decoration-line: none !important;
   border-bottom: none !important;
   box-shadow: none !important;
-  color: #667085;
   transition: color 0.3s ease;
 }
+
 .blog-content.prose a,
 .blog-content.prose a:link,
 .blog-content.prose a:visited,
@@ -289,7 +289,6 @@ html[dir="rtl"] .text-right {
   box-shadow: none !important;
   background-image: none !important;
 
-  color: #667085 !important;
 }
 
 .blog-content.prose a,

@@ -224,7 +224,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 
             {/* ✅ الوصف يدعم HTML */}
             <div
-              className="text-base md:text-lg text-[#667085] font-semibold leading-relaxed mb-8"
+              className="blog-content text-base md:text-lg text-[#667085] prose-a:no-underline font-semibold leading-relaxed mb-8"
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
 

@@ -42,7 +42,7 @@ export const SearchServiceCard = ({ service }: SearchServiceCardProps) => {
         {service.description}
       </p> */}
         <div
-                className="text-sm text-[#585858] mb-4 line-clamp-2 flex-1"
+                className="blog-content text-sm text-[#585858] mb-4 line-clamp-2 flex-1 prose-a:no-underline"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
 

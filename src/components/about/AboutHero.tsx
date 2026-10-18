@@ -64,7 +64,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
               
                 
                  text-xl md:text-2xl lg:text-[32px]  text-primary   font-extrabold mb-4 leading-relaxed
-                 
+                 blog-content
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
                 prose-ul:my-4 prose-li:my-1"
@@ -106,7 +106,7 @@ export const AboutHero = ({ data }: AboutHeroProps) => {
 
                     prose-a:text-[#667085]
                     prose-a:no-underline
-
+                    
                     prose-ul:my-2
                     prose-li:my-1"
                 dangerouslySetInnerHTML={{ __html: data.description }}

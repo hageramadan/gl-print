@@ -67,7 +67,7 @@ export const HeroContent = ({ data }: HeroContentProps) => {
           <span className="text-secondary">{titleLines[1] || ''}</span>
         </h1> */}
          <div
-              className="text-lg sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px] w-full lg:max-w-xl font-extrabold    text-primary  "
+              className="blog-content text-lg prose-a:no-underline sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px] w-full lg:max-w-xl font-extrabold    text-primary  "
               dangerouslySetInnerHTML={{ __html:data.title }}
             />
 
@@ -85,7 +85,7 @@ export const HeroContent = ({ data }: HeroContentProps) => {
                 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-6 prose-h3:mb-3
                 text-sm sm:text-base md:text-lg
                 mb-2 sm:mb-4
-                 
+                 blog-content
                  prose-p:font-medium 
                 prose-strong:text-primary
                 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline

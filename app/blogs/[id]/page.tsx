@@ -152,7 +152,7 @@ export default function BlogDetailsPage() {
 
                     prose-a:text-[#667085]
                     prose-a:no-underline
-
+           
                     prose-ul:my-4
                     prose-li:my-1
   "
