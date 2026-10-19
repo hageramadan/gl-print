@@ -11,6 +11,7 @@ import {
 import { IconType } from 'react-icons';
 
 interface ContactSidebarProps {
+  mapHref?: string;
   contactInfo?: {
     phone: string;
     email: string;
@@ -35,7 +36,7 @@ interface SocialItem {
   bg: string;
 }
 
-export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps) => {
+export const ContactSidebar = ({ contactInfo, socialLinks, mapHref }: ContactSidebarProps) => {
   const { t, dir } = useLanguage();
 
   const contact = {
@@ -70,6 +71,7 @@ export const ContactSidebar = ({ contactInfo, socialLinks }: ContactSidebarProps
       icon: FiMapPin,
       label: t.quote?.visitUs || 'VISIT US',
       value: contact.address,
+      href: mapHref || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`,
     },
     {
       icon: FiClock,

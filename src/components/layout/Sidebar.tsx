@@ -254,9 +254,15 @@ export const Sidebar = ({
               <p className="  text-primary   font-medium mb-1 text-sm lg:text-base">
                 {t.sidebar?.officeAddress || 'Office Address'}
               </p>
-              <p className="text-base font-bold text-gray-800">
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${contact.address} in Google Maps`}
+                className="text-base font-bold text-gray-800 hover:text-secondary transition-colors"
+              >
                 {contact.address}
-              </p>
+              </a>
             </div>
           </div>
         </div>

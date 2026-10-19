@@ -19,6 +19,12 @@ body {
   font-family: var(--font-montserrat), sans-serif;
   transition: font-family 0.3s ease;
 }
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+}
 .blog-content a {
   text-decoration: none !important;
 }
@@ -695,11 +701,17 @@ html[dir="rtl"] .text-right {
 .blog-content a:visited,
 .blog-content a:hover,
 .blog-content a:focus,
-.blog-content a:active {
+.blog-content a:active,
+.blog-content a *,
+.blog-content a:hover *,
+.blog-content a:focus * {
   text-decoration: none !important;
   text-decoration-line: none !important;
+  text-decoration-style: none !important;
+  text-decoration-thickness: 0 !important;
   border-bottom: none !important;
   box-shadow: none !important;
+  background-image: none !important;
 
   transition: color 0.3s ease;
 }

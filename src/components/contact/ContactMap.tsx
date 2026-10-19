@@ -14,6 +14,7 @@ export const ContactMap = ({ lat, long, title, address }: ContactMapProps) => {
   const marker = `${lat},${long}`;
 
   const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${marker}`;
+  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lat},${long}`)}`;
 
   return (
     <div className="bg-white rounded-2xl border border-[#E6E8ED] overflow-hidden shadow-lg">
@@ -29,7 +30,13 @@ export const ContactMap = ({ lat, long, title, address }: ContactMapProps) => {
       {/* ===== العنوان تحت الخريطة ===== */}
       {address && (
         <div className="p-5 md:p-6 border-t border-[#E6E8ED] bg-gray-50">
-          <div className="flex items-start gap-3">
+          <a
+            href={directionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${title || 'Our Location'}: ${address}`}
+            className="flex items-start gap-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          >
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
               <FiMapPin className="text-primary text-lg" />
             </div>
@@ -41,7 +48,7 @@ export const ContactMap = ({ lat, long, title, address }: ContactMapProps) => {
                 {address}
               </p>
             </div>
-          </div>
+          </a>
         </div>
       )}
     </div>

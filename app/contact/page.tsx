@@ -99,6 +99,7 @@ export default function ContactPage() {
             <div className="lg:col-span-2">
               <div className="lg:sticky lg:top-24">
                 <ContactSidebar
+                  mapHref={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${contact.location.lat},${contact.location.long}`)}`}
                   contactInfo={{
                     phone: contact.phone,
                     email: contact.email,
