@@ -80,6 +80,7 @@ export const SuccessPartners = ({ data }: SuccessPartnersProps) => {
                       src={partner.logo}
                       alt={`Partner ${partner.id}`}
                       fill
+                      sizes="(max-width: 639px) 96px, (max-width: 1023px) 112px, 150px"
                       className="object-contain"
                     />
                   </div>

@@ -1,63 +1,31 @@
-'use client';
+import type { Metadata } from 'next';
+import HomeClient from '@/src/components/home/HomeClient';
+import { getInitialHomeData, getInitialHeroServices } from '@/src/services/homeServer';
+import { getHomeMetadata, getHomeStructuredData } from '@/src/lib/homeSeo';
 
-import { useEffect, useState, useCallback } from 'react';
-import { About } from "@/src/components/home/About";
-import { FeaturedProducts } from "@/src/components/home/FeaturedProducts";
-import { Hero } from "@/src/components/home/Hero/Hero";
-import { Services } from "@/src/components/home/Services";
-import { Stats } from '@/src/components/home/Stats';
-import { SuccessPartners } from "@/src/components/home/SuccessPartners";
-import { Testimonials } from "@/src/components/home/Testimonials";
-import { getHomeData, HomeData } from "@/src/services/homeApi";
-import { useLanguage } from '@/src/hooks/useLanguage';
-import { LoadingScreen } from '@/src/components/common/LoadingScreen';
-
-export default function Home() {
-  const { language } = useLanguage();
-  const [data, setData] = useState<HomeData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-  
-      const homeData = await getHomeData(language);
-      setData(homeData);
-      setError(null);
-    } catch (err) {
-      console.error('❌ Failed to fetch home data:', err);
-      setError('Failed to load content. Please try again later.');
-    } finally {
-      // تأخير بسيط لإظهار شاشة التحميل بشكل أنيق
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }, [language]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData, language]);
-
-  // عرض شاشة التحميل
-  if (loading) {
-    return <LoadingScreen isLoading={loading} videoSrc="/videos/loading.mp4" />;
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    return getHomeMetadata(await getInitialHomeData());
+  } catch {
+    return getHomeMetadata();
   }
+}
 
-  if (error || !data) {
-    return null;
-  }
+export default async function Home() {
+  const [data, services] = await Promise.all([
+    getInitialHomeData(),
+    getInitialHeroServices(),
+  ]);
 
   return (
     <>
-      <Hero data={data.hero_section} />
-      <About data={data.about_section} />
-      <Stats data={data.counters} />
-      <Services data={data.services} />
-      <FeaturedProducts data={data.products} />
-      <Testimonials data={data.testimonials} />
-      <SuccessPartners data={data.companies} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getHomeStructuredData(data)).replace(/</g, '\\u003c'),
+        }}
+      />
+      <HomeClient initialData={data} initialServices={services} />
     </>
   );
 }

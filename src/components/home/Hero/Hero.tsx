@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { HeroContent } from './HeroContent';
 import { HeroServices } from './HeroServices';
 import { HeroSearch } from './HeroSearch';
-import { HeroSlide } from '@/src/services/homeApi';
+import type { HeroSlide, Counter } from '@/src/services/homeApi';
+import type { Service } from '@/src/services/servicesApi';
 
 interface HeroProps {
+  initialServices: Service[];
   data: {
     tagline: string;
     title: string;
@@ -15,11 +17,11 @@ interface HeroProps {
     primary_button: { text: string; action_type: string };
     secondary_button: { text: string; action_type: string };
     slides_images: HeroSlide[];
-    counters_section: any[];
+    counters_section: Counter[];
   };
 }
 
-export const Hero = ({ data }: HeroProps) => {
+export const Hero = ({ data, initialServices }: HeroProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -88,13 +90,14 @@ export const Hero = ({ data }: HeroProps) => {
             >
               <Image
                 src={slide.url}
-                alt={`Slide ${index + 1}`}
+                alt=""
                 fill
+                sizes="100vw"
                 className="object-cover object-center"
                 style={{
                   objectPosition: 'center 15%',
                 }}
-                priority={index === 0}
+                preload={index === 0}
               />
             </div>
           ))}
@@ -119,7 +122,7 @@ export const Hero = ({ data }: HeroProps) => {
         </div>
       </div>
 
-      <HeroServices />
+      <HeroServices initialServices={initialServices} />
     </section>
   );
 };

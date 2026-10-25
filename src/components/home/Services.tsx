@@ -101,6 +101,7 @@ export const Services = ({ data }: ServicesProps) => {
                       src={service.image || service.icon}
                       alt={service.title}
                       fill
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
 

@@ -7,6 +7,7 @@ import {
   ReactNode,
   useCallback,
 } from 'react';
+import { getHomeData, seedHomeData, type HomeData } from '@/src/services/homeApi';
 
 type Language = 'en' | 'ar';
 
@@ -20,8 +21,11 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+export const LanguageProvider = ({ children, initialHomeData }: { children: ReactNode; initialHomeData?: HomeData }) => {
+  const [language, setLanguage] = useState<Language>(() => {
+    if (initialHomeData) seedHomeData('en', initialHomeData);
+    return 'en';
+  });
   const [dir, setDir] = useState<'ltr' | 'rtl'>('ltr');
 
   // ✅ دالة تحديث Meta Tag
@@ -59,21 +63,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const updateMetadata = useCallback(
     async (lang: Language) => {
       try {
-        const response = await fetch('https://admin.glprint-eg.com/api/home', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'Accept-Language': lang,
-            lang: lang,
-          },
-          cache: 'no-store',
-        });
-
-        if (!response.ok) return;
-
-        const data = await response.json();
-        const seo = data.data?.seo;
+        // The home page owns its metadata; other routes keep their own head tags.
+        if (window.location.pathname !== '/') return;
+        const data = await getHomeData(lang);
+        const seo = data.seo;
 
         if (!seo) return;
 
@@ -99,8 +92,14 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         updateMetaTag('twitter:description', seo.meta_description, 'name');
 
         // ✅ تحديث Canonical
-        if (seo.canonical_url) {
-          updateCanonical(seo.canonical_url);
+        const canonical = process.env.NEXT_PUBLIC_SITE_URL || seo.canonical_url;
+        if (canonical) {
+          try {
+            const url = new URL(canonical);
+            if (['https:', 'http:'].includes(url.protocol)) updateCanonical(url.href);
+          } catch {
+            // Keep the server canonical if the CMS value is not a valid URL.
+          }
         }
       } catch (error) {
         console.error('Failed to update metadata:', error);

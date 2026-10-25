@@ -13,10 +13,10 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import { LoadingScreen } from '../../common/LoadingScreen';
 
-export const HeroServices = () => {
+export const HeroServices = ({ initialServices }: { initialServices: Service[] }) => {
   const { language } = useLanguage();
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [services, setServices] = useState<Service[]>(initialServices);
+  const [loading, setLoading] = useState(false);
 
   // ✅ تحديد اللغة العربية
   const isArabic = language === 'ar';
@@ -29,20 +29,24 @@ export const HeroServices = () => {
 
   // ✅ جلب أول 3 خدمات من API
   useEffect(() => {
+    let active = true;
     const fetchServices = async () => {
       try {
-        setLoading(true);
-        const response = await getServices(1, language);
+        if (language !== 'en' || initialServices.length === 0) setLoading(true);
+        const services = language === 'en' && initialServices.length > 0
+          ? await Promise.resolve(initialServices)
+          : (await getServices(1, language)).data.services.slice(0, 3);
         // ✅ أول 3 خدمات فقط
-        setServices(response.data.services.slice(0, 3));
+        if (active) setServices(services);
       } catch (error) {
         console.error('Failed to fetch hero services:', error);
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     };
     fetchServices();
-  }, [language]);
+    return () => { active = false; };
+  }, [language, initialServices]);
 
   // if (loading || services.length === 0) {
   //   return null;
@@ -95,7 +99,7 @@ export const HeroServices = () => {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h1
+                  <h3
                     className="
                       text-xs sm:text-sm md:text-base lg:text-lg 
                       font-bold text-[#070D14] mb-0.5 sm:mb-1 
@@ -104,7 +108,7 @@ export const HeroServices = () => {
                     "
                   >
                     {service.title}
-                  </h1>
+                  </h3>
                   {/* <p
                     className="
                       text-[10px] sm:text-xs md:text-sm lg:text-base 
@@ -197,7 +201,7 @@ export const HeroServices = () => {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h1
+                      <h3
                         className="
                           text-sm 
                           font-bold text-[#070D14] mb-1 
@@ -206,7 +210,7 @@ export const HeroServices = () => {
                         "
                       >
                         {service.title}
-                      </h1>
+                      </h3>
                       {/* <p
                         className="
                           text-xs 

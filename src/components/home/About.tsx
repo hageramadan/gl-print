@@ -21,7 +21,7 @@ interface AboutProps {
 }
 
 export const About = ({ data }: AboutProps) => {
-  const { t, dir } = useLanguage();
+  const { dir } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -44,15 +44,9 @@ export const About = ({ data }: AboutProps) => {
       { threshold: 0.2 },
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    const section = sectionRef.current;
+    if (section) observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -86,6 +80,7 @@ export const About = ({ data }: AboutProps) => {
                   src={images[0]}
                   alt={data?.tagline || "About GL Print"}
                   fill
+                  sizes="346px"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -110,6 +105,7 @@ export const About = ({ data }: AboutProps) => {
                   src={images[1]}
                   alt={data?.tagline || "About GL Print 2"}
                   fill
+                  sizes="200px"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -134,6 +130,7 @@ export const About = ({ data }: AboutProps) => {
                   src={images[2]}
                   alt={data?.tagline || "About GL Print 3"}
                   fill
+                  sizes="224px"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>

@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/src/hooks/useLanguage';
-import { useEffect, useRef } from 'react';
 import { FaArrowRight } from "react-icons/fa6";
 import { HeroCard } from './HeroCard';
+import type { Counter } from '@/src/services/homeApi';
 
 interface HeroContentProps {
   data: {
@@ -13,44 +13,15 @@ interface HeroContentProps {
     description: string;
     primary_button: { text: string; action_type: string };
     secondary_button: { text: string; action_type: string };
-    counters_section: any[];
+    counters_section: Counter[];
   };
 }
 
 export const HeroContent = ({ data }: HeroContentProps) => {
-  const { t, dir } = useLanguage();
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (contentRef.current) {
-      observer.observe(contentRef.current);
-    }
-
-    return () => {
-      if (contentRef.current) {
-        observer.unobserve(contentRef.current);
-      }
-    };
-  }, []);
-
-  // تقسيم العنوان للحصول على سطرين
-  const titleLines = data.title.split('\n');
-
+  const { dir } = useLanguage();
   return (
     <div 
-      ref={contentRef}
-      className="relative w-full lg:w-1/2 bg-white/75 backdrop-blur-sm rounded-2xl p-5 sm:p-6 md:p-8 shadow-2xl border border-white/10 opacity-0 mx-auto lg:mx-0"
+      className="relative w-full lg:w-1/2 bg-white/75 backdrop-blur-sm rounded-2xl p-5 sm:p-6 md:p-8 shadow-2xl border border-white/10 animate-fade-in-up mx-auto lg:mx-0"
       style={{ animationFillMode: 'forwards' }}
       dir={dir}
     >
@@ -66,7 +37,7 @@ export const HeroContent = ({ data }: HeroContentProps) => {
           <br />
           <span className="text-secondary">{titleLines[1] || ''}</span>
         </h1> */}
-         <div
+         <h1
               className="blog-content text-lg prose-a:no-underline sm:text-xl md:text-2xl lg:text-[40px] xl:text-[40px] w-full lg:max-w-xl font-extrabold    text-primary  "
               dangerouslySetInnerHTML={{ __html:data.title }}
             />

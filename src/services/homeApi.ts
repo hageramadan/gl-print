@@ -120,9 +120,30 @@ export interface HomeData {
   footer: FooterData;
 }
 
-export const getHomeData = async (language: string = 'en'): Promise<HomeData> => {
- 
-  
+const browserRequests = new Map<string, { expires: number; promise: Promise<HomeData> }>();
+
+// Share the server payload with components that also consume /home in the browser.
+export function seedHomeData(language: string, data: HomeData) {
+  if (typeof window !== 'undefined') {
+    browserRequests.set(language, { expires: Date.now() + 60_000, promise: Promise.resolve(data) });
+  }
+}
+
+export const getHomeData = (language: string = 'en'): Promise<HomeData> => {
+  const cached = typeof window !== 'undefined' ? browserRequests.get(language) : undefined;
+  if (cached && cached.expires > Date.now()) return cached.promise;
+
+  const promise = fetchHomeData(language);
+  if (typeof window !== 'undefined') {
+    browserRequests.set(language, { expires: Date.now() + 60_000, promise });
+    void promise.catch(() => {
+      if (browserRequests.get(language)?.promise === promise) browserRequests.delete(language);
+    });
+  }
+  return promise;
+};
+
+async function fetchHomeData(language: string): Promise<HomeData> {
   const response = await fetch('https://admin.glprint-eg.com/api/home', {
     method: 'GET',
     headers: {
@@ -131,7 +152,7 @@ export const getHomeData = async (language: string = 'en'): Promise<HomeData> =>
       'Accept-Language': language,
     
     },
-    // cache: 'no-store',
+    next: { revalidate: 300 },
   });
 
   if (!response.ok) {
@@ -141,4 +162,4 @@ export const getHomeData = async (language: string = 'en'): Promise<HomeData> =>
   const data = await response.json();
 
   return data.data;
-};
+}

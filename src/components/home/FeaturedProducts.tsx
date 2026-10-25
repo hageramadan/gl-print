@@ -33,7 +33,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
     title: product.name,
     description: product.description,
     image: product.image?.[0]?.url || "/images/placeholder/placeholder.png",
-   link: `/products/${product.slug}`,
+   link: `/products/${product.slug || product.id}`,
     category: "Product",
   }));
 
@@ -103,6 +103,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             src={product.image}
             alt={product.title}
             fill
+            sizes="50vw"
             className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
 

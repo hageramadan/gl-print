@@ -39,11 +39,11 @@ export const HeroCard = () => {
 
     
       <div>
-        <h1
+        <p
           className={`text-xl text-center md:text-[32px] font-extrabold  ${isHovered ? "text-white" : "text-primary"}`}
         >
           +1M
-        </h1>
+        </p>
         <p
           className={`
           text-xs md:text-lg font-medium

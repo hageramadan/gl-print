@@ -107,6 +107,7 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
                         src={testimonial.avatar}
                         alt={testimonial.client_name}
                         fill
+                        sizes="(max-width: 767px) 64px, 80px"
                         className="object-cover w-full h-full"
                       />
                     </div>
