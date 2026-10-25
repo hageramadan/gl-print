@@ -3,14 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { DeferredCarousel, CarouselSlide } from "@/src/components/common/DeferredCarousel";
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { getServices, Service } from '@/src/services/servicesApi';
+import { cardDescription } from '@/src/lib/cardDescription';
 
-import 'swiper/css';
-import 'swiper/css/autoplay';
 import { LoadingScreen } from '../../common/LoadingScreen';
 
 export const HeroServices = ({ initialServices }: { initialServices: Service[] }) => {
@@ -90,7 +88,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                   >
                     <Image
                       src={service.icon}
-                      alt={service.title}
+                      alt=""
                       width={50}
                       height={50}
                       className="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 p-0.5 sm:p-1"
@@ -99,7 +97,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3
+                  <h2
                     className="
                       text-xs sm:text-sm md:text-base lg:text-lg 
                       font-bold text-[#070D14] mb-0.5 sm:mb-1 
@@ -108,7 +106,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                     "
                   >
                     {service.title}
-                  </h3>
+                  </h2>
                   {/* <p
                     className="
                       text-[10px] sm:text-xs md:text-sm lg:text-base 
@@ -122,10 +120,11 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                 className=" blog-content   text-[10px] sm:text-xs md:text-sm lg:text-base 
                       text-[#585858] mb-1 sm:mb-2  prose-a:no-underline
                       line-clamp-2"
-                dangerouslySetInnerHTML={{ __html: service.description }}
+                dangerouslySetInnerHTML={{ __html: cardDescription(service.description) }}
               />
                   <Link
-                    aria-label={`go to services`}
+                    aria-label={`${learnMoreText} ${service.title}`}
+                    prefetch={false}
                     href={`/services/${service.slug}`}
                     className="
                       inline-flex items-center gap-1 
@@ -135,7 +134,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                       group-hover:gap-2 transition-all duration-300
                     "
                   >
-                    {learnMoreText}
+                    {learnMoreText}<span className="sr-only"> {service.title}</span>
                     
                     <ArrowIcon
                       className="
@@ -153,8 +152,8 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
 
         {/* ===== Mobile ===== */}
         <div className="block lg:hidden overflow-hidden">
-          <Swiper
-            modules={[Autoplay]}
+          <DeferredCarousel
+            modules={["autoplay"]}
             spaceBetween={16}
             slidesPerView={1.25}
             centeredSlides={false}
@@ -167,7 +166,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
             className="!overflow-visible"
           >
             {services.map((service) => (
-              <SwiperSlide key={service.id}>
+              <CarouselSlide key={service.id}>
                 <div
                   className="
                     group 
@@ -192,7 +191,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                       >
                         <Image
                           src={service.icon}
-                          alt={service.title}
+                          alt=""
                           width={50}
                           height={50}
                           className="object-contain w-10 h-10 p-1"
@@ -201,7 +200,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3
+                      <h2
                         className="
                           text-sm 
                           font-bold text-[#070D14] mb-1 
@@ -210,7 +209,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                         "
                       >
                         {service.title}
-                      </h3>
+                      </h2>
                       {/* <p
                         className="
                           text-xs 
@@ -224,10 +223,11 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                 className="blog-content text-xs 
                           text-[#585858] mb-2 
                           line-clamp-2 prose-a:no-underline"
-                dangerouslySetInnerHTML={{ __html: service.description }}
+                dangerouslySetInnerHTML={{ __html: cardDescription(service.description) }}
               />
                       <Link
-                        aria-label={`go to services`}
+                        aria-label={`${learnMoreText} ${service.title}`}
+                    prefetch={false}
                         href={`/services/${service.slug}`}
                         className="
                           inline-flex items-center gap-1 
@@ -236,7 +236,7 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                           group-hover:gap-2 transition-all duration-300
                         "
                       >
-                        {learnMoreText}
+                        {learnMoreText}<span className="sr-only"> {service.title}</span>
                         <ArrowIcon
                           className="
                             text-xs 
@@ -248,9 +248,9 @@ export const HeroServices = ({ initialServices }: { initialServices: Service[] }
                     </div>
                   </div>
                 </div>
-              </SwiperSlide>
+              </CarouselSlide>
             ))}
-          </Swiper>
+          </DeferredCarousel>
         </div>
       </div>
     </div>

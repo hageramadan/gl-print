@@ -55,7 +55,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
               {t.products?.title2 || "Latest Products"}
             </h2>
           </div>
-          <Link
+          <Link prefetch={false}
            aria-label={`go to products`}
             href="/products"
             className="inline-flex text-lg items-center gap-2 text-secondary/90 font-bold hover:text-secondary transition-colors mt-3 sm:mt-0 group"
@@ -73,7 +73,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {bottomProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} sizes="(max-width: 1023px) 50vw, 33vw" />
             ))}
           </div>
         </div>
@@ -83,6 +83,7 @@ export const FeaturedProducts = ({ data }: FeaturedProductsProps) => {
 };
 
 interface ProductCardProps {
+  sizes?: string;
   product: {
     id: number;
     title: string;
@@ -94,16 +95,16 @@ interface ProductCardProps {
   };
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, sizes = "50vw" }: ProductCardProps) => {
   return (
-    <Link href={product.link} className="block group"  aria-label={`go to ${product.link}`}>
+    <Link href={product.link} className="block group"  aria-label={product.title} prefetch={false}>
       <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full">
         <div className="relative w-full h-48 sm:h-56 md:h-62.5 lg:h-70 xl:h-100">
           <Image
             src={product.image}
             alt={product.title}
             fill
-            sizes="50vw"
+            sizes={sizes}
             className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
 

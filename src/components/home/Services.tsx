@@ -3,13 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/src/hooks/useLanguage";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { DeferredCarousel, CarouselSlide } from "@/src/components/common/DeferredCarousel";
 import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 // استيراد الـ CSS الخاص بـ Swiper
-import "swiper/css";
-import "swiper/css/pagination";
 
 interface ServicesProps {
   data: Array<{
@@ -59,8 +56,8 @@ export const Services = ({ data }: ServicesProps) => {
         </div>
 
         {/* ===== سلايدر الخدمات ===== */}
-        <Swiper
-          modules={[Autoplay, Pagination]}
+        <DeferredCarousel
+          modules={["autoplay", "pagination"]}
           spaceBetween={0}
           slidesPerView={1}
           breakpoints={{
@@ -92,14 +89,14 @@ export const Services = ({ data }: ServicesProps) => {
           className="pb-0!"
         >
           {servicesData.map((service) => (
-            <SwiperSlide key={service.id}>
-              <Link href={`/services/${service.slug}`} className="block group"  aria-label={`go to service`}>
+            <CarouselSlide key={service.id}>
+              <Link href={`/services/${service.slug}`} className="block group"  aria-label={service.title} prefetch={false}>
                 <div className="relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                   {/* ===== الصورة ===== */}
                   <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px]">
                     <Image
                       src={service.image || service.icon}
-                      alt={service.title}
+                      alt=""
                       fill
                       sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -134,13 +131,13 @@ export const Services = ({ data }: ServicesProps) => {
                   </div>
                 </div>
               </Link>
-            </SwiperSlide>
+            </CarouselSlide>
           ))}
-        </Swiper>
+        </DeferredCarousel>
 
         {/* ===== زر View All Services ===== */}
         <div className="text-center mt-8 md:mt-10">
-          <Link
+          <Link prefetch={false}
            aria-label={`go to services`}
             href="/services"
             className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-8 md:px-10 py-3 md:py-4 rounded-2xl font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"

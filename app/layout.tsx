@@ -21,6 +21,7 @@ const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["300", "400", "700", "800"],
   display: "swap",
+  preload: false,
   variable: "--font-almarai",
 });
 

@@ -283,7 +283,7 @@ export const About = ({ data }: AboutProps) => {
                     prose-ul:my-4
                     prose-li:my-1" dangerouslySetInnerHTML={{ __html: data.description }}/>
               {/* ===== زر Get a Quote ===== */}
-              <Link
+              <Link prefetch={false}
                 aria-label={`go to ${data.button.action_type}`}
                 href={
                   data?.button?.action_type === "request_quote"

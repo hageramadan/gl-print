@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { HeroContent } from './HeroContent';
 import { HeroServices } from './HeroServices';
@@ -23,33 +23,79 @@ interface HeroProps {
 
 export const Hero = ({ data, initialServices }: HeroProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const animatingUntil = useRef(0);
+  const section = useRef<HTMLElement>(null);
+  const firstImage = useRef<HTMLImageElement>(null);
+  const [enabledSlides, setEnabledSlides] = useState(() => new Set([0]));
   const [touchStartX, setTouchStartX] = useState(0);
 
   // استخدام الصور من الـ API بدلاً من الثابتة
   const slides = data.slides_images || [];
 
   const nextSlide = useCallback(() => {
-    if (isAnimating || slides.length === 0) return;
-    setIsAnimating(true);
+    if (performance.now() < animatingUntil.current || slides.length < 2) return;
+    animatingUntil.current = performance.now() + 500;
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  }, [isAnimating, slides.length]);
+  }, [slides.length]);
 
   const prevSlide = useCallback(() => {
-    if (isAnimating || slides.length === 0) return;
-    setIsAnimating(true);
+    if (performance.now() < animatingUntil.current || slides.length < 2) return;
+    animatingUntil.current = performance.now() + 500;
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  }, [isAnimating, slides.length]);
+  }, [slides.length]);
 
   useEffect(() => {
-    if (slides.length === 0) return;
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
+    const element = section.current;
+    if (!element || slides.length < 2) return;
+    let visible = false;
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const updateAutoplay = () => {
+      clearInterval(interval);
+      if (visible && !document.hidden) interval = setInterval(nextSlide, 5000);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      updateAutoplay();
+    });
+    observer.observe(element);
+    document.addEventListener('visibilitychange', updateAutoplay);
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', updateAutoplay);
+    };
   }, [nextSlide, slides.length]);
+
+  useEffect(() => {
+    const image = firstImage.current;
+    if (slides.length < 2 || !image) return;
+    // Prepare only the next frame, after the first image has loaded. Idle time
+    // alone does not mean the critical image has finished on a slow connection.
+    const prepareNext = () => setEnabledSlides((previous) => {
+      const next = (currentSlide + 1) % slides.length;
+      return previous.has(next) ? previous : new Set([...previous, next]);
+    });
+    let idleTask: number | undefined;
+    let frameTask: number | undefined;
+    const scheduleNext = () => {
+      if ('requestIdleCallback' in window) {
+        idleTask = window.requestIdleCallback(prepareNext, { timeout: 2000 });
+      } else {
+        frameTask = requestAnimationFrame(prepareNext);
+      }
+    };
+    if (image.complete) scheduleNext();
+    else {
+      image.addEventListener('load', scheduleNext, { once: true });
+      image.addEventListener('error', scheduleNext, { once: true });
+    }
+    return () => {
+      image.removeEventListener('load', scheduleNext);
+      image.removeEventListener('error', scheduleNext);
+      if (idleTask !== undefined) window.cancelIdleCallback(idleTask);
+      if (frameTask !== undefined) cancelAnimationFrame(frameTask);
+    };
+  }, [currentSlide, slides.length]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);
@@ -72,7 +118,7 @@ export const Hero = ({ data, initialServices }: HeroProps) => {
   }
 
   return (
-    <section className="relative w-full overflow-visible pb-20 md:pb-24 lg:pb-28">
+    <section ref={section} className="relative w-full overflow-visible pb-20 md:pb-24 lg:pb-28">
       <div className="relative w-full min-h-[600px] max-h-[1024px] md:h-[700px] lg:h-[900px] overflow-hidden">
         {/* الصور */}
         <div
@@ -88,7 +134,8 @@ export const Hero = ({ data, initialServices }: HeroProps) => {
                 ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}
               `}
             >
-              <Image
+              {(enabledSlides.has(index) || index === currentSlide) && <Image
+                ref={index === 0 ? firstImage : undefined}
                 src={slide.url}
                 alt=""
                 fill
@@ -98,7 +145,7 @@ export const Hero = ({ data, initialServices }: HeroProps) => {
                   objectPosition: 'center 15%',
                 }}
                 preload={index === 0}
-              />
+              />}
             </div>
           ))}
         </div>

@@ -1,0 +1,29 @@
+/* Match Swiper's responsive geometry before its JavaScript is needed. */
+.carousel-static {
+  --active-columns: var(--carousel-columns);
+  --active-gap: var(--carousel-gap);
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.carousel-static::-webkit-scrollbar { display: none; }
+.carousel-static > .swiper-wrapper > .swiper-slide {
+  width: calc((100% - (var(--active-columns) - 1) * var(--active-gap)) / var(--active-columns));
+  margin-inline-end: var(--active-gap);
+  scroll-snap-align: start;
+}
+@media (min-width: 480px) {
+  .carousel-static { --active-columns: var(--carousel-columns-480); --active-gap: var(--carousel-gap-480); }
+}
+@media (min-width: 640px) {
+  .carousel-static { --active-columns: var(--carousel-columns-640); --active-gap: var(--carousel-gap-640); }
+}
+@media (min-width: 768px) {
+  .carousel-static { --active-columns: var(--carousel-columns-768); --active-gap: var(--carousel-gap-768); }
+}
+@media (min-width: 1024px) {
+  .carousel-static { --active-columns: var(--carousel-columns-1024); --active-gap: var(--carousel-gap-1024); }
+}
+@media (min-width: 1280px) {
+  .carousel-static { --active-columns: var(--carousel-columns-1280); --active-gap: var(--carousel-gap-1280); }
+}

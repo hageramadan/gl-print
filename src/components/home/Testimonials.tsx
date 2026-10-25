@@ -2,13 +2,9 @@
 
 import Image from 'next/image';
 import { useLanguage } from '@/src/hooks/useLanguage';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { DeferredCarousel, CarouselSlide } from "@/src/components/common/DeferredCarousel";
 import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
 interface TestimonialsProps {
   data: Array<{
@@ -56,10 +52,10 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
             </button>
           </div>
 
-          <Swiper
+          <DeferredCarousel
           key={dir}
             dir={dir}
-            modules={[Autoplay, Pagination, Navigation]}
+            modules={["autoplay", "pagination", "navigation"]}
             spaceBetween={24}
             slidesPerView={1}
             navigation={{
@@ -99,22 +95,22 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
             className="lg:pb-14!"
           >
             {data.map((testimonial) => (
-              <SwiperSlide key={testimonial.id}>
+              <CarouselSlide key={testimonial.id}>
                 <div className="bg-[#F6F7F9] my-4 rounded-2xl border w-[80%] md:w-full mx-auto border-[#D2D6DF] shadow-lg shadow-[#0000000F] p-6 md:p-8 h-52 md:h-71 lg:h-71 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
                   <div className="flex items-center gap-4 mb-4 shrink-0">
                     <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0">
                       <Image
                         src={testimonial.avatar}
-                        alt={testimonial.client_name}
+                        alt=""
                         fill
                         sizes="(max-width: 767px) 64px, 80px"
                         className="object-cover w-full h-full"
                       />
                     </div>
                     <div>
-                      <h4 className="text-base md:text-[20px] font-semibold text-[#1A1A1A]">
+                      <h3 className="text-base md:text-[20px] font-semibold text-[#1A1A1A]">
                         {testimonial.client_name}
-                      </h4>
+                      </h3>
                       <p className="text-sm md:text-base text-[#5A5A6E]">
                         {testimonial.date}
                       </p>
@@ -138,9 +134,9 @@ export const Testimonials = ({ data }: TestimonialsProps) => {
                     {testimonial.comment}
                   </p>
                 </div>
-              </SwiperSlide>
+              </CarouselSlide>
             ))}
-          </Swiper>
+          </DeferredCarousel>
         </div>
       </div>
     </section>

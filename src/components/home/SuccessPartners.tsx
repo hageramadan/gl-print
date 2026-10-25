@@ -2,10 +2,8 @@
 
 import Image from 'next/image';
 import { useLanguage } from '@/src/hooks/useLanguage';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { DeferredCarousel, CarouselSlide } from "@/src/components/common/DeferredCarousel";
 
-import 'swiper/css';
 
 interface SuccessPartnersProps {
   data: Array<{
@@ -31,14 +29,14 @@ export const SuccessPartners = ({ data }: SuccessPartnersProps) => {
               {t.partners?.tag || 'Our Success Partners'}
             </span>
           </div>
-          <h3 className="text-lg md:text-xl lg:text-[46px] w-full lg:max-w-2xl  text-primary  font-extrabold">
+          <h2 className="text-lg md:text-xl lg:text-[46px] w-full lg:max-w-2xl  text-primary  font-extrabold">
             {t.partners?.subtitle || 'Companies and projects that have trusted us.'}
-          </h3>
+          </h2>
         </div>
 
         <div className="relative">
-          <Swiper
-            modules={[Autoplay]}
+          <DeferredCarousel
+            modules={["autoplay"]}
             spaceBetween={20}
             slidesPerView={3}
             breakpoints={{
@@ -73,7 +71,7 @@ export const SuccessPartners = ({ data }: SuccessPartnersProps) => {
             className="overflow-visible"
           >
             {data.map((partner) => (
-              <SwiperSlide key={partner.id}>
+              <CarouselSlide key={partner.id}>
                 <div className="flex items-center justify-center transition-all duration-500">
                   <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-30 lg:h-30 xl:w-37.5 xl:h-37.5">
                     <Image
@@ -85,9 +83,9 @@ export const SuccessPartners = ({ data }: SuccessPartnersProps) => {
                     />
                   </div>
                 </div>
-              </SwiperSlide>
+              </CarouselSlide>
             ))}
-          </Swiper>
+          </DeferredCarousel>
         </div>
       </div>
     </section>

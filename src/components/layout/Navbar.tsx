@@ -199,7 +199,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16 lg:h-20">
-            <Link href="/" aria-label={`go to home`}>
+            <Link prefetch={pathname === "/" ? false : undefined} href="/" aria-label={`go to home`}>
               <Image
                 src="/logo2.png"
                 alt="Logo"
@@ -222,7 +222,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                     onMouseEnter={() => hasSub && handleMouseEnter(item.key)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <Link
+                    <Link prefetch={pathname === "/" ? false : undefined}
                       href={item.href}
                       aria-label={`go to ${item.href}`}
                       className={`
@@ -272,7 +272,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                   }}
                                   // onMouseLeave={handleSubMouseLeave}
                                 >
-                                  <Link
+                                  <Link prefetch={pathname === "/" ? false : undefined}
                                     aria-label={`go to ${service.slug}`}
                                     href={`/services/${service.slug}`}
                                     className={`
@@ -305,7 +305,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                             </div>
                           ) : (
                             productsData.map((product) => (
-                              <Link
+                              <Link prefetch={pathname === "/" ? false : undefined}
                                 key={product.id}
                                 href={`/products/${product.slug}`}
                                 aria-label={`go to ${product.slug}`}
@@ -327,7 +327,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                             </div>
                           ) : (
                             industriesData.map((industry) => (
-                              <Link
+                              <Link prefetch={pathname === "/" ? false : undefined}
                                 key={industry.id}
                                 href={`/industries/${industry.slug}`}
                                 aria-label={`go to ${industry.slug}`}
@@ -353,7 +353,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                 <FiGrid className="text-xl" />
               </button>
 
-              <Link
+              <Link prefetch={pathname === "/" ? false : undefined}
                 href="/quote"
                 aria-label={`go to quote`}
                 className="hidden lg:block bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-6 py-2 text-white rounded-xl transition-all duration-300 font-medium hover:-translate-y-1 hover:shadow-xl"
@@ -387,7 +387,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                           ${isActive ? "bg-secondary text-white" : "hover:bg-gray-100"}
                         `}
                       >
-                        <Link
+                        <Link prefetch={pathname === "/" ? false : undefined}
                           href={item.href}
                           aria-label={`go to ${item.href}`}
                           className="flex-1"
@@ -431,7 +431,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                 return (
                                   <div key={service.id}>
                                     <div className="flex items-center justify-between py-2 px-4">
-                                      <Link
+                                      <Link prefetch={pathname === "/" ? false : undefined}
                                         href={`/services/${service.slug}`}
                                         aria-label={`go to ${service.slug}`}
                                         className="flex-1 text-sm hover:text-black transition-colors"
@@ -460,7 +460,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                                     {hasProducts && isSubSubOpen && (
                                       <div className="ms-4 border-l-2 border-gray-100 ps-4">
                                         {service.products.map((product) => (
-                                          <Link
+                                          <Link prefetch={pathname === "/" ? false : undefined}
                                             key={product.id}
                                             href={`/products/${product.slug}`}
                                             aria-label={`go to ${product.slug}`}
@@ -484,7 +484,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               </div>
                             ) : (
                               productsData.map((product) => (
-                                <Link
+                                <Link prefetch={pathname === "/" ? false : undefined}
                                   key={product.id}
                                   href={`/products/${product.slug}`}
                                   aria-label={`go to ${product.slug}`}
@@ -503,7 +503,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                               </div>
                             ) : (
                               industriesData.map((industry) => (
-                                <Link
+                                <Link prefetch={pathname === "/" ? false : undefined}
                                   key={industry.id}
                                   href={`/industries/${industry.slug}`}
                                   aria-label={`go to ${industry.slug}`}
@@ -519,7 +519,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
                     </div>
                   );
                 })}
-                <Link
+                <Link prefetch={pathname === "/" ? false : undefined}
                   href="/quote"
                   aria-label={`go to quote`}
                   className="bg-linear-to-r from-[#090E1B] to-primary hover:from-primary hover:to-[#090E1B] px-4 py-2 rounded-xl transition-all duration-300 font-medium text-center mt-2 text-white hover:-translate-y-1 hover:shadow-xl"
@@ -549,7 +549,7 @@ export const Navbar = ({ socialLinks, contactInfo }: NavbarProps) => {
             onMouseLeave={handleSubMouseLeave}
           >
             {activeService.products.map((product) => (
-              <Link
+              <Link prefetch={pathname === "/" ? false : undefined}
                 key={product.id}
                 href={`/products/${product.slug}`}
                 aria-label={`go to ${product.slug}`}

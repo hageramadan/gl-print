@@ -87,8 +87,9 @@ export const Footer = ({ data }: FooterProps) => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/footer/footer-bg.png"
-          alt="Footer Background"
+          alt=""
           fill
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-[#152141]/92"></div>
@@ -108,6 +109,7 @@ export const Footer = ({ data }: FooterProps) => {
                 alt="GL Print"
                 width={500}
                 height={500}
+                sizes="80px"
                 className="object-contain w-20 h-20"
               />
             </Link>
