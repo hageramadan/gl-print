@@ -11,7 +11,7 @@ import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 
 async function getQuoteBanner(language: string) {
   try {
-    const response = await fetch('https://glprint-eg.com/api/request-quotes/banner', {
+    const response = await fetch('https://admin.glprint-eg.com/api/request-quotes/banner', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

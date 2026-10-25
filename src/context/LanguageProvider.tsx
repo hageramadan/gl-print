@@ -59,7 +59,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const updateMetadata = useCallback(
     async (lang: Language) => {
       try {
-        const response = await fetch('https://glprint-eg.com/api/home', {
+        const response = await fetch('https://admin.glprint-eg.com/api/home', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

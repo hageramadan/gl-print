@@ -33,7 +33,7 @@ export interface AboutData {
 export const getAboutData = async (language: string = 'en'): Promise<AboutData> => {
   console.log('🔄 Fetching about data with language:', language);
   
-  const response = await fetch('https://glprint-eg.com/api/about-us', {
+  const response = await fetch('https://admin.glprint-eg.com/api/about-us', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

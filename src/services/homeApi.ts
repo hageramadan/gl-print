@@ -123,7 +123,7 @@ export interface HomeData {
 export const getHomeData = async (language: string = 'en'): Promise<HomeData> => {
  
   
-  const response = await fetch('https://glprint-eg.com/api/home', {
+  const response = await fetch('https://admin.glprint-eg.com/api/home', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

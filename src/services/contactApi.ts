@@ -42,7 +42,7 @@ export interface ContactResponse {
 export const getContactData = async (
   language: string = 'en'
 ): Promise<ContactResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/contact-us', {
+  const response = await fetch('https://admin.glprint-eg.com/api/contact-us', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

@@ -34,7 +34,7 @@ export const getQuoteEnums = async (
   language: string = 'en'
 ): Promise<QuoteEnumsResponse> => {
   const response = await fetch(
-    'https://glprint-eg.com/api/request-quotes/enums',
+    'https://admin.glprint-eg.com/api/request-quotes/enums',
     {
       method: 'GET',
       headers: {
@@ -66,7 +66,7 @@ export const submitQuote = async (
   formData: FormData,
   language: string = 'en'
 ): Promise<SubmitResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/request-quotes', {
+  const response = await fetch('https://admin.glprint-eg.com/api/request-quotes', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -91,7 +91,7 @@ export const submitQuickInquiry = async (
   data: { name: string; email: string; message: string },
   language: string = 'en'
 ): Promise<SubmitResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/inquiries', {
+  const response = await fetch('https://admin.glprint-eg.com/api/inquiries', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

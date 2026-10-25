@@ -89,7 +89,7 @@ export const getServices = async (
   language: string = 'en'
 ): Promise<ServicesResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/services?page=${page}`,
+    `https://admin.glprint-eg.com/api/services?page=${page}`,
     {
       method: 'GET',
       headers: {
@@ -115,7 +115,7 @@ export const getServiceDetails = async (
   language: string = 'en'
 ): Promise<ServiceDetailsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/services/${slug}`,
+    `https://admin.glprint-eg.com/api/services/${slug}`,
     {
       method: 'GET',
       headers: {

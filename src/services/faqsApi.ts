@@ -25,7 +25,7 @@ export interface FAQsResponse {
 export const getFAQs = async (
   language: string = 'en'
 ): Promise<FAQsResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/faq', {
+  const response = await fetch('https://admin.glprint-eg.com/api/faq', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

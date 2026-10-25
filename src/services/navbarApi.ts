@@ -37,7 +37,7 @@ export interface NavbarResponse {
 export const getNavbarData = async (language: string = 'en'): Promise<NavbarResponse> => {
   console.log('🔄 Fetching navbar data with language:', language);
   
-  const response = await fetch('https://glprint-eg.com/api/navbar', {
+  const response = await fetch('https://admin.glprint-eg.com/api/navbar', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

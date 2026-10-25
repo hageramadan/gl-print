@@ -68,7 +68,7 @@ export const searchAll = async (
   params.append('page', String(page));
 
   const response = await fetch(
-    `https://glprint-eg.com/api/search?${params.toString()}`,
+    `https://admin.glprint-eg.com/api/search?${params.toString()}`,
     {
       method: 'GET',
       headers: {

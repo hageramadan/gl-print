@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'glprint-eg.com',
+        hostname: 'admin.glprint-eg.com',
         port: '',
         pathname: '/storage/**',
       },

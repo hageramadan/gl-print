@@ -66,7 +66,7 @@ export const getProductDetails = async (
   language: string = 'en'
 ): Promise<ProductDetailsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/products/${slug}`,
+    `https://admin.glprint-eg.com/api/products/${slug}`,
     {
       method: 'GET',
       headers: {

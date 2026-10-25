@@ -9,7 +9,7 @@ export const subscribeEmail = async (
   email: string,
   language: string = 'en'
 ): Promise<EmailResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/email-followups', {
+  const response = await fetch('https://admin.glprint-eg.com/api/email-followups', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -63,7 +63,7 @@ export const getBlogs = async (
   language: string = 'en'
 ): Promise<BlogsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/blogs?page=${page}`,
+    `https://admin.glprint-eg.com/api/blogs?page=${page}`,
     {
       method: 'GET',
       headers: {
@@ -88,7 +88,7 @@ export const getBlogDetails = async (
   language: string = 'en'
 ): Promise<BlogDetailsResponse> => {
   const response = await fetch(
-    `https://glprint-eg.com/api/blogs/${slug}`,
+    `https://admin.glprint-eg.com/api/blogs/${slug}`,
     {
       method: 'GET',
       headers: {

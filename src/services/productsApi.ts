@@ -50,7 +50,7 @@ export interface ProductsResponse {
 export const getAllProducts = async (
   language: string = 'en'
 ): Promise<ProductsResponse> => {
-  const response = await fetch('https://glprint-eg.com/api/products', {
+  const response = await fetch('https://admin.glprint-eg.com/api/products', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export const getProducts = async (
   if (industryId) params.append('industry', String(industryId));
   if (categoryId) params.append('category', String(categoryId));
 
-  const url = `https://glprint-eg.com/api/products?${params.toString()}`;
+  const url = `https://admin.glprint-eg.com/api/products?${params.toString()}`;
 
   const response = await fetch(url, {
     method: 'GET',
