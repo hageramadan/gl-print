@@ -12,6 +12,7 @@ import { getHomeData, HomeData } from "@/src/services/homeApi";
 import { useLanguage } from '@/src/hooks/useLanguage';
 import { LoadingScreen } from '@/src/components/common/LoadingScreen';
 import type { Service } from '@/src/services/servicesApi';
+import { AdPopup } from '@/src/components/home/AdPopup';
 
 export default function HomeClient({ initialData, initialServices }: { initialData: HomeData; initialServices: Service[] }) {
   const { language } = useLanguage();
@@ -58,6 +59,7 @@ export default function HomeClient({ initialData, initialServices }: { initialDa
       <FeaturedProducts data={data.products} />
       <Testimonials data={data.testimonials} />
       <SuccessPartners data={data.companies} />
+      <AdPopup key={language} language={language} />
     </div>
   );
 }
