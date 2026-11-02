@@ -12,6 +12,9 @@ const actionRoutes: Record<string, string> = {
   view_services: '/services',
 };
 
+// Survives client-side navigation and language changes; resets on a full reload.
+let hasShownAd = false;
+
 export function AdPopup({ language }: { language: 'en' | 'ar' }) {
   const [ad, setAd] = useState<Ad | null>(null);
   const [imageFailed, setImageFailed] = useState(false);
@@ -20,6 +23,8 @@ export function AdPopup({ language }: { language: 'en' | 'ar' }) {
   const descriptionId = useId();
 
   useEffect(() => {
+    if (hasShownAd) return;
+
     const controller = new AbortController();
     const loadAd = async () => {
       try {
@@ -30,26 +35,25 @@ export function AdPopup({ language }: { language: 'en' | 'ar' }) {
       }
     };
 
-    // Wait for the initial page load; client-side visits are already loaded.
-    if (document.readyState === 'complete') void loadAd();
-    else window.addEventListener('load', loadAd, { once: true });
+    void loadAd();
 
     return () => {
       controller.abort();
-      window.removeEventListener('load', loadAd);
     };
   }, [language]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (!ad || !dialog) return;
+    if (!ad || !dialog || hasShownAd) return;
 
     let previousOverflow: string | undefined;
     const timer = window.setTimeout(() => {
+      if (hasShownAd) return;
       previousOverflow = document.body.style.overflow;
       dialog.showModal();
+      hasShownAd = true;
       document.body.style.overflow = 'hidden';
-    }, 1200);
+    }, 0);
 
     const restoreScroll = () => {
       if (previousOverflow !== undefined) {

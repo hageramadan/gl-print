@@ -8,6 +8,7 @@ import {
   useCallback,
 } from 'react';
 import { getHomeData, seedHomeData, type HomeData } from '@/src/services/homeApi';
+import { SITE_URL } from '@/src/lib/siteUrl';
 
 type Language = 'en' | 'ar';
 
@@ -92,15 +93,7 @@ export const LanguageProvider = ({ children, initialHomeData }: { children: Reac
         updateMetaTag('twitter:description', seo.meta_description, 'name');
 
         // ✅ تحديث Canonical
-        const canonical = process.env.NEXT_PUBLIC_SITE_URL || seo.canonical_url;
-        if (canonical) {
-          try {
-            const url = new URL(canonical);
-            if (['https:', 'http:'].includes(url.protocol)) updateCanonical(url.href);
-          } catch {
-            // Keep the server canonical if the CMS value is not a valid URL.
-          }
-        }
+        updateCanonical(SITE_URL);
       } catch (error) {
         console.error('Failed to update metadata:', error);
       }
